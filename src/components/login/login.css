@@ -1,0 +1,137 @@
+.login-container
+{
+    display: flex;
+    box-sizing: border-box;
+    padding: 10% 10%;
+
+
+    background-color: #f0f2f5;
+    height: 100vh;
+    width: 100vw;
+}
+.content-container
+{
+    display: flex;
+    flex-direction: row;
+    flex:1
+}
+
+
+.facebook__image
+{
+    height: 70px;
+    margin: -20px;
+}
+.facebook-image-container
+{
+    padding-bottom: 16px;
+}
+.content1
+{
+    display: flex;
+    flex-direction: column;
+    flex:1
+}
+.recent-login__h2
+{
+    font-size: 28px;
+    font-weight: 450;
+    margin: 0;
+}
+
+.recent-login__h3
+{
+    color: #606770;
+    font-size: 15px;
+    font-weight: 400;
+    margin:0;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+}
+
+.recent-user-login-container
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.user-login-container
+{
+    display: flex;
+    align-items: flex-start;
+    width: 180px;
+    height: 220px;
+    text-align: center;
+    flex-direction: column;
+    border-radius: 10px;
+    text-decoration: none;
+    
+
+}
+.avt-user__image
+{
+    height: 170px;
+    width: 150px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0px 1px 0px rgba(17,17,26,0.1);
+
+}
+
+.name-user-login-container
+{
+    width: 150px;
+    background-color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0px 1px 0px rgba(17,17,26,0.1);
+
+}
+
+.name-user-login{
+    margin: 0;
+    color: #4b4f56;
+    font-size: 18px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-weight: 400;
+}
+.add-user-login-container
+{
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 220px;
+    text-align: center;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: white;
+
+}
+.add-user-login-icon-container
+{
+    height: 170px;
+    width: 150px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #f0f2f5;
+    text-decoration: none;
+
+    box-shadow: 0px 1px 8px  rgba(17,17,26,0.1);
+
+    
+}
+.name-user-login.blue{
+    color: #1877f2 ;
+    
+}
+
+.login__form
+{
+    flex: 0.5;
+}
