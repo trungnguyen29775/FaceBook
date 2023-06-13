@@ -3,7 +3,7 @@
     display: flex;
     box-sizing: border-box;
     padding: 10% 10%;
-
+    position: relative;
 
     background-color: #f0f2f5;
     height: 100vh;
@@ -74,8 +74,8 @@
 {
     height: 170px;
     width: 150px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
     box-shadow: 0px 1px 0px rgba(17,17,26,0.1);
 
 }
@@ -84,8 +84,8 @@
 {
     width: 150px;
     background-color: white;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
     box-shadow: 0px 1px 0px rgba(17,17,26,0.1);
 
 }
@@ -133,5 +133,285 @@
 
 .login__form
 {
-    flex: 0.5;
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    background-color: #fff;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    box-sizing: border-box;
+    margin: 40px 0 0;
+    padding: 20px 0 28px;
+    width: 396px;
+    flex-direction: column;
+    height: 348px;
+
+}
+.login-input
+{
+    width: 330px;
+    border-radius: 5px;
+    font-size: 17px;
+    padding: 14px 16px;
+    color: #1d2129;
+    line-height: 16px;
+    height: 22px;
+    border: 1px solid #dddfe2;
+    margin: 6px 0;
+}
+.login-button
+{
+    background-color: #1877f2;
+    border: none;
+    border-radius: 6px;
+    font-size: 20px;
+    line-height: 48px;
+    padding: 0 16px;
+    width: 363px;
+    color: white;
+    margin: 6px 0;
+    font-weight: 600;
+}
+.login-button:hover{
+    cursor: pointer;
+}
+.forgot-password__a
+{
+    text-decoration: none;
+    color: #1877f2;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 6px 0;
+}
+
+.forgot-password__a:hover
+{
+    text-decoration: underline;
+}
+.line-through
+{
+    align-items: center;
+    border-bottom: 1px solid #dadde1;
+    display: flex;
+    margin: 20px 16px;
+    text-align: center;
+    width: 363px;
+}
+.login-create-acccount
+{
+    text-align: center;
+    background-color: #42b72a;
+    border: none;
+    border-radius: 6px;
+    font-size: 17px;
+    line-height: 48px;
+    width: 220px;
+    color: white;
+    margin: 6px 0;
+    font-weight: 600;
+}
+.login-create-acccount:hover{
+    cursor: pointer;
+}
+.register-container
+{
+    background-color: rgba(255, 255, 255, .8);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+}
+
+.register-container.hide
+{
+    display: none;
+}
+
+.register-content
+{
+    margin: auto;
+    background-color: transparent;
+    overflow: visible;
+    padding: 10px;
+    width: 432px;
+    background: white;
+    color: black;
+    text-align: left;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+}
+.register-header-container
+{
+    width: 100%;
+    border-bottom: 1px solid #dadde1;
+    position: relative;
+}
+.register-header
+{
+    margin: 0;
+    font-size: 32px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+.register-sub-header
+{
+    margin: 0;
+    color: gray;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+.register-form
+{
+    display: flex;
+    width: 100%;
+    margin-top:10px;
+    flex-direction: column;
+}
+.register-name-container
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.register-name__input
+{
+    text-align:left;
+    padding:5px;
+    border-radius: 5px;
+    font-size: 15px;
+    border: 1px solid #ccd0d5;
+    width: 201px;
+    height: 22px;
+}
+
+.register-detail__input
+{
+    text-align:left;
+    padding:5px;
+    border-radius: 5px;
+    font-size: 15px;
+    border: 1px solid #ccd0d5;
+    width: 97.5%;
+    height: 22px;
+    margin-bottom: 10px;
+}
+.register-dob-container
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+   
+}
+.register-dob-header
+{
+    color: #606770;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 20px;
+    margin-bottom: 0;
+    margin-top: 2px;
+}
+.register-date-container
+{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+select {
+    appearance: none;
+    -webkit-appearance: none; /* cho các trình duyệt dựa trên Webkit như Chrome và Safari */
+    -moz-appearance: none; /* cho trình duyệt Firefox */
+}
+.register-date__select
+{
+    width: 30%;
+    height: 36px;
+    line-height: 20px;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 0 8px;
+    border: 1px solid #ccd0d5;
+}
+.register-gender-container
+{
+    display: flex;
+    flex-direction: column;
+}
+.register-gender-input-container
+{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.register-gender__label
+{
+    color: #606770;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 20px;
+    margin-bottom: 0;
+    margin-top: 2px;
+}
+.register-gender
+{
+    width: 28%;
+    height: 36px;
+    line-height: 20px;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 0 8px;
+    border: 1px solid #ccd0d5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 400;
+}
+.register-terms
+{
+    color: #777;
+    font-size: 11px;
+    margin-bottom: 0;
+
+}
+.register-term__a
+{
+    text-decoration: none;
+    color: #385898;
+}
+.register-button-container
+{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+.register-sign-in__button
+{
+    width: 50%;
+    height: 36px;
+    text-align: center;
+    border-radius: 5px;
+    border: 0;
+    background-color: #00a400;
+    color: white;
+    margin: auto;
+    font-size: 18px;
+    font-weight: 600;
+}
+.register-sign-in__button:hover
+{
+    cursor: pointer;
+}
+.register-detail__input.hide{
+    display: none;
 }
