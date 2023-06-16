@@ -1,10 +1,11 @@
 import './login.css'
 import React from 'react'
 import src from '../../constant/src'
-import { AiFillPlusCircle } from "react-icons/ai";
+import { AiFillPlusCircle, AiFillGithub,AiFillInstagram,AiFillFacebook } from "react-icons/ai";
 import { FiX } from "react-icons/fi";
 import Date from '../../constant/date';
 import { Link } from 'react-router-dom';
+import { use } from 'marked';
 class Login extends React.Component
 {
     constructor(props)
@@ -29,6 +30,7 @@ class Login extends React.Component
                 }
             ]
         }
+        this.handleDeleteRecentUser = this.handleDeleteRecentUser.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
         this.handleChangeEmail = this.handleChangeEmail.bind(this)
         this.handleExitRegister = this.handleExitRegister.bind(this)
@@ -41,6 +43,20 @@ class Login extends React.Component
         {
             this.props.navigation.navigate('/home')
         }
+    }
+    handleDeleteRecentUser(event)
+    {
+        let indexTarget = event.target.id
+        console.log(indexTarget)
+        let temp = []
+        for(let i=0;i<this.state.userData.length;i++)
+        {
+            if(i==indexTarget)
+                continue
+            temp.push(this.state.userData[i])
+        }
+        this.setState({userData:temp})
+        
     }
     handleLogin(event)
     {
@@ -70,7 +86,7 @@ class Login extends React.Component
         else
             registerEmailInput.classList.add('hide')
     })
-   }
+   } 
     render()
     {
         return(
@@ -81,27 +97,27 @@ class Login extends React.Component
                         <div className='facebook-image-container'>
                             <img src={src.facebookImage} className='facebook__image'/>
                         </div>
-                        <h2 className='recent-login__h2'>Recent Logins</h2>
-                        <h3 className='recent-login__h3'>Click your picture or add an account.</h3>
+                        <h2 className='recent-login__h2'>{this.state.userData.length>0?"Recent Logins":"Facebook helps you connect and share with the people in your life."}</h2>
+                        <h3 className='recent-login__h3'>{this.state.userData.length>0?"Click your picture or add an account.":""}</h3>                    
                         <div className='recent-user-login-container'>
                             {
                                 this.state.userData.map((user,key)=>
                                 {return(
-                                    <a className='user-login-container' href='#'>
-                                      <div className='login-no-ui-container'>
-                                      <FiX style={{position: "absolute",fontSize:"12px", fontWeight:600,color:"white",top:"4px", left:"4px", padding:"2px",backgroundColor:"#4b4f56",borderRadius:"10px"}}/>
-                                        <img src={user.avtUrl} alt="avatar user" className='avt-user__image'/>
-                                        <div className='name-user-login-container'>
-                                        <h2 className='name-user-login'>{user.name}</h2>
+                                    <div className='user-login-container' href='#'>
+                                      <a className='login-no-ui-container' >
+                                      <FiX id={key} key={key} onClick={this.handleDeleteRecentUser}  style={{position: "absolute",fontSize:"12px", fontWeight:600,color:"white",top:"4px", left:"4px", padding:"2px",backgroundColor:"#4b4f56",borderRadius:"10px"}}/>
+                                        <img  src={user.avtUrl} alt="avatar user" className='avt-user__image'/>
+                                        <div  className='name-user-login-container'>
+                                        <h2  className='name-user-login'>{user.name}</h2>
                                         </div>
-                                      </div>
+                                      </a>
                                         
-                                    </a>
+                                    </div>
                                 )
                                 })
                             }
                             
-                            <a className='add-user-login-container' href='#'>
+                            <a className='add-user-login-container' href='#' style={{display:this.state.userData.length>0?"flex":"none"}}>
                             <div className='login-no-ui-container'>
                                 <div className='add-user-login-icon-container'>
                                
@@ -143,6 +159,7 @@ class Login extends React.Component
                 <div className='register-container hide'>
                     <div className='register-content'>
                     <div className='register-header-container'>
+                    <FiX onClick={this.handleExitRegister} style={{position:"absolute", top:0,right:0,fontSize:"25px", fontWeight:600, zIndex:2,color:"gray"}}/>
                         <h1 className='register-header'>Sign Up</h1>
                         <p className='register-sub-header'>It's quick and easy.</p>
                     </div>
@@ -200,19 +217,19 @@ class Login extends React.Component
                             </label>
                             <div className='register-gender-input-container'>
                                 <div className='register-gender' >
-                                <label for="female" >Female
+                                <label htmlFor="female" >Female
                                     </label>
                                     <input  id="female" name="gender" type='radio'/>
 
                                 </div>
                                <div className='register-gender'>
-                               <label for="male" >Male
+                               <label htmlFor="male" >Male
                                     </label>
                                     <input id="male" name="gender" type='radio'/>
 
                                </div>
                                     <div className='register-gender'>
-                                    <label for="other" >Other
+                                    <label htmlFor="other" >Other
                                     </label>
                                     <input id="other" name="gender" type='radio'/>
 
@@ -233,6 +250,25 @@ class Login extends React.Component
                     </div>
                     
                 </div>
+                <footer id='footer'>
+                    <div>
+                        <p>Dev by trungnguyen</p>
+                       
+                    </div>
+                    <div className='footer-icon-container'>
+                            <a href='https://github.com/trungnguyen29775' target='_blank'>
+                            <AiFillGithub style={{color:"#737373"}}/>
+                            </a>
+                            <a target='_blank' href='https://www.facebook.com/profile.php?id=100010558929204'>
+                            <AiFillInstagram style={{color:"#737373"}}/>
+                            </a>
+                            <a target='_blank' href='https://www.instagram.com/trungnghiemtuc/'>
+                            <AiFillFacebook style={{color:"#737373"}}/>
+                            </a>
+                           
+                            
+                        </div>
+                </footer>
             </div>
         )
     }
