@@ -4,7 +4,7 @@ import src from '../../constant/src'
 import { AiFillPlusCircle } from "react-icons/ai";
 import { FiX } from "react-icons/fi";
 import Date from '../../constant/date';
-
+import { Link } from 'react-router-dom';
 class Login extends React.Component
 {
     constructor(props)
@@ -12,13 +12,42 @@ class Login extends React.Component
         super(props)
         this.state=
         {   
-            email:""
+            email:"",
+            isLogged: this.props.isLogged,
+            userData:[
+                {
+                    name:"Nguyễn",
+                    avtUrl:"assets/image/avt-user-login.jpg"
+                },
+                {
+                    name:"Nguyễn",
+                    avtUrl:"assets/image/avt-user-login.jpg"
+                },
+                {
+                    name:"Nguyễn",
+                    avtUrl:"assets/image/avt-user-login.jpg"
+                }
+            ]
         }
+        this.handleLogin = this.handleLogin.bind(this)
         this.handleChangeEmail = this.handleChangeEmail.bind(this)
         this.handleExitRegister = this.handleExitRegister.bind(this)
         this.handleCreateAccountClick= this.handleCreateAccountClick.bind(this)
     }
-
+    componentDidMount()
+    {
+        console.log(this.props.isLogged)
+        if(this.props.isLogged)
+        {
+            this.props.navigation.navigate('/home')
+        }
+    }
+    handleLogin(event)
+    {
+        event.preventDefault()
+        this.props.changeStateLogged()
+        this.props.navigation.navigate('/home')
+    }
     handleCreateAccountClick(event)
     {
         event.preventDefault()
@@ -41,7 +70,6 @@ class Login extends React.Component
         else
             registerEmailInput.classList.add('hide')
     })
-    
    }
     render()
     {
@@ -56,34 +84,52 @@ class Login extends React.Component
                         <h2 className='recent-login__h2'>Recent Logins</h2>
                         <h3 className='recent-login__h3'>Click your picture or add an account.</h3>
                         <div className='recent-user-login-container'>
-                            <a className='user-login-container' href='#'>
-                                <img src={src.avtUserLogin[0]} alt="avatar user" className='avt-user__image'/>
-                                <div className='name-user-login-container'>
-                                <h2 className='name-user-login'>Nguyễn</h2>
-
-                                </div>
-
-                            </a>
+                            {
+                                this.state.userData.map((user,key)=>
+                                {return(
+                                    <a className='user-login-container' href='#'>
+                                      <div className='login-no-ui-container'>
+                                      <FiX style={{position: "absolute",fontSize:"12px", fontWeight:600,color:"white",top:"4px", left:"4px", padding:"2px",backgroundColor:"#4b4f56",borderRadius:"10px"}}/>
+                                        <img src={user.avtUrl} alt="avatar user" className='avt-user__image'/>
+                                        <div className='name-user-login-container'>
+                                        <h2 className='name-user-login'>{user.name}</h2>
+                                        </div>
+                                      </div>
+                                        
+                                    </a>
+                                )
+                                })
+                            }
+                            
                             <a className='add-user-login-container' href='#'>
+                            <div className='login-no-ui-container'>
                                 <div className='add-user-login-icon-container'>
-                                <AiFillPlusCircle style={{
-                                 width: "50px",
-                                 height: "50px",
-                                 color:"#1877f2",
-                                 margin:"auto"
-                               }}/>
-                                </div>
                                
+                               <AiFillPlusCircle style={{
+                                width: "50px",
+                                height: "50px",
+                                color:"#1877f2",
+                                margin:"auto"
+                              }}/>
 
+                               
+                               </div>
+                               <div className='login-add-user__a'>
                                <a href='#' className='name-user-login blue'>Add Account</a>
+                            </div>
+
+                             
+                                
+
+                                </div>
                             </a>
                         </div>
                     </div>
                     <form className='login__form'>
                         <input placeholder='Email address or phone number' className='login-input'/>
-                        <input placeholder='Password' className='login-input'/>
-                        <button className='login-button'>Log in</button>
-                        <a href='#' className='forgot-password__a'>Forgotten password?</a>
+                        <input placeholder='Password' type='password' className='login-input'/>
+                        <button className='login-button' oncClick = {this.handleLogin}>Log in</button>
+                        <a href='#'  className='forgot-password__a'>Forgotten password?</a>
                         <div className='line-through'></div>
                         <button className='login-create-acccount' onClick={this.handleCreateAccountClick}>Create new account</button>
                     </form>
@@ -99,7 +145,6 @@ class Login extends React.Component
                     <div className='register-header-container'>
                         <h1 className='register-header'>Sign Up</h1>
                         <p className='register-sub-header'>It's quick and easy.</p>
-                        <FiX onClick={this.handleExitRegister} style={{position:"absolute", top:0,right:0,fontSize:"25px", fontWeight:600, zIndex:2,color:"gray"}}/>
                     </div>
                     <form className='register-form'>
                         <div className='register-name-container'>
