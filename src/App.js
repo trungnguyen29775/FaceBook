@@ -7,7 +7,7 @@ class App extends React.Component {
   {
     super(props)
     this.state = {
-      isLogged: false
+      isLogged: true
     }
     this.changeStateLogged = this.changeStateLogged.bind(this)
   }
