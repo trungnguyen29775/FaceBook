@@ -6,6 +6,7 @@ import { AiOutlineDown } from "react-icons/ai";
 import { FiX } from "react-icons/fi";
 import { IoIosMore } from "react-icons/io";
 import { BiExpand } from "react-icons/bi";
+import { useEffect } from 'react';
 class  Home extends React.Component
 {
     constructor(props)
@@ -116,18 +117,101 @@ class  Home extends React.Component
                             <button className='mess-type'>Cộng đồng</button>
 
                         </div>
-                        <div>
-                            <div>
+                        <div className='mess-container'>
+                            <div className='mess-item-container'>
                                 <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                <div>
-                                    <span>LT - Sao chổi Tournament</span>
-                                    <span>Bạn: Chay tron sao choi <span>18 phút</span></span>
+                                <div className='mess-item-detail'>
+                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
+                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
                                 </div>
                                 <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
                                 
                             </div>
+                            <div className='mess-item-container'>
+                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                <div className='mess-item-detail'>
+                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
+                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
+                                </div>
+                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                
+                            </div>
+                            <div className='mess-item-container'>
+                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                <div className='mess-item-detail'>
+                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
+                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
+                                </div>
+                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                
+                            </div>
+                            <div className='mess-item-container'>
+                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                <div className='mess-item-detail'>
+                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
+                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
+                                </div>
+                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                
+                            </div>
+
+                            <div className='mess-item-container'>
+                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                <div className='mess-item-detail'>
+                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
+                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
+                                </div>
+                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                
+                            </div>
+                            <div className='mess-item-container'>
+                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                <div className='mess-item-detail'>
+                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
+                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
+                                </div>
+                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                
+                            </div>
+                            <div className='mess-item-container'>
+                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                <div className='mess-item-detail'>
+                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
+                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
+                                </div>
+                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                
+                            </div>
+                            <div className='mess-item-container'>
+                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                <div className='mess-item-detail'>
+                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
+                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
+                                </div>
+                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                
+                            </div>
+                            <div className='mess-item-container'>
+                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                <div className='mess-item-detail'>
+                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
+                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
+                                </div>
+                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                
+                            </div>
+                            <div className='mess-item-container'>
+                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                <div className='mess-item-detail'>
+                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
+                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
+                                </div>
+                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                
+                            </div>
+                            
                         </div>
-                        <div>
+                        <div className='mess-footer'>
                             <a href='#'>Xem tất cả trong Messenger</a>
                         </div>
                         </div>
