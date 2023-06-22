@@ -16,7 +16,8 @@ class  Home extends React.Component
         {
             messType:"personal"
         }
-        this.handleMessTypeClick = this.handleMessTypeClick.bind(this)
+        this.handleHideMessDropTab = this.handleHideMessDropTab.bind(this)
+        this.activeMessDropTab = this.activeMessDropTab.bind(this)
         this.hideInputTab = this.hideInputTab.bind(this)
         this.handleClickInput = this.handleClickInput.bind(this)
     }
@@ -27,6 +28,22 @@ class  Home extends React.Component
         if(!this.props.isLogged)
             <this.props.navigation replace to="/"/>
     }
+    handleHideMessDropTab(event)
+    {
+        event.preventDefault()
+        event.stopPropagation()
+        document.addEventListener('click',(event)=>
+        {
+            event.preventDefault()
+            const messIcon  = document.querySelector('.nav-icon--padding.mess')
+
+            const messDropTab = document.querySelector('.mess-droptab-container')
+            messDropTab.classList.remove('active')
+            messIcon.classList.remove('active')
+
+        })
+    }
+
     handleClickInput(event)
     {
         event.stopPropagation()
@@ -46,9 +63,22 @@ class  Home extends React.Component
                 droptab.classList.remove('active')
               });
     }
-    handleMessTypeClick(event)
+    activeMessDropTab(event)
     {
-
+        event.preventDefault()
+        event.stopPropagation()
+        const messIcon  = document.querySelector('.nav-icon--padding.mess')
+        const messDropTab = document.querySelector('.mess-droptab-container')
+        if(messDropTab.classList[1] =="active")
+        {
+            messDropTab.classList.remove('active')
+            messIcon.classList.remove('active')
+        }
+        else 
+        {
+            messDropTab.classList.add('active')
+            messIcon.classList.add('active')
+        }
     }
     render()
     {
@@ -83,11 +113,11 @@ class  Home extends React.Component
                             <AiOutlineDown style={{position:"absolute",height:"12px",width:"12px",borderRadius:"6px",backgroundColor:"#3A3B3C",bottom:0,right:0,padding:"auto"}}/>
                         </div>
                        
-                        <div  className='nav-icon--padding'>
+                        <div  className='nav-icon--padding notification'>
                         <IoNotifications style={{margin:"auto"}}/>
 
                         </div>
-                        <div className='nav-icon--padding'>
+                        <div className='nav-icon--padding mess' onClick={this.activeMessDropTab} onMouseLeave={this.handleHideMessDropTab}>
                         <BsMessenger style={{margin:"auto"}} />
                         <div className='mess-droptab-container'>
                             <div className='home-mess-header-container'>
@@ -125,90 +155,11 @@ class  Home extends React.Component
                                     <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
                                 </div>
                                 <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                
-                            </div>
-                            <div className='mess-item-container'>
-                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                <div className='mess-item-detail'>
-                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
-                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
+                                <div className='mess-item-more'>
+                                    <IoIosMore style={{margin:"auto"}}/>
                                 </div>
-                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                
                             </div>
-                            <div className='mess-item-container'>
-                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                <div className='mess-item-detail'>
-                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
-                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
-                                </div>
-                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                
-                            </div>
-                            <div className='mess-item-container'>
-                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                <div className='mess-item-detail'>
-                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
-                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
-                                </div>
-                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                
-                            </div>
-
-                            <div className='mess-item-container'>
-                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                <div className='mess-item-detail'>
-                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
-                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
-                                </div>
-                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                
-                            </div>
-                            <div className='mess-item-container'>
-                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                <div className='mess-item-detail'>
-                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
-                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
-                                </div>
-                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                
-                            </div>
-                            <div className='mess-item-container'>
-                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                <div className='mess-item-detail'>
-                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
-                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
-                                </div>
-                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                
-                            </div>
-                            <div className='mess-item-container'>
-                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                <div className='mess-item-detail'>
-                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
-                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
-                                </div>
-                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                
-                            </div>
-                            <div className='mess-item-container'>
-                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                <div className='mess-item-detail'>
-                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
-                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
-                                </div>
-                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                
-                            </div>
-                            <div className='mess-item-container'>
-                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                <div className='mess-item-detail'>
-                                    <span className='mess-item-name'>LT - Sao chổi Tournament</span>
-                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
-                                </div>
-                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
-                                
-                            </div>
+                            
                             
                         </div>
                         <div className='mess-footer'>

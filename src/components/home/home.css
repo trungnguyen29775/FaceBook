@@ -187,7 +187,7 @@
     position: absolute;
     background-color: rgb(36, 37, 38);
     color: rgb(228, 230, 235);
-    display: flex;
+    display: none;
     flex-direction: column;
     font-size: 12px;
     height: 673.6px;
@@ -312,6 +312,7 @@
     align-items: center;
     padding: 8px;
     justify-content: space-between;
+    position: relative;
 }
 
 .mess-avt-user
@@ -357,6 +358,10 @@
     cursor: pointer;
     background-color: #3A3B3C;
     border-radius: 5px;
+    .mess-item-more
+    {
+        display: flex;
+    }
 }
 .mess-footer
 {
@@ -384,4 +389,36 @@
 .mess-footer:hover{
     cursor: pointer;
     text-decoration: underline;
+}
+.mess-item-more
+{
+    position: absolute;
+    background-color: rgb(62, 64, 66);
+    font-size: 20px;
+    height: 36px;
+    width: 36px;
+    display: none;
+    border-radius: 50%;
+    right: 25px;
+    z-index: 3;
+    font-weight: 600;
+    
+}
+
+.mess-item-more:hover
+{
+    background-color: #8A8D91;
+}
+.mess-droptab-container.active
+{
+    display: flex;
+}
+.nav-icon--padding:hover
+{
+    cursor: pointer;
+    background-color: #8A8D91;
+}
+.nav-icon--padding.active{
+    background-color: rgba(45, 136, 255, 0.2);
+    color: rgb(46, 137, 255);
 }
