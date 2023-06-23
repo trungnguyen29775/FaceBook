@@ -16,6 +16,8 @@ class  Home extends React.Component
         {
             messType:"personal"
         }
+        this.handleHideNotifiDropTab = this.handleHideNotifiDropTab.bind(this)
+        this.activeNotifiDropTab = this.activeNotifiDropTab.bind(this)
         this.handleHideMessDropTab = this.handleHideMessDropTab.bind(this)
         this.activeMessDropTab = this.activeMessDropTab.bind(this)
         this.hideInputTab = this.hideInputTab.bind(this)
@@ -27,6 +29,38 @@ class  Home extends React.Component
        
         if(!this.props.isLogged)
             <this.props.navigation replace to="/"/>
+    }
+    activeNotifiDropTab(event)
+    {
+        event.preventDefault()
+        event.stopPropagation()
+        const notifiIcon  = document.querySelector('.nav-icon--padding.notification')
+        const notifiDropTab = document.querySelector('.notifi-droptab-container')
+        if(notifiDropTab.classList[1] =="active")
+        {
+            notifiDropTab.classList.remove('active')
+            notifiIcon.classList.remove('active')
+        }
+        else 
+        {
+            notifiDropTab.classList.add('active')
+            notifiIcon.classList.add('active')
+        }
+    }
+    handleHideNotifiDropTab(event)
+    {
+        event.preventDefault()
+        event.stopPropagation()
+        document.addEventListener('click',(event)=>
+        {
+            event.preventDefault()
+            const notifiIcon  = document.querySelector('.nav-icon--padding.notification')
+
+            const notifiDropTab = document.querySelector('.notifi-droptab-container')
+            notifiDropTab.classList.remove('active')
+            notifiIcon.classList.remove('active')
+
+        })
     }
     handleHideMessDropTab(event)
     {
@@ -113,9 +147,131 @@ class  Home extends React.Component
                             <AiOutlineDown style={{position:"absolute",height:"12px",width:"12px",borderRadius:"6px",backgroundColor:"#3A3B3C",bottom:0,right:0,padding:"auto"}}/>
                         </div>
                        
-                        <div  className='nav-icon--padding notification'>
+                        <div  className='nav-icon--padding notification' onClick={this.activeNotifiDropTab} onMouseLeave={this.handleHideNotifiDropTab}>
                         <IoNotifications style={{margin:"auto"}}/>
+                        <div className='notifi-droptab-container'>
+                            <div className='home-notifi-header-container'>
+                            <h1>Thông báo</h1>
+                            <div className='notifi-icon-mode-container'>
+                                <div className='notifi-icon-mode'>
+                                    <IoIosMore style={{margin:"auto"}}/>
+                                </div>
+                            </div>
+                            </div>
+                           
+                        <div className='notifi-type-container'>
+                            <button className='notifi-type active'>Tất cả</button>
+                            <button className='notifi-type'>Chưa đọc</button>
 
+                        </div>
+                        <div className='notifi-container'>
+                            <div className='notifi-zone-container'>
+                                    <div className='zone-header-container'>
+                                    <span>Lời mời kết bạn</span>
+                                    <a className='drop-tab-see-all' href='#'>Xem tất cả</a>
+                                    </div>
+                                    
+                                    <div className='zone-item-container'>
+                                    <img className='notifi-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                    <div className='notifi-item-detail'>
+                                    <span className='notifi-item-content'><strong className='notifi-name-taget'>
+                                    Minh Trung
+                                        </strong> đã gửi cho bạn lời mời kết bạn</span>
+                                    <span className='notifi-item-time'>18 phút</span>
+                                    <div className='zone-button-container'>
+                                        <button className='active'>Xác nhận</button>
+                                        <button>Xóa</button>
+                                    </div>
+                                    </div>
+                                    </div>
+                                
+                                <div>
+                                </div>
+                            </div>
+                            <div className='notifi-zone-container'>
+                                    <div className='zone-header-container'>
+                                    <span>Trước đó</span>
+                                    <a className='drop-tab-see-all' href='#'>Xem tất cả</a>
+                                    </div>
+                                    
+                                    <div className='zone-item-container'>
+                                    <img className='notifi-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                    <div className='notifi-item-detail'>
+                                    <span className='notifi-item-content'><strong className='notifi-name-taget'>
+                                    Minh Trung
+                                        </strong> đã nhắc đến bạn ở một bình luận trong <strong className='notifi-name-target'>Tôi yêu coding</strong></span>
+                                    <span className='notifi-item-time'>18 phút</span>
+                                    
+                                    </div>
+                                    </div>
+                                    <div className='zone-item-container'>
+                                    <img className='notifi-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                    <div className='notifi-item-detail'>
+                                    <span className='notifi-item-content'><strong className='notifi-name-taget'>
+                                    Minh Trung
+                                        </strong> đã nhắc đến bạn ở một bình luận trong <strong className='notifi-name-target'>Tôi yêu coding</strong></span>
+                                    <span className='notifi-item-time'>18 phút</span>
+                                    
+                                    </div>
+                                    </div>
+                                    <div className='zone-item-container'>
+                                    <img className='notifi-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                    <div className='notifi-item-detail'>
+                                    <span className='notifi-item-content'><strong className='notifi-name-taget'>
+                                    Minh Trung
+                                        </strong> đã nhắc đến bạn ở một bình luận trong <strong className='notifi-name-target'>Tôi yêu coding</strong></span>
+                                    <span className='notifi-item-time'>18 phút</span>
+                                    
+                                    </div>
+                                    </div>
+                                    <div className='zone-item-container'>
+                                    <img className='notifi-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                    <div className='notifi-item-detail'>
+                                    <span className='notifi-item-content'><strong className='notifi-name-taget'>
+                                    Minh Trung
+                                        </strong> đã nhắc đến bạn ở một bình luận trong <strong className='notifi-name-target'>Tôi yêu coding</strong></span>
+                                    <span className='notifi-item-time'>18 phút</span>
+                                    
+                                    </div>
+                                    </div>
+                                    <div className='zone-item-container'>
+                                    <img className='notifi-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                    <div className='notifi-item-detail'>
+                                    <span className='notifi-item-content'><strong className='notifi-name-taget'>
+                                    Minh Trung
+                                        </strong> đã nhắc đến bạn ở một bình luận trong <strong className='notifi-name-target'>Tôi yêu coding</strong></span>
+                                    <span className='notifi-item-time'>18 phút</span>
+                                    
+                                    </div>
+                                    </div>
+                                    <div className='zone-item-container'>
+                                    <img className='notifi-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                    <div className='notifi-item-detail'>
+                                    <span className='notifi-item-content'><strong className='notifi-name-taget'>
+                                    Minh Trung
+                                        </strong> đã nhắc đến bạn ở một bình luận trong <strong className='notifi-name-target'>Tôi yêu coding</strong></span>
+                                    <span className='notifi-item-time'>18 phút</span>
+                                    
+                                    </div>
+                                    </div>
+                                    <div className='zone-item-container'>
+                                    <img className='notifi-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                    <div className='notifi-item-detail'>
+                                    <span className='notifi-item-content'><strong className='notifi-name-taget'>
+                                    Minh Trung
+                                        </strong> đã nhắc đến bạn ở một bình luận trong <strong className='notifi-name-target'>Tôi yêu coding</strong></span>
+                                    <span className='notifi-item-time'>18 phút</span>
+                                    
+                                    </div>
+                                    </div>
+                                
+                                <div>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                        </div>
                         </div>
                         <div className='nav-icon--padding mess' onClick={this.activeMessDropTab} onMouseLeave={this.handleHideMessDropTab}>
                         <BsMessenger style={{margin:"auto"}} />

@@ -422,3 +422,226 @@
     background-color: rgba(45, 136, 255, 0.2);
     color: rgb(46, 137, 255);
 }
+.notifi-icon-mode-container
+{
+    position: relative;
+}
+.notifi-droptab-container
+{
+    position: absolute;
+    background-color: rgb(36, 37, 38);
+    color: rgb(228, 230, 235);
+    display: none ;
+    flex-direction: column;
+    font-size: 12px;
+    height: 673.6px;
+    width: 360px;
+    top: 45px;
+    right: -47px;
+    border-radius: 5px;
+    box-shadow:  rgba(0, 0, 0, 0.2) 0px 2px 12px 0px;
+    overflow: auto;
+    overflow-x: hidden;
+    max-height: 629px;
+    padding: 0px 8px;
+    
+}
+
+.home-notifi-header-container
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 32px;
+    padding: 12px 8px 4px 8px;
+    justify-content: space-between;
+}
+.home-notifi-header-container h1{
+    font-size: 28px;
+}
+.notifi-icon-mode-container
+{
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    color: #8A8D91;
+    
+}
+.notifi-icon-mode
+{
+    height: 32px;
+    width: 32px;
+    line-height:32px;
+    display: flex;
+    align-items: center;
+    margin-right: 4px;
+}
+.notifi-icon-mode:hover
+{
+    cursor: pointer;
+    background-color: #3A3B3C;
+    border-radius: 16px;
+}
+.notifi-type-container
+{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin: 12px 8px 4px;
+}
+.notifi-type
+{
+   
+    border: 0;
+    color: rgb(228, 230, 235);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 0px 15px;
+    text-align: center;
+    height: 36px;
+    border-radius: 18px;
+    background-color: #242526;
+    margin-right: 8px;
+}
+.notifi-type.active
+{
+    color:  #2d88ff;
+    background-color: rgba(45, 136, 255, 0.2);
+}
+.notifi-type:hover
+{
+    cursor: pointer;
+    background-color: #3A3B3C;
+}
+.notifi-zone-container
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.zone-header-container
+{
+    display: flex;
+    flex-direction: row;
+    width: 360px;
+    padding: 8px;
+    font-size: 17px;
+    font-weight: 600;
+    justify-content: space-between;
+    box-sizing: border-box;
+    align-items: center;
+}
+.drop-tab-see-all
+{
+    text-decoration: none;
+    color: #2d88ff;
+    font-size: 15px;
+}
+.zone-item-container
+{
+    padding: 0px 8px;
+    display: flex;
+}
+.notifi-avt-user
+{
+    height: 56px;
+    width: 56px;
+    border-radius: 50%;
+    margin: 8px 12px 8px 0px;
+}
+.notifi-item-detail
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    color: rgb(176, 179, 184);
+    margin-top: 8px;
+}
+.notifi-item-content
+{
+    width: 100%;
+    font-size: 15px;
+    font-weight: 400;
+    max-height: 59px;
+
+}
+.notifi-name-taget
+{
+    font-weight: 500;
+}
+.notifi-item-time
+{
+    font-size: 12px;
+    text-align: start;
+}
+.zone-button-container
+{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.zone-button-container button{
+    background-color: rgba(255, 255, 255,0.1);
+    border: 0px;
+    color: rgb(228, 230, 235);
+    font-size: 14px;
+    padding: 0px 12px;
+    height: 36px;
+    width: 84px;
+    border-radius: 6px;
+    font-weight: 600;
+    box-sizing: content-box;
+    margin: 4px;
+    margin-bottom: 10px;
+}
+.zone-button-container button.active
+{
+    background-color: rgb(35, 116, 225);
+}
+.zone-button-container button:hover
+{
+    cursor: pointer;
+}
+.zone-item-container:hover
+{
+    background-color: #3A3B3C;
+    border-radius: 6px;
+}
+
+.notifi-droptab-container {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #555 #242526; /* Firefox */
+  }
+  
+  .notifi-droptab-container::-webkit-scrollbar {
+    width: 8px; /* Chrome, Safari */
+    height: 8px; /* Edge */
+  }
+  
+  .notifi-droptab-container::-webkit-scrollbar-thumb {
+    background-color: #555; /* Chrome, Safari, Edge */
+    border-radius: 3px; /* Chrome, Safari, Edge */
+  }
+  
+  .notifi-droptab-container::-webkit-scrollbar-track {
+    background-color: #242526; /* Chrome, Safari, Edge */
+  }
+  
+  .notifi-droptab-container::-ms-scrollbar-thumb {
+    background-color: #555; /* Edge */
+    border-radius: 3px; /* Edge */
+  }
+  
+  .notifi-droptab-container::-ms-scrollbar-track {
+    background-color: #242526; /* Edge */
+  }
+  
+  .notifi-droptab-container::-ms-scrollbar {
+    width: 8px; /* Edge */
+    height: 8px; /* Edge */
+  }
+  .notifi-droptab-container.active
+  {
+    display: flex;
+  }
