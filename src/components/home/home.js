@@ -1,11 +1,13 @@
 import './home.css'
 import React from 'react'
-import { BsSearch,BsMessenger,BsCameraVideoFill,BsPencilSquare } from "react-icons/bs";
-import { IoNotifications } from "react-icons/io5";
-import { AiOutlineDown } from "react-icons/ai";
+import { BsSearch,BsMessenger,BsCameraVideoFill,BsPencilSquare,BsFillPeopleFill,BsLink45Deg } from "react-icons/bs";
+import { IoNotifications,IoApps } from "react-icons/io5";
+import { AiOutlineDown,AiFillHome,AiFillFlag } from "react-icons/ai";
 import { FiX } from "react-icons/fi";
 import { IoIosMore } from "react-icons/io";
-import { BiExpand } from "react-icons/bi";
+import { BiExpand,BiSolidTv } from "react-icons/bi";
+import { FaTv,FaUserFriends } from "react-icons/fa";
+import { TbBuildingWarehouse } from "react-icons/tb";
 import { useEffect } from 'react';
 class  Home extends React.Component
 {
@@ -116,7 +118,7 @@ class  Home extends React.Component
     }
     render()
     {
-        
+        const userSrcImg = "assets/image/avt-user-login.jpg";
         return(
             <div className='home-container'>
                 <nav className='nav'>
@@ -132,7 +134,7 @@ class  Home extends React.Component
                                 <a href='#' className='search-title__a'>Chỉnh sửa</a>
                             </div>
                             <div className='search-target-container'>
-                                <img src='assets/image/avt-user-login.jpg' className='home-avt__img smaller'/>
+                                <img src={userSrcImg} className='home-avt__img smaller'/>
                                 <div className='search-target-detail'>
                                     <span >Nguyễn Trần Minh Trung</span>
                                     <span className='search-target-role'>Bạn bè</span>
@@ -143,7 +145,7 @@ class  Home extends React.Component
                     </div>
                     <div className='home-icon-container'>
                     <div className='nav-img-icon-container'>
-                            <img className='home-avt__img' src='assets/image/avt-user-login.jpg' alt="avatar user"/>
+                            <img className='home-avt__img' src={userSrcImg} alt="avatar user"/>
                             <AiOutlineDown style={{position:"absolute",height:"12px",width:"12px",borderRadius:"6px",backgroundColor:"#3A3B3C",bottom:0,right:0,padding:"auto"}}/>
                         </div>
                        
@@ -172,7 +174,7 @@ class  Home extends React.Component
                                     </div>
                                     
                                     <div className='zone-item-container'>
-                                    <img className='notifi-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                    <img className='notifi-avt-user' src={userSrcImg} alt='avt-user'/>
                                     <div className='notifi-item-detail'>
                                     <span className='notifi-item-content'><strong className='notifi-name-taget'>
                                     Minh Trung
@@ -195,7 +197,7 @@ class  Home extends React.Component
                                     </div>
                                     
                                     <div className='zone-item-container'>
-                                    <img className='notifi-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                    <img className='notifi-avt-user' src={userSrcImg} alt='avt-user'/>
                                     <div className='notifi-item-detail'>
                                     <span className='notifi-item-content'><strong className='notifi-name-taget'>
                                     Minh Trung
@@ -205,7 +207,7 @@ class  Home extends React.Component
                                     </div>
                                     </div>
                                     <div className='zone-item-container'>
-                                    <img className='notifi-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                    <img className='notifi-avt-user' src={userSrcImg} alt='avt-user'/>
                                     <div className='notifi-item-detail'>
                                     <span className='notifi-item-content'><strong className='notifi-name-taget'>
                                     Minh Trung
@@ -215,7 +217,7 @@ class  Home extends React.Component
                                     </div>
                                     </div>
                                     <div className='zone-item-container'>
-                                    <img className='notifi-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                    <img className='notifi-avt-user' src={userSrcImg} alt='avt-user'/>
                                     <div className='notifi-item-detail'>
                                     <span className='notifi-item-content'><strong className='notifi-name-taget'>
                                     Minh Trung
@@ -225,7 +227,7 @@ class  Home extends React.Component
                                     </div>
                                     </div>
                                     <div className='zone-item-container'>
-                                    <img className='notifi-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                    <img className='notifi-avt-user' src={userSrcImg} alt='avt-user'/>
                                     <div className='notifi-item-detail'>
                                     <span className='notifi-item-content'><strong className='notifi-name-taget'>
                                     Minh Trung
@@ -235,7 +237,7 @@ class  Home extends React.Component
                                     </div>
                                     </div>
                                     <div className='zone-item-container'>
-                                    <img className='notifi-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                    <img className='notifi-avt-user' src={userSrcImg} alt='avt-user'/>
                                     <div className='notifi-item-detail'>
                                     <span className='notifi-item-content'><strong className='notifi-name-taget'>
                                     Minh Trung
@@ -245,7 +247,7 @@ class  Home extends React.Component
                                     </div>
                                     </div>
                                     <div className='zone-item-container'>
-                                    <img className='notifi-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                    <img className='notifi-avt-user' src={userSrcImg} alt='avt-user'/>
                                     <div className='notifi-item-detail'>
                                     <span className='notifi-item-content'><strong className='notifi-name-taget'>
                                     Minh Trung
@@ -255,7 +257,7 @@ class  Home extends React.Component
                                     </div>
                                     </div>
                                     <div className='zone-item-container'>
-                                    <img className='notifi-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                    <img className='notifi-avt-user' src={userSrcImg} alt='avt-user'/>
                                     <div className='notifi-item-detail'>
                                     <span className='notifi-item-content'><strong className='notifi-name-taget'>
                                     Minh Trung
@@ -305,12 +307,12 @@ class  Home extends React.Component
                         </div>
                         <div className='mess-container'>
                             <div className='mess-item-container'>
-                                <img className='mess-avt-user' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                <img className='mess-avt-user' src={userSrcImg} alt='avt-user'/>
                                 <div className='mess-item-detail'>
                                     <span className='mess-item-name'>LT - Sao chổi Tournament</span>
                                     <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
                                 </div>
-                                <img className='mess-avt-user smaller' src='assets/image/avt-user-login.jpg' alt='avt-user'/>
+                                <img className='mess-avt-user smaller' src={userSrcImg} alt='avt-user'/>
                                 <div className='mess-item-more'>
                                     <IoIosMore style={{margin:"auto"}}/>
                                 </div>
@@ -326,6 +328,71 @@ class  Home extends React.Component
                         </div>
                     </div>
                 </nav>
+            <div className='home-content-container'>
+                {/* left side bar */}
+
+                <div className='home-left-side-bar-container'>
+                    <div className='left-side-header'>
+                        <div className='home-left-side-bar-item-container'>
+                        <AiFillHome/>
+                        <span className='side-bar-item__span'>Trang chủ</span>
+                        </div>
+                        <div className='home-left-side-bar-item-container'>
+                            <img src={userSrcImg} className='home-avt__img bar'/>
+                            <span className='side-bar-item__span'>Trung Nguyễn</span>
+                        </div>
+                    </div>
+                    <div className='left-side-bar-feature-container'>
+                        <div className='home-left-side-bar-item-container'>
+                            <FaTv/>
+                            <span className='side-bar-item__span'>Watch</span>
+                        </div>
+                        <div className='home-left-side-bar-item-container'>
+                            <FaUserFriends/>
+                            <span className='side-bar-item__span'>Bạn bè</span>
+                        </div>
+                        <div className='home-left-side-bar-item-container'>
+                            <AiFillFlag/>
+                            <span className='side-bar-item__span'>Trang</span>
+                        </div>
+                        <div className='home-left-side-bar-item-container'>
+                            <TbBuildingWarehouse/>
+                            <span className='side-bar-item__span'>Marketplace</span>
+                        </div>
+                        <div className='home-left-side-bar-item-container'>
+                            <IoApps/>
+                            <span className='side-bar-item__span'>Xem Tất cả</span>
+                        </div>
+                    </div>
+                    <div className='left-side-bar-feature-container'>
+                        <div className='home-left-side-bar-item-container'>
+                            <span className='side-bar-item-new'></span>
+                            <img src= {userSrcImg} className='home-avt__img bar-page' />
+                            <span className='side-bar-item__span'>IU Start up Demo days</span>                            
+                        </div>
+                        <div className='home-left-side-bar-item-container'>
+                            <BsFillPeopleFill/>
+                            <spann className='side-bar-item__span'>Xem tất cả các nhóm</spann>
+                            </div>
+                    </div>
+                    <div className='left-side-bar-feature-container'>
+                        <div className='home-left-side-bar-item-container'>
+                            <BsLink45Deg/>
+                            <span className='side-bar-item__span'>Xem tất cả lối tắt</span>
+                        </div>
+                    </div>
+                </div>
+                
+                {/* new feed */}
+                <div className='home-new-feed-container'>
+
+                </div>
+
+
+                {/* rigt side bar */}
+            </div>
+
+
             </div>
         )
     }
