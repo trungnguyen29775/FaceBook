@@ -309,8 +309,13 @@ class  Home extends React.Component
                             <div className='mess-item-container'>
                                 <img className='mess-avt-user' src={userSrcImg} alt='avt-user'/>
                                 <div className='mess-item-detail'>
+
                                     <span className='mess-item-name'>LT - Sao chổi Tournament</span>
-                                    <span className='mess-item-message'>Bạn: Chay tron sao choi . <span className='mess-item-time'>18 phút</span></span>
+                                    <div className='mess-item-message-and-time-container'>
+                                    <span className='mess-item-message'>Bạn: Chay traaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaon sao choi .</span> 
+                                    <span className='mess-item-time'>18 phút</span>
+
+                                    </div>
                                 </div>
                                 <img className='mess-avt-user smaller' src={userSrcImg} alt='avt-user'/>
                                 <div className='mess-item-more'>
@@ -334,6 +339,7 @@ class  Home extends React.Component
                 <div className='home-left-side-bar-container'>
                     <div className='left-side-header'>
                         <div className='home-left-side-bar-item-container'>
+                        <div className='left-side-bar-active-bar'></div>
                         <AiFillHome/>
                         <span className='side-bar-item__span'>Trang chủ</span>
                         </div>
@@ -370,6 +376,22 @@ class  Home extends React.Component
                             <img src= {userSrcImg} className='home-avt__img bar-page' />
                             <span className='side-bar-item__span'>IU Start up Demo days</span>                            
                         </div>
+                        <div className='home-left-side-bar-item-container'>
+                            <span className='side-bar-item-new'></span>
+                            <img src= {userSrcImg} className='home-avt__img bar-page' />
+                            <span className='side-bar-item__span'>IU Start up Demo days</span>                            
+                        </div>
+                        <div className='home-left-side-bar-item-container'>
+                            <span className='side-bar-item-new'></span>
+                            <img src= {userSrcImg} className='home-avt__img bar-page' />
+                            <span className='side-bar-item__span'>IU Start up Demo days</span>                            
+                        </div>
+                        <div className='home-left-side-bar-item-container'>
+                            <span className='side-bar-item-new'></span>
+                            <img src= {userSrcImg} className='home-avt__img bar-page' />
+                            <span className='side-bar-item__span'>IU Start up Demo days</span>                            
+                        </div>
+                        
                         <div className='home-left-side-bar-item-container'>
                             <BsFillPeopleFill/>
                             <spann className='side-bar-item__span'>Xem tất cả các nhóm</spann>
