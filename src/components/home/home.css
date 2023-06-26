@@ -880,6 +880,7 @@
     font-size: 12px;
     color: rgb(176, 179, 184);
     margin-bottom: 8px;
+    font-weight: 500;
 }
 .right-side-control-item-container
 {
@@ -896,3 +897,98 @@
     background-color: #3A3B3C;
     cursor: pointer;
 }
+.right-side-bar-contact-container
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 90px;
+}
+.contact-header
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 17px;
+    font-weight: 500;
+    align-items: center;
+}
+.contact-header-action-container
+{
+    display: flex;
+    width: 40%;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px 0px 4px 0px;
+}
+.contact-action-icon
+{
+    height: 32px;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    color: #8A8D91;
+}
+.contact-action-icon:hover
+{
+    cursor: pointer;
+    background-color: #555;
+}
+.contact-user-container
+{
+    padding: 8px 0px;
+}
+.contact-user
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    border-radius: 6px;
+    padding: 0px 8px;
+    box-sizing: border-box;
+}
+.contact-user__img{
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    margin: 8px 12px 8px 0;
+}
+.contact-user:hover
+{
+    cursor: pointer;
+    background-color: #555;
+}
+.home-right-side-bar-container {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #555 #242526; /* Firefox */
+  }
+  
+  .home-right-side-bar-container::-webkit-scrollbar {
+    width: 8px; /* Chrome, Safari */
+    height: 8px; /* Edge */
+  }
+  
+  .home-right-side-bar-container::-webkit-scrollbar-thumb {
+    background-color: #555; /* Chrome, Safari, Edge */
+    border-radius: 3px; /* Chrome, Safari, Edge */
+  }
+  
+  .home-right-side-bar-container::-webkit-scrollbar-track {
+    background-color: #242526; /* Chrome, Safari, Edge */
+  }
+  
+  .home-right-side-bar-container::-ms-scrollbar-thumb {
+    background-color: #555; /* Edge */
+    border-radius: 3px; /* Edge */
+  }
+  
+  .home-right-side-bar-container::-ms-scrollbar-track {
+    background-color: #242526; /* Edge */
+  }
+  
+  .home-right-side-bar-container::-ms-scrollbar {
+    width: 8px; /* Edge */
+    height: 8px; /* Edge */
+  }

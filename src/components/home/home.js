@@ -475,22 +475,80 @@ class  Home extends React.Component
                             </div>
 
                         </div>
-                        <div>
-                            <div>
+                        <div className='right-side-bar-contact-container'>
+                            <div className='contact-header'>
                                 <span>
                                     Người liên hệ
                                 </span>
-                                <div>
-                                    <BsCameraVideoFill/>
-                                    <BsSearch/>
-                                    <IoIosMore/>
+                                <div className='contact-header-action-container'>
+                                    <div className='contact-action-icon'>
+                                    <BsCameraVideoFill style={{margin:"auto"}}/>
+
+                                    </div>
+                                    <div className='contact-action-icon'>
+                                    <BsSearch style={{margin:"auto"}}/>
+
+                                    </div>
+                                    <div className='contact-action-icon'>
+                                    <IoIosMore style={{margin:"auto"}}/>
+
+                                    </div>
                                 </div>
                             </div>
-                            <div>
-                                <div>
-                                    <img/>
+                            <div className='contact-users-container'>
+                                <div className='contact-user'>
+                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
                                     <span>Peter Tran</span>
                                 </div>
+                                <div className='contact-user'>
+                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
+                                    <span>Peter Tran</span>
+                                </div>
+                                <div className='contact-user'>
+                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
+                                    <span>Peter Tran</span>
+                                </div>
+                                <div className='contact-user'>
+                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
+                                    <span>Peter Tran</span>
+                                </div>
+                                <div className='contact-user'>
+                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
+                                    <span>Peter Tran</span>
+                                </div>
+                                <div className='contact-user'>
+                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
+                                    <span>Peter Tran</span>
+                                </div>
+                                <div className='contact-user'>
+                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
+                                    <span>Peter Tran</span>
+                                </div>
+                                <div className='contact-user'>
+                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
+                                    <span>Peter Tran</span>
+                                </div>
+                                <div className='contact-user'>
+                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
+                                    <span>Peter Tran</span>
+                                </div>
+                                <div className='contact-user'>
+                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
+                                    <span>Peter Tran</span>
+                                </div>
+                                <div className='contact-user'>
+                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
+                                    <span>Peter Tran</span>
+                                </div>
+                                <div className='contact-user'>
+                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
+                                    <span>Peter Tran</span>
+                                </div>
+                                <div className='contact-user'>
+                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
+                                    <span>Peter Tran</span>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
