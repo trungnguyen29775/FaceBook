@@ -2,13 +2,13 @@ import './home.css'
 import React from 'react'
 import { BsSearch,BsMessenger,BsCameraVideoFill,BsPencilSquare,BsFillPeopleFill,BsLink45Deg } from "react-icons/bs";
 import { IoNotifications,IoApps } from "react-icons/io5";
-import { AiOutlineDown,AiFillHome,AiFillFlag } from "react-icons/ai";
+import { AiOutlineUserSwitch,AiOutlineDown,AiFillHome,AiFillFlag,AiOutlineNotification } from "react-icons/ai";
 import { FiX } from "react-icons/fi";
 import { IoIosMore } from "react-icons/io";
-import { BiExpand,BiSolidTv } from "react-icons/bi";
+import { BiExpand } from "react-icons/bi";
 import { FaTv,FaUserFriends } from "react-icons/fa";
 import { TbBuildingWarehouse } from "react-icons/tb";
-import { useEffect } from 'react';
+
 class  Home extends React.Component
 {
     constructor(props)
@@ -340,7 +340,7 @@ class  Home extends React.Component
                     <div className='left-side-header'>
                         <div className='home-left-side-bar-item-container'>
                         <div className='left-side-bar-active-bar'></div>
-                        <AiFillHome/>
+                        <AiFillHome className='left-side-bar-icon'/>
                         <span className='side-bar-item__span'>Trang chủ</span>
                         </div>
                         <div className='home-left-side-bar-item-container'>
@@ -350,23 +350,23 @@ class  Home extends React.Component
                     </div>
                     <div className='left-side-bar-feature-container'>
                         <div className='home-left-side-bar-item-container'>
-                            <FaTv/>
+                            <FaTv className='left-side-bar-icon'/>
                             <span className='side-bar-item__span'>Watch</span>
                         </div>
                         <div className='home-left-side-bar-item-container'>
-                            <FaUserFriends/>
+                            <FaUserFriends className='left-side-bar-icon'/>
                             <span className='side-bar-item__span'>Bạn bè</span>
                         </div>
                         <div className='home-left-side-bar-item-container'>
-                            <AiFillFlag/>
+                            <AiFillFlag className='left-side-bar-icon'/>
                             <span className='side-bar-item__span'>Trang</span>
                         </div>
                         <div className='home-left-side-bar-item-container'>
-                            <TbBuildingWarehouse/>
+                            <TbBuildingWarehouse className='left-side-bar-icon'/>
                             <span className='side-bar-item__span'>Marketplace</span>
                         </div>
                         <div className='home-left-side-bar-item-container'>
-                            <IoApps/>
+                            <IoApps className='left-side-bar-icon'/>
                             <span className='side-bar-item__span'>Xem Tất cả</span>
                         </div>
                     </div>
@@ -393,13 +393,46 @@ class  Home extends React.Component
                         </div>
                         
                         <div className='home-left-side-bar-item-container'>
-                            <BsFillPeopleFill/>
+                            
+                            <BsFillPeopleFill className='left-side-bar-icon' />
                             <spann className='side-bar-item__span'>Xem tất cả các nhóm</spann>
                             </div>
                     </div>
-                    <div className='left-side-bar-feature-container'>
+                    <div className='left-side-bar-feature-container last'>
+                    <div className='home-left-side-bar-item-container'>
+                            <span className='side-bar-item-new'></span>
+                            <img src= {userSrcImg} className='home-avt__img bar-page' />
+                            <span className='side-bar-item__span'>IU Start up Demo days</span>                            
+                        </div>
+
                         <div className='home-left-side-bar-item-container'>
-                            <BsLink45Deg/>
+                            <span className='side-bar-item-new'></span>
+                            <img src= {userSrcImg} className='home-avt__img bar-page' />
+                            <span className='side-bar-item__span'>IU Start up Demo days</span>                            
+                        </div>
+
+                        <div className='home-left-side-bar-item-container'>
+                            <span className='side-bar-item-new'></span>
+                            <img src= {userSrcImg} className='home-avt__img bar-page' />
+                            <span className='side-bar-item__span'>IU Start up Demo days</span>                            
+                        </div>
+                        <div className='home-left-side-bar-item-container'>
+                            <span className='side-bar-item-new'></span>
+                            <img src= {userSrcImg} className='home-avt__img bar-page' />
+                            <span className='side-bar-item__span'>IU Start up Demo days</span>                            
+                        </div>
+                        <div className='home-left-side-bar-item-container'>
+                            <span className='side-bar-item-new'></span>
+                            <img src= {userSrcImg} className='home-avt__img bar-page' />
+                            <span className='side-bar-item__span'>IU Start up Demo days</span>                            
+                        </div>
+                        <div className='home-left-side-bar-item-container'>
+                            <span className='side-bar-item-new'></span>
+                            <img src= {userSrcImg} className='home-avt__img bar-page' />
+                            <span className='side-bar-item__span'>IU Start up Demo days</span>                            
+                        </div>
+                        <div className='home-left-side-bar-item-container'>
+                            <BsLink45Deg className='left-side-bar-icon'/>
                             <span className='side-bar-item__span'>Xem tất cả lối tắt</span>
                         </div>
                     </div>
@@ -412,6 +445,56 @@ class  Home extends React.Component
 
 
                 {/* rigt side bar */}
+                <div className='home-right-side-bar-container'>
+                    <div className='right-side-bar-header-container'>
+                        <div className='right-side-bar-header'>
+                            <span>Trang và trang cá nhân của bạn</span>
+                            <div className='right-side-bar-icon-container'>
+                                <IoIosMore className='right-sidebar-icon' />
+
+                            </div>
+                        </div>
+                        <div className='right-side-bar-user-page-container'>
+                            <img alt='user page image' src={userSrcImg} className='user-page__img'/>
+                            <span className='user-page-name'>Another well well well Universe</span>
+                        </div>
+                        <div className='right-side-bar-user-page-control'>
+                            <div className='right-side-control-item-container'>
+                                <IoNotifications style={{fontSize:"20px",padding:"6px"}}/>
+                                <span>1 Thông báo</span>
+                            </div>
+                            <div className='right-side-control-item-container'>
+                                <AiOutlineUserSwitch style={{fontSize:"20px",padding:"6px"}}/>
+                                <span>Chuyển sang trang</span>
+                            </div >
+                            <div className='right-side-control-item-container'>
+                                <AiOutlineNotification style={{fontSize:"20px",padding:"6px"}}/>
+                                <span>
+                                    Tạo quảng cáo
+                                </span>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div>
+                                <span>
+                                    Người liên hệ
+                                </span>
+                                <div>
+                                    <BsCameraVideoFill/>
+                                    <BsSearch/>
+                                    <IoIosMore/>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <img/>
+                                    <span>Peter Tran</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
