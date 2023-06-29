@@ -2,10 +2,10 @@ import './home.css'
 import React from 'react'
 import { BsSearch,BsMessenger,BsCameraVideoFill,BsPencilSquare,BsFillPeopleFill,BsLink45Deg } from "react-icons/bs";
 import { IoNotifications,IoApps } from "react-icons/io5";
-import { AiOutlineUserSwitch,AiOutlineDown,AiFillHome,AiFillFlag,AiOutlineNotification } from "react-icons/ai";
+import { AiOutlinePlus,AiOutlineUserSwitch,AiOutlineDown,AiFillHome,AiFillFlag,AiOutlineNotification } from "react-icons/ai";
 import { FiX } from "react-icons/fi";
-import { IoIosMore } from "react-icons/io";
-import { BiExpand } from "react-icons/bi";
+import { IoIosMore,IoIosBook } from "react-icons/io";
+import { BiExpand,BiMoviePlay } from "react-icons/bi";
 import { FaTv,FaUserFriends } from "react-icons/fa";
 import { TbBuildingWarehouse } from "react-icons/tb";
 
@@ -99,6 +99,14 @@ class  Home extends React.Component
                 droptab.classList.remove('active')
               });
     }
+
+    handleZoomImage(event)
+    {
+        event.preventDefault()
+        event.stopPropagation()
+        event.target.style.transform = 'scale(1.2)'
+    }
+
     activeMessDropTab(event)
     {
         event.preventDefault()
@@ -438,13 +446,71 @@ class  Home extends React.Component
                     </div>
                 </div>
                 
+                <div>
+                    
+                </div>
+                <div className='new-feed-right-side-bar-container'>
                 {/* new feed */}
+
                 <div className='home-new-feed-container'>
+                    <div className='home-reels-container'>
+                        <div className='reels-nav-container'>
+                            <div className='reels-nav'>
+                                <div className='reel-nav-center'>
+                                    <IoIosBook style={{fontSize:"20px",marginRight:"8px"}}/> <span>Tin</span>
+                                
+                                </div>
+                                <div className='reel-nav-active'></div>
+                            </div>
+                            <div className='reels-nav'>
+                                <div className='reel-nav-center'>
+                                <BiMoviePlay style={{fontSize:"20px",marginRight:"8px"}}/> <span>Reels</span>
+
+                                </div>
+                            </div>
+                            <div className='reels-nav'>
+                                <div className='reel-nav-center'>
+                                <BsCameraVideoFill style={{fontSize:"20px",marginRight:"8px"}}/> <span>Phòng họp mặt</span>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div className='home-reels'>
+                            <div className='reel-block-bar'>
+
+                            </div>
+                            <div className='reel'>
+                                <div className='avt-user-icon-container'>
+                                 <img className='reel-avt-user'  alt='avt user'src={userSrcImg}/>
+
+                                    <div className='reel-plus-container'>
+                                        <AiOutlinePlus className='reel-plus__icon'/>
+                                    </div>
+                                </div>
+                                <div className='reel-title-container'>
+                                    Tạo tin
+                                </div>
+                                
+                            </div>
+                            <div className='reel'>
+                            <div className='reel-avt-user other'>
+                                        <img className='avt-user other' src={userSrcImg} />
+                                    </div>
+                                <div className='avt-user-icon-container other'>
+                                    
+                                 <img className='reel-background' alt='avt user'src={userSrcImg}/>
+                                </div>
+                                <span className='reel-name-user'>Trung Nguyen</span>
+                                
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
 
 
-                {/* rigt side bar */}
+                    {/* rigt side bar */}
                 <div className='home-right-side-bar-container'>
                     <div className='right-side-bar-header-container'>
                         <div className='right-side-bar-header'>
@@ -498,61 +564,62 @@ class  Home extends React.Component
                             <div className='contact-users-container'>
                                 <div className='contact-user'>
                                     <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Peter Tran</span>
+                                    <span>Trung Nguyen</span>
                                 </div>
                                 <div className='contact-user'>
                                     <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Peter Tran</span>
+                                    <span>Trung Nguyen</span>
                                 </div>
                                 <div className='contact-user'>
                                     <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Peter Tran</span>
+                                    <span>Trung Nguyen</span>
                                 </div>
                                 <div className='contact-user'>
                                     <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Peter Tran</span>
+                                    <span>Trung Nguyen</span>
                                 </div>
                                 <div className='contact-user'>
                                     <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Peter Tran</span>
+                                    <span>Trung Nguyen</span>
                                 </div>
                                 <div className='contact-user'>
                                     <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Peter Tran</span>
+                                    <span>Trung Nguyen</span>
                                 </div>
                                 <div className='contact-user'>
                                     <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Peter Tran</span>
+                                    <span>Trung Nguyen</span>
                                 </div>
                                 <div className='contact-user'>
                                     <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Peter Tran</span>
+                                    <span>Trung Nguyen</span>
                                 </div>
                                 <div className='contact-user'>
                                     <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Peter Tran</span>
+                                    <span>Trung Nguyen</span>
                                 </div>
                                 <div className='contact-user'>
                                     <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Peter Tran</span>
+                                    <span>Trung Nguyen</span>
                                 </div>
                                 <div className='contact-user'>
                                     <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Peter Tran</span>
+                                    <span>Trung Nguyen</span>
                                 </div>
-                                <div className='contact-user'>
-                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Peter Tran</span>
-                                </div>
-                                <div className='contact-user'>
-                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Peter Tran</span>
-                                </div>
+
+                                
+                               
                                 
                             </div>
+
                         </div>
                     </div>
                 </div>
+                </div>
+                
+
+
+                
             </div>
 
 
