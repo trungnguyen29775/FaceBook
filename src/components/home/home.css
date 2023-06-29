@@ -112,7 +112,7 @@
     box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 12px 0px;
     display: none;
     flex-direction: column;
-    z-index: 1;
+    z-index: 3;
     max-height:665.6px;
     top: 49px;
     margin: auto;
@@ -911,6 +911,7 @@
     font-size: 17px;
     font-weight: 500;
     align-items: center;
+    padding-bottom: 10px;
 }
 .contact-header-action-container
 {
@@ -918,7 +919,6 @@
     width: 40%;
     flex-direction: row;
     justify-content: space-around;
-    padding: 20px 0px 4px 0px;
 }
 .contact-action-icon
 {
@@ -1021,6 +1021,7 @@
     color: #8A8D91;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 .reels-nav-container
 {
@@ -1071,16 +1072,18 @@
     display: flex;
     flex-direction: row;
     max-width: 590px;
-    overflow-y: hidden;
-    overflow-x: auto;
-    padding: 8px 0px;
+    overflow: hidden;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    box-sizing: border-box;
+    vertical-align: top;
+    position: relative;
 }
 .reel-avt-user
 {
     width: 112.5px;
     height: 151px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    overflow: hidden;
 
 }
 .reel-block-bar
@@ -1096,6 +1099,15 @@
     color: rgb(255, 255, 255);
     width: 112.5px;
     margin-right: 8px;
+    height: 200px;
+
+}
+.reel-avt-user-container
+{
+    height: 151px;
+    overflow: hidden;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 
 }
 .reel-plus__icon
@@ -1109,14 +1121,13 @@
 .reel-plus-container
 {
     position: absolute;
-
     height: 40px;
     width: 40px;
     display: flex;
     align-items: center;
     background-color: rgb(62, 64, 66);
     border-radius: 50%;
-    bottom:-20px;
+    bottom:15%;
     left: 36.25px;
 }
 .avt-user-icon-container
@@ -1124,6 +1135,15 @@
     display: flex;
     align-items: center;
     position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.avt-user-icon-container.current
+{
+    border-radius: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
 }
 .reel-title-container
 {
@@ -1139,7 +1159,10 @@
     height: 50px;
 }
 .avt-user-icon-container.other{
-    flex: 1;
+    height: 200px;
+    width: 112.5px;
+    z-index: 0;
+
 }
 .avt-user.other
 {
@@ -1147,13 +1170,14 @@
     width: 32px;
     margin: auto;
     border-radius: 50%;
+    
 }
 .reel-background{
     position: relative;
     height: 100%;
     width: 100%;
     border-radius: 10px;
-
+    overflow: hidden;
     
 }
 .reel-avt-user.other{
@@ -1166,6 +1190,7 @@
     border-radius: 50%;
     top: 10px;
     left: 10px;
+    z-index: 1;
 }
 .reel-name-user{
     font-size: 12px;
@@ -1178,15 +1203,46 @@
 }
 .reel:hover
 {
-
+    opacity: 0.85;
     cursor: pointer;
-    overflow: hidden;
     border-radius: 10px;
+
+    .reel-avt-user.current
+    {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        transition: transform 0.5s ease;
+        transform: scale(1.05);
+    }
     .reel-background
     {
         border-radius: 10px;
         transition: transform 0.5s ease;
-        transform: scale(1.1);
+        transform: scale(1.05);
 
     }
+}
+.reel-arrow-right,.reel-arrow-left
+{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    background-color: #3A3B3C;
+    z-index: 2;
+    height: 48px;
+    width: 48px;
+    font-size: 20px;
+    border-radius: 50%;
+    right: 25px;
+    bottom: 35%;
+}
+.reel-arrow-right:hover,
+.reel-arrow-left:hover
+{
+    cursor: pointer;
+    background-color: #555;
+}
+.reel-arrow-left
+{
+    left: 25px;
 }

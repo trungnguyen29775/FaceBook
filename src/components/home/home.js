@@ -2,7 +2,7 @@ import './home.css'
 import React from 'react'
 import { BsSearch,BsMessenger,BsCameraVideoFill,BsPencilSquare,BsFillPeopleFill,BsLink45Deg } from "react-icons/bs";
 import { IoNotifications,IoApps } from "react-icons/io5";
-import { AiOutlinePlus,AiOutlineUserSwitch,AiOutlineDown,AiFillHome,AiFillFlag,AiOutlineNotification } from "react-icons/ai";
+import {AiOutlineLeft,AiOutlineRight, AiOutlinePlus,AiOutlineUserSwitch,AiOutlineDown,AiFillHome,AiFillFlag,AiOutlineNotification } from "react-icons/ai";
 import { FiX } from "react-icons/fi";
 import { IoIosMore,IoIosBook } from "react-icons/io";
 import { BiExpand,BiMoviePlay } from "react-icons/bi";
@@ -16,14 +16,17 @@ class  Home extends React.Component
         super(props)
         this.state = 
         {
-            messType:"personal"
+            messType:"personal",
+            displayReelScrollLeftButton:false,
         }
+        this.handleReelsScrollLeft = this.handleReelsScrollLeft.bind(this)
         this.handleHideNotifiDropTab = this.handleHideNotifiDropTab.bind(this)
         this.activeNotifiDropTab = this.activeNotifiDropTab.bind(this)
         this.handleHideMessDropTab = this.handleHideMessDropTab.bind(this)
         this.activeMessDropTab = this.activeMessDropTab.bind(this)
         this.hideInputTab = this.hideInputTab.bind(this)
         this.handleClickInput = this.handleClickInput.bind(this)
+        this.handleReelsScrollRight = this.handleReelsScrollRight.bind(this)
     }
     componentDidMount()
     {
@@ -100,17 +103,39 @@ class  Home extends React.Component
               });
     }
 
-    handleZoomImage(event)
+    handleReelsScrollRight(event)
     {
-        event.preventDefault()
         event.stopPropagation()
-        event.target.style.transform = 'scale(1.2)'
+        event.preventDefault()
+        const slideContainer = document.querySelector('.home-reels')
+        slideContainer.scrollBy({
+            left: 200,
+            behavior: 'smooth'
+          });
+        this.setState({displayReelScrollLeftButton:true})
+    }
+    handleReelsScrollLeft(event)
+    {
+        event.stopPropagation()
+        event.preventDefault()
+        const slideContainer = document.querySelector('.home-reels')
+        slideContainer.scrollBy({
+            left: -200,
+            behavior: 'smooth'
+          });
+        const scrollPosition = slideContainer.scrollLeft;
+        if(scrollPosition<=90)
+            this.setState({displayReelScrollLeftButton:false})
+        else
+            this.setState({displayReelScrollLeftButton:true})
+    
     }
 
     activeMessDropTab(event)
     {
         event.preventDefault()
         event.stopPropagation()
+        
         const messIcon  = document.querySelector('.nav-icon--padding.mess')
         const messDropTab = document.querySelector('.mess-droptab-container')
         if(messDropTab.classList[1] =="active")
@@ -453,7 +478,15 @@ class  Home extends React.Component
                 {/* new feed */}
 
                 <div className='home-new-feed-container'>
+                    
                     <div className='home-reels-container'>
+                    <div className='reel-arrow-right' onClick={this.handleReelsScrollRight}>
+                                <AiOutlineRight style={{margin:"auto", fontWeight:600}}/>
+                            </div>
+                            
+                            <div className='reel-arrow-left' style={{display:this.state.displayReelScrollLeftButton?'flex':'none'}} onClick={this.handleReelsScrollLeft}>
+                                <AiOutlineLeft style={{margin:"auto", fontWeight:600}}/>
+                            </div>
                         <div className='reels-nav-container'>
                             <div className='reels-nav'>
                                 <div className='reel-nav-center'>
@@ -477,33 +510,116 @@ class  Home extends React.Component
                             </div>
                         </div>
                         <div className='home-reels'>
+                            
                             <div className='reel-block-bar'>
 
                             </div>
                             <div className='reel'>
-                                <div className='avt-user-icon-container'>
-                                 <img className='reel-avt-user'  alt='avt user'src={userSrcImg}/>
-
-                                    <div className='reel-plus-container'>
+                                <div className='avt-user-icon-container current'>
+                                 <img className='reel-avt-user current'  alt='avt user'src={userSrcImg}/>
+                                </div>
+                                <div className='reel-plus-container'>
                                         <AiOutlinePlus className='reel-plus__icon'/>
                                     </div>
-                                </div>
                                 <div className='reel-title-container'>
                                     Tạo tin
                                 </div>
                                 
                             </div>
                             <div className='reel'>
-                            <div className='reel-avt-user other'>
-                                        <img className='avt-user other' src={userSrcImg} />
-                                    </div>
+                                
                                 <div className='avt-user-icon-container other'>
-                                    
+                                <div className='reel-avt-user other'>
+                                    <img className='avt-user other' src={userSrcImg} />
+                                </div>
                                  <img className='reel-background' alt='avt user'src={userSrcImg}/>
                                 </div>
                                 <span className='reel-name-user'>Trung Nguyen</span>
-                                
                             </div>
+                            <div className='reel'>
+                                
+                                <div className='avt-user-icon-container other'>
+                                <div className='reel-avt-user other'>
+                                    <img className='avt-user other' src={userSrcImg} />
+                                </div>
+                                 <img className='reel-background' alt='avt user'src={userSrcImg}/>
+                                </div>
+                                <span className='reel-name-user'>Trung Nguyen</span>
+                            </div>
+                            <div className='reel'>
+                                
+                                <div className='avt-user-icon-container other'>
+                                <div className='reel-avt-user other'>
+                                    <img className='avt-user other' src={userSrcImg} />
+                                </div>
+                                 <img className='reel-background' alt='avt user'src={userSrcImg}/>
+                                </div>
+                                <span className='reel-name-user'>Trung Nguyen</span>
+                            </div>
+                            <div className='reel'>
+                                
+                                <div className='avt-user-icon-container other'>
+                                <div className='reel-avt-user other'>
+                                    <img className='avt-user other' src={userSrcImg} />
+                                </div>
+                                 <img className='reel-background' alt='avt user'src={userSrcImg}/>
+                                </div>
+                                <span className='reel-name-user'>Trung Nguyen</span>
+                            </div>
+                            <div className='reel'>
+                                
+                                <div className='avt-user-icon-container other'>
+                                <div className='reel-avt-user other'>
+                                    <img className='avt-user other' src={userSrcImg} />
+                                </div>
+                                 <img className='reel-background' alt='avt user'src={userSrcImg}/>
+                                </div>
+                                <span className='reel-name-user'>Trung Nguyen</span>
+                            </div>
+                            <div className='reel'>
+                                
+                                <div className='avt-user-icon-container other'>
+                                <div className='reel-avt-user other'>
+                                    <img className='avt-user other' src={userSrcImg} />
+                                </div>
+                                 <img className='reel-background' alt='avt user'src={userSrcImg}/>
+                                </div>
+                                <span className='reel-name-user'>Trung Nguyen</span>
+                            </div>
+                            <div className='reel'>
+                                
+                                <div className='avt-user-icon-container other'>
+                                <div className='reel-avt-user other'>
+                                    <img className='avt-user other' src={userSrcImg} />
+                                </div>
+                                 <img className='reel-background' alt='avt user'src={userSrcImg}/>
+                                </div>
+                                <span className='reel-name-user'>Trung Nguyen</span>
+                            </div>
+                            <div className='reel'>
+                                
+                                <div className='avt-user-icon-container other'>
+                                <div className='reel-avt-user other'>
+                                    <img className='avt-user other' src={userSrcImg} />
+                                </div>
+                                 <img className='reel-background' alt='avt user'src={userSrcImg}/>
+                                </div>
+                                <span className='reel-name-user'>Trung Nguyen</span>
+                            </div>
+                            <div className='reel'>
+                                
+                                <div className='avt-user-icon-container other'>
+                                <div className='reel-avt-user other'>
+                                    <img className='avt-user other' src={userSrcImg} />
+                                </div>
+                                 <img className='reel-background' alt='avt user'src={userSrcImg}/>
+                                </div>
+                                <span className='reel-name-user'>Trung Nguyen</span>
+                            </div>
+                            
+                            
+                            
+                            
                         </div>
                     </div>
 
