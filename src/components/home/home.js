@@ -124,7 +124,8 @@ class  Home extends React.Component
             behavior: 'smooth'
           });
         const scrollPosition = slideContainer.scrollLeft;
-        if(scrollPosition<=90)
+        console.log(scrollPosition)
+        if(scrollPosition<=200)
             this.setState({displayReelScrollLeftButton:false})
         else
             this.setState({displayReelScrollLeftButton:true})
@@ -478,32 +479,32 @@ class  Home extends React.Component
                 {/* new feed */}
 
                 <div className='home-new-feed-container'>
-                    
+                    {/* Reels */}
                     <div className='home-reels-container'>
-                    <div className='reel-arrow-right' onClick={this.handleReelsScrollRight}>
+                    <button className='reel-arrow-right' onClick={this.handleReelsScrollRight}>
                                 <AiOutlineRight style={{margin:"auto", fontWeight:600}}/>
-                            </div>
+                            </button>
                             
-                            <div className='reel-arrow-left' style={{display:this.state.displayReelScrollLeftButton?'flex':'none'}} onClick={this.handleReelsScrollLeft}>
+                            <button className='reel-arrow-left' style={{display:this.state.displayReelScrollLeftButton?'flex':'none'}} onClick={this.handleReelsScrollLeft}>
                                 <AiOutlineLeft style={{margin:"auto", fontWeight:600}}/>
-                            </div>
+                            </button>
                         <div className='reels-nav-container'>
                             <div className='reels-nav'>
-                                <div className='reel-nav-center'>
-                                    <IoIosBook style={{fontSize:"20px",marginRight:"8px"}}/> <span>Tin</span>
+                                <div className='reel-nav-center active'>
+                                    <IoIosBook style={{fontSize:"24px",marginRight:"8px"}}/> <span>Tin</span>
                                 
                                 </div>
                                 <div className='reel-nav-active'></div>
                             </div>
                             <div className='reels-nav'>
                                 <div className='reel-nav-center'>
-                                <BiMoviePlay style={{fontSize:"20px",marginRight:"8px"}}/> <span>Reels</span>
+                                <BiMoviePlay style={{fontSize:"24px",marginRight:"8px"}}/> <span>Reels</span>
 
                                 </div>
                             </div>
                             <div className='reels-nav'>
                                 <div className='reel-nav-center'>
-                                <BsCameraVideoFill style={{fontSize:"20px",marginRight:"8px"}}/> <span>Phòng họp mặt</span>
+                                <BsCameraVideoFill style={{fontSize:"24px",marginRight:"8px"}}/> <span>Phòng họp mặt</span>
 
                                 </div>
 
@@ -616,10 +617,39 @@ class  Home extends React.Component
                                 </div>
                                 <span className='reel-name-user'>Trung Nguyen</span>
                             </div>
-                            
-                            
-                            
-                            
+                        </div>
+                    </div>
+                    {/* Status */}
+                    <div className='home-status-container'>
+                        <div className='status-header'>
+                            <img type="text" className='home-avt__img' src={userSrcImg} alt="avatar user"/>
+                            <input className='status__input' placeholder='Nguyễn ơi bạn đang nghĩ gì thế'/>
+
+                        </div>
+                        <div className='line-through status'></div>
+                        <div className='status-action-container'>
+                            <div className='status-action'>
+                                <div className='status-action--center'>
+                                <img alt='status icon' className='status-icon__img' src='https://static.xx.fbcdn.net/rsrc.php/v3/yF/r/v1iF2605Cb5.png'/>
+                                <span>Video trực tiếp</span>
+                                </div>
+                           
+                            </div>
+                            <div className='status-action'>
+                                <div className='status-action--center'>
+                                <img alt='status icon' className='status-icon__img' src='https://static.xx.fbcdn.net/rsrc.php/v3/yC/r/a6OjkIIE-R0.png'/>
+                                <span>Ảnh/video</span>
+                                </div>
+                                
+                            </div>
+                            <div className='status-action'>
+                                <div className='status-action--center'>
+                                <img  alt='status icon' className='status-icon__img' src='https://static.xx.fbcdn.net/rsrc.php/v3/yk/r/yMDS19UDsWe.png'/>
+                                <span>Cảm xúc/hoạt động</span>
+                                </div>
+                               
+                            </div>
+
                         </div>
                     </div>
 
