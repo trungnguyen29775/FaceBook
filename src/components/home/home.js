@@ -2,11 +2,11 @@ import './home.css'
 import React from 'react'
 import { BsSearch,BsMessenger,BsCameraVideoFill,BsPencilSquare,BsFillPeopleFill,BsLink45Deg } from "react-icons/bs";
 import { IoNotifications,IoApps } from "react-icons/io5";
-import {AiOutlineLeft,AiOutlineRight, AiOutlinePlus,AiOutlineUserSwitch,AiOutlineDown,AiFillHome,AiFillFlag,AiOutlineNotification } from "react-icons/ai";
+import {AiOutlineLike,AiOutlineGlobal,AiOutlineLeft,AiOutlineRight, AiOutlinePlus,AiOutlineUserSwitch,AiOutlineDown,AiFillHome,AiFillFlag,AiOutlineNotification } from "react-icons/ai";
 import { FiX } from "react-icons/fi";
 import { IoIosMore,IoIosBook } from "react-icons/io";
-import { BiExpand,BiMoviePlay } from "react-icons/bi";
-import { FaTv,FaUserFriends } from "react-icons/fa";
+import { BiShare,BiExpand,BiMoviePlay } from "react-icons/bi";
+import {FaRegCommentAlt, FaTv,FaUserFriends } from "react-icons/fa";
 import { TbBuildingWarehouse } from "react-icons/tb";
 
 class  Home extends React.Component
@@ -653,7 +653,88 @@ class  Home extends React.Component
                         </div>
                     </div>
 
+                     {/* New feed */}
+
+                    <div className="new-feed-container">
+                        <div className='new-feed-header'>
+                            <div>
+                                <img src={userSrcImg} className='home-avt__img'/>
+                            <div>
+                                <div>
+                                    <span>Trung Nguyen</span>
+                                    <span>4 Tháng 2, 2022</span>
+                            </div>
+                                <AiOutlineGlobal/>
+                            </div>
+                        
+                            </div>
+                            <IoIosMore/>
+                        </div>
+                        <div>
+                            <span>Hello</span>
+                            <img/>
+                        </div>
+                        <div>
+                            <div>
+                                <div>
+                                    <img/>
+                                    <img/>
+                                    <img/>
+                                </div>
+                                <div>
+                                    <span>Lan Anh, Trần Tài và 61 người khác</span>
+                                </div>
+                            </div>
+                            <span>26 bình luận</span>
+                        </div>
+                        {/* Post Action */}
+                        <div>
+                            <div>
+                            <AiOutlineLike/>
+                            <span>Thích</span>
+                            </div>
+                            <div>
+                            <FaRegCommentAlt/>
+                            <span>
+                                Bình luận
+                            </span>
+                            </div>
+                            <div>
+                                <BiShare/>
+                                <span>Chia sẻ</span>
+                            </div>
+                        </div>
+                        {/* Comment */}
+                        <div>
+                            <div>
+                                <span>Xem thêm bình luận</span>
+                            </div>
+                            <div>
+                                <div>
+                                    <img/>
+                                    <span>Lợi Phạm</span>
+                                </div>
+                                <div>
+                                    <div>
+                                        <img/>
+                                    </div>
+                                    <div>
+
+                                        <div>
+                                            <span>Thích</span>
+                                            <span>Phản hồi</span>
+                                        </div>
+                                       <span>1 năm</span>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
                 </div>
+
+
+                                 
 
 
                     {/* rigt side bar */}
