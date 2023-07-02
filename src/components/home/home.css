@@ -1397,6 +1397,7 @@
     background-color:#242526;
     box-sizing: border-box;
     align-items: center;
+    color: rgb(228, 230, 235);
 }
 .new-feed-header
 {
@@ -1405,4 +1406,157 @@
     padding: 12px 16px 0px 16px;
     margin-bottom: 12px;
     justify-content: space-between;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+    width: 100%;
+}
+.new-feed-header-avt-detail
+{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+.new-feed-header-detail
+{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: flex-start;
+    margin-left: 8px;
+}
+.new-feed-header-detail-name-user{
+    font-size: 15px;
+    font-weight: 600;
+}
+.new-feed-header-detail-date{
+    display: flex;
+    flex-direction: row;
+    color: rgb(176, 179, 184);
+    font-size: 13px;
+    text-align: center;
+    display: flex;
+    height: 18px;
+    line-height: 18px;
+}
+.dot-seperate
+{
+    margin: 0px 3px;
+}
+.new-feed-more-icon-container
+{
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    display: flex;
+    color: rgb(176, 179, 184);
+}
+.new-feed-more-icon-container:hover
+{
+    cursor: pointer;
+    background-color: #555;
+}
+.new-feed-content-container
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-size: 15px;
+    font-weight: 400;
+    overflow-wrap:break-word;
+}
+.new-feed-status
+{
+    padding:4px 16px 16px  16px;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+}
+.new-feed-react-comment-count-container
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 10px 16px;
+    align-items: center;
+    color: rgb(176, 179, 184);
+    text-align: center;
+    font-size: 15px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    height: 42px;
+}
+.new-feed-react-container
+{
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+.new-feed-user-status__img
+{
+    max-width: 100%;
+}
+.new-feed-react{
+    padding-left: 4px;
+}
+.new-feed-reacted__img
+{
+    height: 18px;
+    width: 18px;
+}
+.new-feed-user-react-container
+{
+    padding-left: 4px;
+    text-align: center;
+    margin: auto;
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.line-through.status.new-feed{
+    margin: 0px 16px;
+
+}
+.new-feed-action-container
+{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    padding: 0px 16px;
+    box-sizing: border-box;
+    
+}
+.new-feed-action
+{
+    height: 44px;
+    padding: 0px 12px;
+    font-size: 15px;
+    display: flex;
+    font-weight: 600;
+    color: rgb(176, 179, 184);
+    width: 167px;
+    padding: 0px 12px;
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+}
+.new-feed-action--center{
+    margin: auto;
+    line-height: 44px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+}
+.new-feed-action:hover
+{
+    cursor: pointer;
+    background-color: #555;
+}
+.line-through.status.new-feed
+{
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
