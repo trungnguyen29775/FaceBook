@@ -726,26 +726,33 @@ class  Home extends React.Component
 
                         
                         {/* Comment */}
-                        <div>
-                            <div>
+                        <div className='new-feed-comment-container'>
+                            <div className='new-feed-more-comment-container'>
                                 <span>Xem thêm bình luận</span>
                             </div>
-                            <div>
-                                <div>
-                                    <img/>
-                                    <span>Lợi Phạm</span>
+                            <div className='new-feed-users-comment-container'>
+                                <div className='new-feed-user-comment'>
+                                <div className='comment-avt-user-container'>
+                                    <img src={userSrcImg} className='home-avt__img comment' alt='avatar user' />
                                 </div>
-                                <div>
-                                    <div>
-                                        <img/>
+                                <div className='comment-detail-container'>
+                                    <span className='comment-name-user'>Trung Nguyen</span>
+                                    <div className='commment-content-container'>
+                                        <span className='comment-content'>siuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu</span>
+                                        <img className='comment__img' alt='comment image' src={userStatusImg}/>
                                     </div>
-                                    <div>
-
-                                        <div>
+                                    <div className='comment-action-time-container'>
                                             <span>Thích</span>
                                             <span>Phản hồi</span>
-                                        </div>
-                                       <span>1 năm</span>
+                                            <span style={{fontWeight:400}}>1 năm</span>
+                                                                                
+                                    </div>
+                                </div>
+                                </div>
+                                <div>
+                                    <img/>
+                                    <div>
+                                        <input/>
                                         
                                     </div>
                                 </div>

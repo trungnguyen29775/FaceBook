@@ -62,7 +62,7 @@ class Login extends React.Component
     {
         event.preventDefault()
         this.props.changeStateLogged()
-        this.props.navigation.navigate('/home')
+        this.props.navigation('/home')
     }
     handleCreateAccountClick(event)
     {
@@ -144,7 +144,7 @@ class Login extends React.Component
                     <form className='login__form'>
                         <input placeholder='Email address or phone number' className='login-input'/>
                         <input placeholder='Password' type='password' className='login-input'/>
-                        <button className='login-button' oncClick = {this.handleLogin}>Log in</button>
+                        <button className='login-button' onClick = {this.handleLogin}>Log in</button>
                         <a href='#'  className='forgot-password__a'>Forgotten password?</a>
                         <div className='line-through'></div>
                         <button className='login-create-acccount' onClick={this.handleCreateAccountClick}>Create new account</button>
