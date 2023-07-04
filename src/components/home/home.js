@@ -2,13 +2,15 @@ import './home.css'
 import React from 'react'
 import { BsSearch,BsMessenger,BsCameraVideoFill,BsPencilSquare,BsFillPeopleFill,BsLink45Deg } from "react-icons/bs";
 import { IoNotifications,IoApps } from "react-icons/io5";
-import {AiOutlineComment,AiOutlineLike,AiOutlineGlobal,AiOutlineLeft,AiOutlineRight, AiOutlinePlus,AiOutlineUserSwitch,AiOutlineDown,AiFillHome,AiFillFlag,AiOutlineNotification } from "react-icons/ai";
+import {AiOutlineGif,AiOutlineCamera,AiOutlineComment,AiOutlineLike,AiOutlineGlobal,AiOutlineLeft,AiOutlineRight, AiOutlinePlus,AiOutlineUserSwitch,AiOutlineDown,AiFillHome,AiFillFlag,AiOutlineNotification } from "react-icons/ai";
 import { FiX } from "react-icons/fi";
 import { IoIosMore,IoIosBook } from "react-icons/io";
 import { BiShare,BiExpand,BiMoviePlay } from "react-icons/bi";
 import {FaRegCommentAlt, FaTv,FaUserFriends } from "react-icons/fa";
 import { TbBuildingWarehouse } from "react-icons/tb";
-
+import { RiEmotionHappyLine } from "react-icons/ri";
+import { HiOutlineGif } from "react-icons/hi";
+import { LuSticker } from "react-icons/lu";
 class  Home extends React.Component
 {
     constructor(props)
@@ -748,15 +750,37 @@ class  Home extends React.Component
                                                                                 
                                     </div>
                                 </div>
+                                
                                 </div>
-                                <div>
-                                    <img/>
-                                    <div>
-                                        <input/>
-                                        
+                                
+                            </div>
+                            <div className='new-feed-comment-input-container'>
+                                    <img src={userSrcImg} className='home-avt__img comment'/>
+                                    <div className='comment-input-wrap'>
+                                        <textarea placeholder='Viết bình luận'></textarea>
+                                        <div className='comment-type__icon'>
+                                            
+                                            <div className='comment-type__icon--padding'>
+                                            <RiEmotionHappyLine  style={{margin:"auto"}}/>
+                                            
+                                            </div>
+
+                                            <div className='comment-type__icon--padding'>
+                                            <AiOutlineCamera  style={{margin:"auto"}}/>
+                                            
+                                            </div>
+                                            <div className='comment-type__icon--padding'>
+                                            <AiOutlineGif  style={{margin:"auto"}}/>
+                                            
+                                            </div>
+                                            <div className='comment-type__icon--padding'>
+                                            <LuSticker style={{margin:"auto"}} />
+                                            
+                                            </div>
+                                            
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                         </div>
                     </div>  
                 </div>
