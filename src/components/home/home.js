@@ -697,12 +697,22 @@ class  Home extends React.Component
                         </div>
 
                         <div className='new-feed-action-container'>
-                            <div className='new-feed-action'>
+                            <div className='new-feed-action react'>
                                 <div className='new-feed-action--center'>
                                 <AiOutlineLike style={{fontSize:"18px",padding:"6px 4px"}}/>
                                 <span>Thích</span>
                                 </div>
-                           
+                                
+                                <div className='new-feed-react-emoji-container'>
+                                    <span class="emoji">👍</span>
+                                    <span class="emoji">❤️</span>
+                                    <span class="emoji">😆</span>
+                                    <span class="emoji">😍</span>
+                                    <span class="emoji">😯</span>
+                                    <span class="emoji">😢</span>
+                                    <span class="emoji">😡</span>
+                                </div>
+
                             </div>
                             <div className='new-feed-action'>
                             <div className='new-feed-action--center'>

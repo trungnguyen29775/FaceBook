@@ -69,7 +69,7 @@
     flex-direction: row;
     font-size: 20px;
     max-width: 360px;   
-    min-width: 280px;
+    width: 140px;
     align-items: flex-start;
     flex-direction: row-reverse;
 }
@@ -1011,6 +1011,7 @@
     flex: 1;
     padding-bottom:30px;
     overflow-y: auto;
+    padding-top: 50px;
 }
 
 /* Over flow new feed */
@@ -1541,6 +1542,90 @@
     text-align: center;
     border-radius: 5px;
 }
+
+.new-feed-action.react{
+    position: relative;
+}
+
+.new-feed-react-emoji-container
+{
+    position: absolute;
+    display: none;
+    flex-direction: row;
+    height: 40px;
+    align-items: center;
+    background-color: rgb(36, 37, 38);
+    border: 0.8px solid #3A3B3C;
+    width: 350px;
+    border-radius: 20px;
+    top: -41px;
+    opacity:0;
+    transform: translateY(1%);
+    transition:transform 0.2s ease-in ;
+    transition:opacity 0.3s ease-in ;
+
+}
+
+.new-feed-action.react:hover
+{
+    .new-feed-react-emoji-container
+    {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}   
+
+.emoji
+{
+    display:block;
+    font-size: 35px;
+    opacity: 1;
+    height: 40px;
+    width: 50px;
+    margin: auto;
+    text-align: center;
+    align-items: center;
+    line-height: 36px;
+    transform: scale(1);
+    transition: transform 0.5 ease;
+    
+}
+
+.emoji:hover
+{
+    transform: scale(1.5);
+
+}
+  
+.emoji.active{
+    
+    animation-name: emoji;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+  
+  @keyframes emoji {
+    0% { top: -50px; opacity: 0; }
+    50% { top: -100px; opacity: 1; }
+    100% { top: -150px; opacity: 0; }
+  }
+  
+  .new-feed-action.react:hover .emoji.active {
+    animation-name: emoji-hover;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes emoji-hover {
+    0% { top: -50px; opacity: 0; }
+    50% { top: -100px; opacity: 1; }
+    100% { top: -150px; opacity: 0; }
+  }
+
+
 .new-feed-action--center{
     margin: auto;
     line-height: 44px;
@@ -1698,7 +1783,7 @@
     flex: 1;
     resize: none;
     overflow: hidden;
-    height: auto;
+    height: 34px;
 }
 .comment-type__icon
 {
