@@ -1,0 +1,54 @@
+.new-feed-like-button-container
+{
+    height: 44px;
+    padding: 0px 12px;
+    font-size: 15px;
+    display: flex;
+    font-weight: 600;
+    color: rgb(176, 179, 184);
+    width: 167px;
+    padding: 0px 12px;
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+}
+.new-feed-like-button-container img
+{
+    height: 18px;
+    width: 18px;
+    padding: 6px 4px;
+}
+.new-feed-like-button-container 
+{
+    font-size: 15px;
+    color: rgb(176, 179, 184);
+    font-weight: 600;
+}
+span.haha
+{
+    color: rgb(247, 177, 37);
+}
+span.like
+{
+    color: rgb(32, 120, 244);
+}
+span.love
+{
+    color: rgb(243, 62, 88);
+}
+span.share-love
+{
+    color: rgb(247, 177, 37);
+}
+span.angry
+{
+    color: rgb(233, 113, 15)
+}
+span.wow
+{
+    color: rgb(247, 177, 37);
+}
+span.sad
+{
+    color: rgb(247, 177, 37);
+}

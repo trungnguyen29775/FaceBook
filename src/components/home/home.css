@@ -1556,7 +1556,7 @@
     align-items: center;
     background-color: rgb(36, 37, 38);
     border: 0.8px solid #3A3B3C;
-    width: 350px;
+    width: 280px;
     border-radius: 20px;
     top: -41px;
     opacity:0;
@@ -1579,10 +1579,9 @@
 .emoji
 {
     display:block;
-    font-size: 35px;
+    height: 35px;
+    width: 35px;
     opacity: 1;
-    height: 40px;
-    width: 50px;
     margin: auto;
     text-align: center;
     align-items: center;
@@ -1634,6 +1633,11 @@
     align-items: center;
     flex-direction: row;
 
+}
+
+.new-feed-container.reacted .new-feed-action.react .new-feed-action--center
+{
+    display: none !important;
 }
 .new-feed-action:hover
 {
