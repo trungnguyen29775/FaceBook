@@ -12,6 +12,7 @@ import { RiEmotionHappyLine } from "react-icons/ri";
 import { HiOutlineGif } from "react-icons/hi";
 import { LuSticker } from "react-icons/lu";
 import EmojiLikeButton from './subcomponents/emojiLikeButton/emoji';
+import { current } from '@reduxjs/toolkit';
 class  Home extends React.Component
 {
     constructor(props)
@@ -20,12 +21,222 @@ class  Home extends React.Component
         this.state = 
         {
             messType:"personal",
+            currentUser:
+            {
+                userId:"3dfg",
+                username:"Trung Nguyen"
+            },
             displayReelScrollLeftButton:false,
             newFeeds:[
                 {
                     id:0,
-                    reacted:'none'
+                    userPoster:{
+                        avtUrl:"assets/image/avt-user-login.jpg",
+                        name:"Trung Nguyen"
+                       
+                    },
+                    timePosted:"4 Tháng 2, 2022",
+                    newFeedStatus:"Hello",
+                    newFeedSrcImg:"assets/image/user-status-image.jpg",
+                    reacted:'none',
+                    userReacted:[
+                        {
+                            userId:0,
+                            userName:"Thiên Long",
+                            reacted:"haha"
+                        },
+                        {
+                            userId:1,
+                            userName:"Phúc Lee",
+                            reacted:"haha"
+                        },
+                        {
+                            userId:3,
+                            userName:"Phúc Lee",
+                            reacted:"haha"
+                        },
+                        {
+                            userId:4,
+                            userName:"Phúc Lee",
+                            reacted:"haha"
+                        },
+                        {
+                            userId:5,
+                            userName:"Phúc Lee",
+                            reacted:"haha"
+                        },
+                    ],
+                    comment:[
+                        {
+                            userId:1,
+                            userSrcImg:"assets/image/user-status-image.jpg",
+                            userName:"Trung Nguyen",
+                            comment:{
+                                commentText:"siuuuuuuuuuuuuuuuuuu",
+                                comentImgSrc:"assets/image/user-status-image.jpg"
+                            },
+                            timePosted:"1 năm"
+                        }
+                    ]
+
+                },
+                {
+                    id:1,
+                    userPoster:{
+                        avtUrl:"assets/image/avt-user-login.jpg",
+                        name:"Trung Nguyen"
+                       
+                    },
+                    timePosted:"4 Tháng 2, 2022",
+                    newFeedStatus:"Hello",
+                    newFeedSrcImg:"assets/image/user-status-image.jpg",
+                    reacted:'none',
+                    userReacted:[
+                        {
+                            userId:0,
+                            userName:"Thiên Long",
+                            reacted:"haha"
+                        },
+                        {
+                            userId:1,
+                            userName:"Phúc Lee",
+                            reacted:"haha"
+                        },
+                        {
+                            userId:3,
+                            userName:"Phúc Lee",
+                            reacted:"haha"
+                        },
+                        {
+                            userId:4,
+                            userName:"Phúc Lee",
+                            reacted:"haha"
+                        },
+                        {
+                            userId:5,
+                            userName:"Phúc Lee",
+                            reacted:"haha"
+                        },
+                    ],
+                    comment:[
+                        {
+                            userId:1,
+                            userSrcImg:"assets/image/user-status-image.jpg",
+                            userName:"Trung Nguyen",
+                            comment:{
+                                commentText:"siuuuuuuuuuuuuuuuuuu",
+                                comentImgSrc:"assets/image/user-status-image.jpg"
+                            },
+                            timePosted:"1 năm"
+                        }
+                    ]
+
+                },
+                {
+                    id:2,
+                    userPoster:{
+                        avtUrl:"assets/image/avt-user-login.jpg",
+                        name:"Trung Nguyen"
+                       
+                    },
+                    timePosted:"4 Tháng 2, 2022",
+                    newFeedStatus:"Hello",
+                    newFeedSrcImg:"assets/image/user-status-image.jpg",
+                    reacted:'none',
+                    userReacted:[
+                        {
+                            userId:0,
+                            userName:"Thiên Long",
+                            reacted:"haha"
+                        },
+                        {
+                            userId:1,
+                            userName:"Phúc Lee",
+                            reacted:"haha"
+                        },
+                        {
+                            userId:3,
+                            userName:"Phúc Lee",
+                            reacted:"haha"
+                        },
+                        {
+                            userId:4,
+                            userName:"Phúc Lee",
+                            reacted:"haha"
+                        },
+                        {
+                            userId:5,
+                            userName:"Phúc Lee",
+                            reacted:"haha"
+                        },
+                    ],
+                    comment:[
+                        {
+                            userId:1,
+                            userSrcImg:"assets/image/user-status-image.jpg",
+                            userName:"Trung Nguyen",
+                            comment:{
+                                commentText:"siuuuuuuuuuuuuuuuuuu",
+                                comentImgSrc:"assets/image/user-status-image.jpg"
+                            },
+                            timePosted:"1 năm"
+                        }
+                    ]
+
+                },
+                {
+                    id:3,
+                    userPoster:{
+                        avtUrl:"assets/image/avt-user-login.jpg",
+                        name:"Trung Nguyen"
+                       
+                    },
+                    timePosted:"4 Tháng 2, 2022",
+                    newFeedStatus:"Hello",
+                    newFeedSrcImg:"assets/image/user-status-image.jpg",
+                    reacted:'none',
+                    userReacted:[
+                        {
+                            userId:0,
+                            userName:"Thiên Long",
+                            reacted:"haha"
+                        },
+                        {
+                            userId:1,
+                            userName:"Phúc Lee",
+                            reacted:"haha"
+                        },
+                        {
+                            userId:3,
+                            userName:"Phúc Lee",
+                            reacted:"haha"
+                        },
+                        {
+                            userId:4,
+                            userName:"Phúc Lee",
+                            reacted:"haha"
+                        },
+                        {
+                            userId:5,
+                            userName:"Phúc Lee",
+                            reacted:"haha"
+                        },
+                    ],
+                    comment:[
+                        {
+                            userId:1,
+                            userSrcImg:"assets/image/user-status-image.jpg",
+                            userName:"Trung Nguyen",
+                            comment:{
+                                commentText:"siuuuuuuuuuuuuuuuuuu",
+                                comentImgSrc:"assets/image/user-status-image.jpg"
+                            },
+                            timePosted:"1 năm"
+                        }
+                    ]
+
                 }
+                
             ]
         }
         this.handleReelsScrollLeft = this.handleReelsScrollLeft.bind(this)
@@ -37,6 +248,7 @@ class  Home extends React.Component
         this.handleClickInput = this.handleClickInput.bind(this)
         this.handleReelsScrollRight = this.handleReelsScrollRight.bind(this)
         this.handleNewFeedEmojiClick = this.handleNewFeedEmojiClick.bind(this)
+        this.handleNewFeedEmojiUnClick = this.handleNewFeedEmojiUnClick.bind(this)
     }
     activeNotifiDropTab(event)
     {
@@ -157,21 +369,53 @@ class  Home extends React.Component
     {
         event.preventDefault()
         event.stopPropagation()
+
+
         const emojiContainer = event.target.parentNode
         const newFeedLikeButton = emojiContainer.parentNode
-        
-       
         const newFeedContainer = newFeedLikeButton.parentNode.parentNode
         newFeedContainer.classList.add('reacted')
         let newFeeds = this.state.newFeeds
         let targetIndex = 0
-        for(let targetIndex=0;targetIndex<newFeeds.length;targetIndex++)
+        for(targetIndex;targetIndex<newFeeds.length;targetIndex++)
+        {
             if(newFeeds[targetIndex].id==newFeedContainer.id)
+            {
+                if(newFeeds[targetIndex].reacted=="none")
+                    newFeeds[targetIndex].userReacted.push(this.state.currentUser)
                 newFeeds[targetIndex].reacted = event.target.alt
-        this.setState({newFeeds:newFeeds},()=>
+                
+            }
+            
+        }
+           
+        this.setState({newFeeds: newFeeds},()=>
         {
             console.log(this.state.newFeeds)
         })
+    }
+    handleNewFeedEmojiUnClick(event,currentNewFeed)
+    {
+        event.preventDefault()
+        event.stopPropagation()
+        if(currentNewFeed.reacted === "none")
+        {
+            currentNewFeed.reacted="like"
+            currentNewFeed.userReacted.push(this.state.currentUser)
+
+        }
+        else
+        {
+            currentNewFeed.reacted="none"
+            let indexCurrentUser = currentNewFeed.userReacted.indexOf(this.state.currentUser)
+            currentNewFeed.userReacted.splice(indexCurrentUser,1)
+
+        }
+        let newFeeds = this.state.newFeeds
+        for(let newFeed of newFeeds)
+            if(newFeed.id === currentNewFeed.id)
+                newFeed = currentNewFeed
+        this.setState({newFeeds:newFeeds})
     }
     render()
     {
@@ -689,11 +933,12 @@ class  Home extends React.Component
                     </div>
 
                      {/* New feed */}
-
-                    <div className="new-feed-container" id="0">
-                        <div className='new-feed-header'>
+                     {
+                        this.state.newFeeds.map((item,index)=>
+                            <div className="new-feed-container" id={item.id} key={index}>
+                                <div className='new-feed-header'>
                             <div className='new-feed-header-avt-detail'>
-                                <img src={userSrcImg} className='home-avt__img'/>
+                                <img src={item.userPoster.avtUrl} className='home-avt__img'/>
                             <div className='new-feed-header-detail'>
                                     <span className='new-feed-header-detail-name-user'>Trung Nguyen</span>
                                     <span className='new-feed-header-detail-date'>4 Tháng 2, 2022 <span className='dot-seperate'>.</span><AiOutlineGlobal style={{margin:"auto"}}/></span>
@@ -705,7 +950,7 @@ class  Home extends React.Component
                         </div>
                         <div className='new-feed-content-container'>
                             <span className='new-feed-status'>Hello</span>
-                            <img className='new-feed-user-status__img' src={userStatusImg} alt='status image'/>
+                            <img className='new-feed-user-status__img' src={item.newFeedSrcImg} alt='status image'/>
                         </div>
                         <div className='new-feed-react-comment-count-container'>
                             <div className='new-feed-react-container'>
@@ -715,26 +960,36 @@ class  Home extends React.Component
                                     <img  className='new-feed-reacted__img' src={loveEmoji} alt="Yêu thích"/>
                                 </div>
                                 <div className='new-feed-user-react-container'>
-                                    <span>Lan Anh, Trần Tài và 61 người khác</span>
+                                    <span className='new-feed-user-reacted__span'>{
+                                    item.userReacted.length>=3
+                                    ?(item.userReacted[0].userName+", "+item.userReacted[1].userName + " và "+ (item.userReacted.length-2) +" người khác ")
+                                    :item.userReacted[0].userName} đã bày tỏ cảm xúc</span>
                                 </div>
                             </div>
                             <span>26 bình luận</span>
                             
                         </div>
-                        {/* Post Action */}
+                        {/* new feed Action */}
                         <div className='line-through status new-feed'>
-
+                     
 
                         </div>
 
-                        <div className='new-feed-action-container' id='0'>
-                            <div className='new-feed-action react'>
-                                <div className='new-feed-action--center'>
-                                <AiOutlineLike style={{fontSize:"18px",padding:"6px 4px"}}/>
-                                <span>Thích</span>
-
+                        <div className='new-feed-action-container'>
+                            <div className='new-feed-action react' onClick={e=>this.handleNewFeedEmojiUnClick(e,item)}>
+                                {
+                                    
+                                    
+                                    item.reacted=="like"?EmojiLikeButton.like
+                                    :item.reacted=="love"? EmojiLikeButton.love
+                                    :item.reacted=="angry"? EmojiLikeButton.angry
+                                    :item.reacted=="wow"?EmojiLikeButton.wow
+                                    :item.reacted=="share-love"?EmojiLikeButton.shareLove
+                                    :item.reacted=="sad"?EmojiLikeButton.sad
+                                    :item.reacted=="haha"?EmojiLikeButton.haha
+                                    :EmojiLikeButton.default
+                                }
                                
-                                </div>
                                 {/* {
                                     EmojiLikeButton.wow
                                 } */}
@@ -779,32 +1034,43 @@ class  Home extends React.Component
 
                         
                         {/* Comment */}
+                        
                         <div className='new-feed-comment-container'>
                             <div className='new-feed-more-comment-container'>
                                 <span>Xem thêm bình luận</span>
                             </div>
-                            <div className='new-feed-users-comment-container'>
-                                <div className='new-feed-user-comment'>
-                                <div className='comment-avt-user-container'>
-                                    <img src={userSrcImg} className='home-avt__img comment' alt='avatar user' />
-                                </div>
-                                <div className='comment-detail-container'>
-                                    <span className='comment-name-user'>Trung Nguyen</span>
-                                    <div className='commment-content-container'>
-                                        <span className='comment-content'>siuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu</span>
-                                        <img className='comment__img' alt='comment image' src={userStatusImg}/>
+                                {
+                                item.comment.map((commentItem,commentIndex)=>
+                                {
+                                    return(
+                                        <div className='new-feed-users-comment-container' key={commentIndex}>
+                                        <div className='new-feed-user-comment'>
+                                        <div className='comment-avt-user-container'>
+                                            <img src={commentItem.userSrcImg} className='home-avt__img comment' alt='avatar user' />
+                                        </div>
+                                        <div className='comment-detail-container'>
+                                            <span className='comment-name-user'>{commentItem.userName}</span>
+                                            <div className='commment-content-container'>
+                                                <span className='comment-content'>{commentItem.comment.commentText}</span>
+                                                {
+                                                    commentItem.comment.comentImgSrc!==""?"":<img className='comment__img' alt='comment image' src={userStatusImg}/>
+                                                }
+                                            </div>
+                                            <div className='comment-action-time-container'>
+                                                    <span>Thích</span>
+                                                    <span>Phản hồi</span>
+                                                    <span style={{fontWeight:400}}>{commentItem.timePosted}</span>
+                                                                                        
+                                            </div>
+                                        </div>
+                                        
+                                        </div>
+                                        
                                     </div>
-                                    <div className='comment-action-time-container'>
-                                            <span>Thích</span>
-                                            <span>Phản hồi</span>
-                                            <span style={{fontWeight:400}}>1 năm</span>
-                                                                                
-                                    </div>
-                                </div>
-                                
-                                </div>
-                                
-                            </div>
+                                    )
+                                })
+                                }
+                            
                             <div className='new-feed-comment-input-container'>
                                     <img src={userSrcImg} className='home-avt__img comment'/>
                                     <div className='comment-input-wrap'>
@@ -833,7 +1099,9 @@ class  Home extends React.Component
                                     </div>
                                 </div>
                         </div>
-                    </div>  
+                            </div>
+                        )
+                     } 
                 </div>
 
 

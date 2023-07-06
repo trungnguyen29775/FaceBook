@@ -1,4 +1,5 @@
 import './emoji.css'
+import {AiOutlineLike} from "react-icons/ai";
 
 const likeEmoji = "assets/image/emoji/like.svg"
 const loveEmoji = "assets/image/emoji/love.svg"
@@ -78,6 +79,18 @@ function Wow ()
     )
 }
 
+function Default()
+{
+    return(
+        <div className='new-feed-action--center'>
+        <AiOutlineLike style={{fontSize:"18px",padding:"6px 4px"}}/>
+        <span>Thích</span>
+
+       
+        </div>
+    )
+}
+
 const EmojiLikeButton = 
 {
     like:Like(),
@@ -86,7 +99,8 @@ const EmojiLikeButton =
     wow:Wow(),
     angry:Angry(),
     shareLove:ShareLove(),
-    sad:Sad()
+    sad:Sad(),
+    default:Default()
 }
 
 export default EmojiLikeButton

@@ -6,11 +6,11 @@
     display: flex;
     font-weight: 600;
     color: rgb(176, 179, 184);
-    width: 167px;
     padding: 0px 12px;
     align-items: center;
     text-align: center;
     border-radius: 5px;
+    margin: auto;
 }
 .new-feed-like-button-container img
 {
