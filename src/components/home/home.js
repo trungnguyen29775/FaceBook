@@ -12,6 +12,8 @@ import { RiEmotionHappyLine } from "react-icons/ri";
 import { LuSticker } from "react-icons/lu";
 import EmojiLikeButton from './subcomponents/emojiLikeButton/emoji';
 import { current } from '@reduxjs/toolkit';
+import { useState } from 'react';
+import ChatWindow from './subcomponents/chatWindow/chatWindow';
 class  Home extends React.Component
 {
     constructor(props)
@@ -457,7 +459,6 @@ class  Home extends React.Component
         const sadEmoji = "assets/image/emoji/sad.svg"
         const hahaEmoji = "assets/image/emoji/haha.svg"
         const wowEmoji = "assets/image/emoji/wow.svg"
-        
 
 
         return(
@@ -1015,7 +1016,7 @@ class  Home extends React.Component
                                             <BsClock style={{fontSize:"20px"}}/>
                                             <div className='nf-option-span-container'>
                                                 <span>
-                                                    Tạm ẩn Nguyen trong 30 ngày
+                                                    Tạm ẩn {item.userPoster.name} trong 30 ngày
                                                 </span>
                                                 <span className='nf-option__span--small'>
                                                     Tạm thời sẽ không nhìn thấy bài viết nữa
@@ -1025,7 +1026,7 @@ class  Home extends React.Component
                                         <div className='nf-option-action'>
                                             <FaWindowClose style={{fontSize:"20px"}}/>
                                             <div className='nf-option-span-container'>
-                                                <span>Bỏ theo dõi Nguyen</span>
+                                                <span>Bỏ theo dõi {item.userPoster.name}</span>
                                                 <span className='nf-option__span--small'>Không nhìn thấy bài viết nữa nhưng vẫn là bạn bè</span>
                                             </div>
                                         </div>
@@ -1037,7 +1038,7 @@ class  Home extends React.Component
                                                     Báo cáo ảnh
                                                 </span>
                                                 <span className='nf-option__span--small'>
-                                                    Chúng tôi sẽ không cho  Nguyen biết là ai đã báo cáo
+                                                    Chúng tôi sẽ không cho {item.userPoster.name} biết là ai đã báo cáo
                                                 </span>
                                             </div>
                                         </div>
@@ -1317,11 +1318,9 @@ class  Home extends React.Component
                 </div>
                 </div>
                 
-
-
                 
             </div>
-
+            <ChatWindow/>
 
             </div>
         )
