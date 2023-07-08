@@ -1,15 +1,14 @@
 import './home.css'
 import React from 'react'
-import { BsSearch,BsMessenger,BsCameraVideoFill,BsPencilSquare,BsFillPeopleFill,BsLink45Deg } from "react-icons/bs";
+import {BsBookmark,BsClock,BsBell, BsFillBookmarkFill,BsSearch,BsMessenger,BsCameraVideoFill,BsPencilSquare,BsFillPeopleFill,BsLink45Deg } from "react-icons/bs";
 import { IoNotifications,IoApps } from "react-icons/io5";
 import {AiOutlineGif,AiOutlineCamera,AiOutlineComment,AiOutlineLike,AiOutlineGlobal,AiOutlineLeft,AiOutlineRight, AiOutlinePlus,AiOutlineUserSwitch,AiOutlineDown,AiFillHome,AiFillFlag,AiOutlineNotification } from "react-icons/ai";
 import { FiX } from "react-icons/fi";
 import { IoIosMore,IoIosBook } from "react-icons/io";
-import { BiShare,BiExpand,BiMoviePlay } from "react-icons/bi";
-import {FaRegCommentAlt, FaTv,FaUserFriends } from "react-icons/fa";
+import {BiMessageError, BiShare,BiExpand,BiMoviePlay } from "react-icons/bi";
+import {FaWindowClose,FaRegWindowClose,FaRegCommentAlt, FaTv,FaUserFriends } from "react-icons/fa";
 import { TbBuildingWarehouse } from "react-icons/tb";
 import { RiEmotionHappyLine } from "react-icons/ri";
-import { HiOutlineGif } from "react-icons/hi";
 import { LuSticker } from "react-icons/lu";
 import EmojiLikeButton from './subcomponents/emojiLikeButton/emoji';
 import { current } from '@reduxjs/toolkit';
@@ -249,6 +248,35 @@ class  Home extends React.Component
         this.handleReelsScrollRight = this.handleReelsScrollRight.bind(this)
         this.handleNewFeedEmojiClick = this.handleNewFeedEmojiClick.bind(this)
         this.handleNewFeedEmojiUnClick = this.handleNewFeedEmojiUnClick.bind(this)
+        this.handleNewFeedMoreOptionOpen = this.handleNewFeedMoreOptionOpen.bind(this)
+        this.handleNewFeedMoreOptionHide = this.handleNewFeedMoreOptionHide.bind(this)
+    }
+
+    handleNewFeedMoreOptionOpen(event)
+    {
+        event.preventDefault()
+        event.stopPropagation()
+        console.log(event.target)
+        if(event.target.tagName==="div")
+            event.target.children[1].classList.add('active')
+        else if(event.target.tagName=="svg")
+            event.target.parentNode.children[1].classList.add('active')
+        else if(event.target.tagName=="path")
+            event.target.parentNode.parentNode.children[1].classList.add('active')
+
+    }
+    handleNewFeedMoreOptionHide(event)
+    {
+        event.preventDefault()
+        event.stopPropagation()
+        document.addEventListener('click',(e)=>
+        {
+            e.preventDefault()
+            e.stopPropagation()
+            event.target.children[1].classList.remove('active')
+
+        })
+
     }
     activeNotifiDropTab(event)
     {
@@ -944,8 +972,82 @@ class  Home extends React.Component
                                     <span className='new-feed-header-detail-date'>4 Tháng 2, 2022 <span className='dot-seperate'>.</span><AiOutlineGlobal style={{margin:"auto"}}/></span>
                             </div>
                             </div>
-                            <div className='new-feed-more-icon-container'>
-                                <IoIosMore style={{fontSize:"20px",margin:"auto"}}/>
+                            <div className='new-feed-more-icon-container' onClick={this.handleNewFeedMoreOptionOpen} onMouseLeave={this.handleNewFeedMoreOptionHide}>
+                                <IoIosMore style={{fontSize:"20px",margin:"auto"}} onMouseLeave={e=>e.stopPropagation()}/>
+
+                                <div className='new-feed-more-option-drop-tab-container'>
+                                    <svg fill='#242526' className='new-feed-more-option-drop-tab__svg'>
+                                        <path  d="M20.685.12c-2.229.424-4.278 1.914-6.181 3.403L5.4 10.94c-2.026 2.291-5.434.62-5.4-2.648V.12h20.684z"></path>
+
+                                    </svg>
+                                    <div className='nf-more-option-content'>
+                                    <div className='nf-option-action'>
+                                        <BsBookmark style={{fontSize:"20px"}}/>
+                                        <div className='nf-option-span-container'>
+                                            <span>
+                                                Lưu bài viết
+                                            </span>
+                                            <span className='nf-option__span--small'>
+                                                Thêm vào danh sách mục đã lưu
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className='nf-option-action'>
+                                        <BsBell style={{fontSize:"20px"}}/>
+                                        <div className='nf-option-span-container'>
+                                            <span>Bật thông báo về bài viết này</span>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div className='nf-option-action'>
+                                            <FaRegWindowClose style={{fontSize:"20px"}}/>
+                                            <div className='nf-option-span-container'>
+                                                <span>
+                                                    Ẩn bài viết
+                                                </span>
+                                                <span className='nf-option__span--small'>
+                                                    Ẩn bớt các bài viết tương tự
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className='nf-option-action'>
+                                            <BsClock style={{fontSize:"20px"}}/>
+                                            <div className='nf-option-span-container'>
+                                                <span>
+                                                    Tạm ẩn Nguyen trong 30 ngày
+                                                </span>
+                                                <span className='nf-option__span--small'>
+                                                    Tạm thời sẽ không nhìn thấy bài viết nữa
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className='nf-option-action'>
+                                            <FaWindowClose style={{fontSize:"20px"}}/>
+                                            <div className='nf-option-span-container'>
+                                                <span>Bỏ theo dõi Nguyen</span>
+                                                <span className='nf-option__span--small'>Không nhìn thấy bài viết nữa nhưng vẫn là bạn bè</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className='nf-option-action'>
+                                            <BiMessageError style={{fontSize:"20px"}}/>
+                                            <div className='nf-option-span-container'>
+                                                <span>
+                                                    Báo cáo ảnh
+                                                </span>
+                                                <span className='nf-option__span--small'>
+                                                    Chúng tôi sẽ không cho  Nguyen biết là ai đã báo cáo
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    </div>
+                                    
+
+                                </div>
+
                             </div>
                         </div>
                         <div className='new-feed-content-container'>

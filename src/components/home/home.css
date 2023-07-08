@@ -1411,6 +1411,9 @@
     margin-bottom: 12px;
     width: 100%;
 }
+
+
+
 .new-feed-header-avt-detail
 {
     display: flex;
@@ -1450,11 +1453,95 @@
     border-radius: 50%;
     display: flex;
     color: rgb(176, 179, 184);
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 .new-feed-more-icon-container:hover
 {
     cursor: pointer;
     background-color: #555;
+}
+
+.new-feed-more-option-drop-tab-container
+{
+    display: none;
+    align-items: center;
+    position: absolute;
+    width: 344px;
+    right: 25px;
+    top: 35px;
+    background-color: rgb(36, 37, 38);
+    box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1);;
+    flex-direction: column;
+    border-radius: 8px;
+    border-top-right-radius: 0;
+    
+}
+.new-feed-more-option-drop-tab-container.active
+{
+    display: flex;
+}
+.new-feed-more-option-drop-tab__svg
+{
+    width: 21px;
+    height: 12px;
+    position: absolute;
+    transform: scale(-1, -1) translate(0px, 0px);
+    right: 0;
+    color: rgb(36, 37, 38);
+    top: -11px;
+    
+
+}
+
+.new-feed-more-option-drop-tab__svg path
+{
+    box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1);;
+}
+
+.nf-more-option-content
+{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 8px 0px;
+    box-sizing: border-box;
+
+}
+
+.nf-option-action
+{
+    display: flex;
+    flex-direction: row;
+    width: 328px;
+    font-size: 15px;
+    color: rgb(228, 230, 235);
+    align-items: center;
+    padding: 8px;
+    margin: 0px 8px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    font-weight: 500;
+}
+.nf-option-action:hover
+{
+    cursor: pointer;
+    background-color: #3A3B3C;
+}
+.nf-option-span-container
+{
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    align-items: flex-start;
+    margin-left: 12px;
+}
+.nf-option__span--small{
+    font-size: 12px;
+    color: rgb(176, 179, 184);
+    font-weight: 400;
 }
 .new-feed-content-container
 {
@@ -1464,6 +1551,7 @@
     font-size: 15px;
     font-weight: 400;
     overflow-wrap:break-word;
+
 }
 .new-feed-status
 {
