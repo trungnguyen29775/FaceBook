@@ -13,6 +13,7 @@
     overflow-x: hidden;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+    overflow: hidden;
 }
 .mess-window-header-container
 {
@@ -21,13 +22,14 @@
     top: 0;
     flex-direction: row;
     color: rgb(176, 179, 184);
-    padding: 8px;
     width: 100%;
     height: 48px;
     box-sizing: border-box;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     border-bottom: 0.1px solid #3A3B3C;
+    padding: 2px 2px 0px 2px;
+    justify-content: space-between;
 }
 .mess-window-avt-user
 {
@@ -59,8 +61,17 @@
     display: flex;
     align-items: center;
     flex-direction: row;
-    width: 201px;
     justify-content: space-between;
+    height: 100%;
+    padding: 8px 0px;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.mess-window-header-user-detail-container:hover
+{
+    cursor: pointer;
+    background-color: #555555;
 }
 .mess-window-header-status-container
 {
@@ -90,7 +101,7 @@
 {
     display: flex;
     flex-direction: row;
-    flex: 1;
+    width: 104px;
     justify-content: space-between;
     height: 100%;
     align-items: center;
@@ -109,3 +120,240 @@
     cursor: pointer;
     background-color:#555555;
 }
+.mess-chat-content-container
+{
+    display: flex;
+    width: 100%;
+    max-height: 347px;
+    height: 347px;
+    overflow: hidden;
+    overflow-y: auto;
+    margin-top: 47px;
+    flex-direction: column;
+
+}
+.mess-chat-content-user-backgrounnd-info__img
+{
+   height: 60px;
+   width: 60px;
+   border-radius: 50%;
+   margin: auto;
+}
+.mess-chat-content-user-backgrounnd-info
+{
+    width: 100%;
+    height: 193px;
+    padding: 40px 12px 12px 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(176, 179, 184);
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 13px;
+
+}
+.mess-chat-content-user-backgrounnd-info-img-container
+{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.mess-chat-content-user-backgrounnd-info-span-container
+{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+}
+.mess-chat-content-user-backgrounnd-info-span-container-name
+{
+    font-size: 17px;
+    font-weight: 600;
+    color: rgb(228, 230, 235);
+}
+
+
+
+
+
+.mess-chat-content-other-container
+{
+    max-width: 328px;
+    display: flex;
+    flex-direction: row;
+    color: rgb(255, 255, 255);
+    align-items: flex-start;
+
+}
+.mess-chat-content__img
+{
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    margin: 0px 8px 0px 6px;
+}
+.mess-chat-content-message-container
+{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+.mess-chat-content-message-container span{
+    background-color:rgb(62, 64, 66);
+    padding: 8px 12px;
+    font-size: 15px;
+    margin-bottom: 3px;
+    border-radius: 10%;
+}
+.mess-chat-content-current-container
+{
+    max-width: 328px;
+    display: flex;
+    flex-direction: row-reverse;
+    color: rgb(255, 255, 255);
+    
+}
+.mess-chat-content-current-container .mess-chat-content-message-container span
+{
+    background-color: rgb(0, 132, 255);
+}
+
+
+/* Scroll bar css  */
+
+.mess-chat-content-container {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #555 #242526; /* Firefox */
+  }
+  
+  .mess-chat-content-container::-webkit-scrollbar {
+    width: 12px; /* Chrome, Safari */
+    height: 60px;
+  }
+  
+  .mess-chat-content-container::-webkit-scrollbar-thumb {
+    background-color: #555; /* Chrome, Safari, Edge */
+  }
+  
+  .mess-chat-content-container::-webkit-scrollbar-track {
+    background-color: #242526; /* Chrome, Safari, Edge */
+  }
+  
+  .mess-chat-content-container::-ms-scrollbar-thumb {
+    background-color: #555; /* Edge */
+  }
+  
+  .mess-chat-content-container::-ms-scrollbar-track {
+    background-color: #242526; /* Edge */
+  }
+  
+  .mess-chat-content-container::-ms-scrollbar {
+    width: 12px; /* Edge */
+    height: 60px;
+
+  }
+.mess-window-input-container
+{
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    flex-direction: row;
+    color: rgb(176, 179, 184);
+    width: 100%;
+    height: 60px;
+    box-sizing: border-box;
+    padding: 12px 0px;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 6px;
+    align-items: center;
+    box-sizing: border-box;
+}
+.mess-window-input-textarea-icon-container
+{
+    display: flex;
+    flex-direction: row;
+    width: 248px;
+    height: 36px;
+    margin: auto
+}
+.mess-window-input-icon-container-wraper
+{
+    display: flex;
+    flex-direction: row;
+    margin: auto
+   
+}
+
+
+.mess-window-input-textarea-container textarea {
+    font-family: inherit;
+    font-size: 15px;
+    background-color: rgb(58, 59, 60);
+    border: 0px;
+    border-bottom-color: #e4e6eb;
+    outline: 0px;
+    color: white;
+    resize: none;
+    overflow: hidden;
+    width: 80%;
+    padding: 0px;
+    margin: 0px;
+    line-height: 36px;    
+    padding-left: 12px;
+    box-sizing: border-box;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    max-height: 36px;
+    align-items: center;
+    
+
+}
+.mess-window-input-icon-container
+{
+    height: 20px;
+    width: 20px;
+    padding: 4px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: #555;
+    display: flex;
+    margin: auto;
+}
+.mess-window-input-textarea-container
+{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    background-color: rgb(58, 59, 60);
+    box-sizing: border-box;
+   border-radius: 20px;
+}
+.mess-window-input-textare-container .mess-window-input-icon-container
+{
+    margin:auto
+}
+.mess-window-input-icon-container.padding
+{
+    height: 36px;
+    width: 36px;
+    margin: 0px 4px;
+    padding: 8px;
+    display: flex;
+    box-sizing: border-box;
+    margin: auto
+    
+
+}
+.mess-window-input-icon-container.center
+{
+    margin: auto;
+}
+.mess-window-input-icon-container:hover
+{
+    background-color: #3A3B3C;
+    cursor: pointer;
+}   
