@@ -5,10 +5,14 @@ import { CgLoadbar } from "react-icons/cg";
 import { FiX } from "react-icons/fi";
 import { FaImages,FaSmile,FaPhoneAlt } from "react-icons/fa";
 import { LuSticker } from "react-icons/lu";
+import { BsSend } from "react-icons/bs";
 import { useEffect, useState } from 'react';
+import { current } from '@reduxjs/toolkit';
 
 const ChatWindow = function()
 {
+ // State for input mess  window
+    const [message,setMessage] = useState('')
 
     const  [data,setData] = useState({
         userId:null,
@@ -32,38 +36,27 @@ const ChatWindow = function()
             userName:"Trung Nguyen",
             mess:{
                 currentUser:[
+                    
                     {
-                        mess:"Hello",
-    
-                    },
-                    {
-                        mess:"Hello",
+                        message:"Porttitor rhoncus dolor purus non enim praesent elementum facilisis leo. ",
                         
                     },
                     {
-                        mess:"Hello",
-                        
-                    },
-                    {
-                        mess:"Hello",
+                        message:"Suspendisse in est ante in nibh mauris cursus mattis molestie.",
                         
                     }
                 ],
-                targetUser:[
+                otherUser:[
                     {
-                        mess:"Hello",
+                        message:"Suspendisse in molestie.",
                         
                     },
                     {
-                        mess:"Hello",
+                        message:"Nunc lobortis  in massa.",
                         
                     },
                     {
-                        mess:"Hello",
-                        
-                    },
-                    {
-                        mess:"Hello",
+                        message:"Hello",
                         
                     }
                 ]
@@ -71,6 +64,28 @@ const ChatWindow = function()
         })
         console.log(data)
     },[])
+
+    // function
+    function handleSendMessage(event)
+    {
+        event.preventDefault()
+        event.stopPropagation()
+        console.log(message)
+        if(message.length>0)
+        {
+            setData({
+                ...data,
+                mess:{
+                    ...data.mess,
+                    currentUser:[...data.mess.currentUser,{message:message}]
+                }
+            })
+        }
+        setMessage('')
+    }
+            
+
+   
 
     return(
         <div className='mess-window-container'>
@@ -133,9 +148,14 @@ const ChatWindow = function()
                 <div className='mess-chat-content-other-container'>
                     <img src={data.userSrcImg} className='mess-chat-content__img'/>
                     <div className='mess-chat-content-message-container'>
-                        <span>Hello</span>
-                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
-                        <span>Hello</span>
+                        {
+                            data.mess.otherUser?.map((messData,index)=>
+                            {
+                                return(
+                                    <span key={index}>{messData.message}</span>
+                                )
+                            })
+                        }
 
 
                     </div>
@@ -143,9 +163,14 @@ const ChatWindow = function()
 
                 <div className='mess-chat-content-current-container'>
                     <div className='mess-chat-content-message-container'>
-                        <span>Hello</span>
-                        <span>Hello</span>
-                        <span>Hello</span>
+                       {
+                        data.mess.currentUser?.map((messData,index)=>
+                        {
+                            return(
+                                <span key={index}>{messData.message}</span>
+                            )
+                        })
+                       }
 
                         
 
@@ -164,7 +189,7 @@ const ChatWindow = function()
                     
                 </div>
                 <div className='mess-window-input-textarea-icon-container'>
-                    <div className='mess-window-input-icon-container-wraper'>
+                    <div className='mess-window-input-icon-container-wraper' style={{display:message.length==0?"flex":"none"}}>
                         <div className='mess-window-input-icon-container'>
                             <FaImages style={{margin:"auto"}}/>
 
@@ -179,16 +204,29 @@ const ChatWindow = function()
                         </div>
                     </div>
                     <div className='mess-window-input-textarea-container'>
-                        <textarea placeholder="Aa"></textarea>
+                        <textarea placeholder="Aa" value={message} onChange={(e)=>setMessage(e.target.value)}></textarea>
                         
+                        
+
                         <div className='mess-window-input-icon-container center'>
-                            <FaSmile style={{margin:"auto"}}/>    
+                            <FaSmile style={{margin:"auto"}} />    
                         </div>
                     </div>
                 </div>
-                <div className='mess-window-input-icon-container padding'>
-                    <AiFillLike style={{margin:"auto"}}/>
-                </div>
+                {
+                    message.length>0?(
+                        <div   div className='mess-window-input-icon-container padding' onClick={e=>handleSendMessage(e)}>
+                            <BsSend style={{margin:"auto"}} />    
+                        </div>
+                    )
+                    :(
+                        <div className='mess-window-input-icon-container padding'>
+                            <AiFillLike style={{margin:"auto"}}/>
+                        </div>
+                    )
+                }
+                
+               
 
             </div>
         </div>

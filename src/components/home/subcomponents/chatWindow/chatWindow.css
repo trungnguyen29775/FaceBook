@@ -201,12 +201,14 @@
     display: flex;
     flex-direction: column;
     height: fit-content;
+    align-items: flex-start;
+    margin-bottom: 6px;
+
 }
 .mess-chat-content-message-container span{
     background-color:rgb(62, 64, 66);
     padding: 8px 12px;
     font-size: 15px;
-    margin-bottom: 3px;
     border-top-left-radius: 18px;
     border-bottom-left-radius: 18px;
     border-top-right-radius: 18px;
@@ -214,7 +216,19 @@
     width: fit-content;
     display: inline-block;
     margin-right: 10px;
+    height: -moz-fit-content;
+    margin-bottom: 3px;
+    white-space: pre-line;
 
+}
+.mess-chat-content-current-container .mess-chat-content-message-container
+{
+    margin-left: 42px;
+    align-items: flex-end;
+}
+.mess-chat-content-other-container .mess-chat-content-message-container
+{
+    align-items: flex-start;
 }
 .mess-chat-content-current-container
 {
@@ -308,15 +322,14 @@
     outline: 0px;
     color: white;
     resize: none;
-    overflow: hidden;
     padding: 0px;
-    line-height: 36px;    
-    box-sizing: border-box;
+    line-height: 36px;
     max-height: 142px;
-    align-items: center;
     overflow: hidden;
     overflow-y: auto;
-    margin: 8px 0px
+    width: 80%;
+    box-sizing: border-box;
+    margin-left: 15px;
 }
 .mess-window-input-icon-container
 {
