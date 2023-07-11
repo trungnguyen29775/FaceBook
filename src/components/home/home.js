@@ -1320,7 +1320,7 @@ class  Home extends React.Component
                 
                 
             </div>
-            <ChatWindow/>
+            <ChatWindow />
 
             </div>
         )

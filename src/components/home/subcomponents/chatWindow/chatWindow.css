@@ -9,11 +9,8 @@
     background-color: #242526;
     box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2),0 2px 4px 0 rgba(0, 0, 0, 0.1);
     right: 88px;
-    overflow-y: auto;
-    overflow-x: hidden;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    overflow: hidden;
 }
 .mess-window-header-container
 {
@@ -294,6 +291,8 @@
     align-items: center;
     box-sizing: border-box;
     max-height: 164px;
+    background-color: inherit;
+    align-items: flex-start;
 }
 .mess-window-input-textarea-icon-container
 {
@@ -351,6 +350,7 @@
     box-sizing: border-box;
     border-radius: 20px;
     max-height: 142px;
+    position: relative;
 }
 .mess-window-input-textare-container .mess-window-input-icon-container
 {
@@ -372,6 +372,7 @@
 {
     margin: auto;
 }
+
 .mess-window-input-icon-container:hover
 {
     background-color: #3A3B3C;
@@ -407,4 +408,50 @@
 .mess-chat-content-other-container .mess-chat-content-message-container span:last-child
 {
     border-top-left-radius: 8px;
+}
+
+
+/* Emoji Pikcer Message */
+
+.mess-window-emoji-picker-container
+{
+    position: absolute;
+    bottom: 190px;
+    right: 22px;
+}
+
+.EmojiPickerReact 
+{
+    --epr-emoji-size:20px !important;
+}
+.EmojiPickerReact .Flex.epr-preview.FlexRow
+{
+    display: none;
+}
+.EmojiPickerReact .Flex.epr-header-overlay.FlexRow
+{
+    background-color: #242526;
+
+}
+.EmojiPickerReact .Flex.epr-header-overlay.FlexRow input
+{
+    background-color: #3A3B3C;
+}
+.EmojiPickerReact .Flex.epr-header-overlay.FlexRow input:focus
+{
+    background-color: #3A3B3C !important;
+    color: #e4e6eb;
+}
+
+.EmojiPickerReact .epr-emoji-category-label
+{
+    background-color: #3A3B3C !important;
+}
+.EmojiPickerReact 
+{
+    background-color: #242526 !important;
+    border: none !important;
+    font-size: 15px !important;
+    box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2),0 2px 4px 0 rgba(0, 0, 0, 0.1);
+
 }

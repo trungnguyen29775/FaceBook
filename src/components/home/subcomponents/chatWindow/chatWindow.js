@@ -7,13 +7,13 @@ import { FaImages,FaSmile,FaPhoneAlt } from "react-icons/fa";
 import { LuSticker } from "react-icons/lu";
 import { BsSend } from "react-icons/bs";
 import { useEffect, useState } from 'react';
-import { current } from '@reduxjs/toolkit';
-
-const ChatWindow = function()
+import EmojiPicker from 'emoji-picker-react';
+import twemoji from 'twemoji';
+const ChatWindow = function(props)
 {
  // State for input mess  window
     const [message,setMessage] = useState('')
-
+    const [heightMessage,setHeightMess] = useState(0)
     const  [data,setData] = useState({
         userId:null,
         userSrcImg:"",
@@ -27,6 +27,15 @@ const ChatWindow = function()
             ]
         }
     })
+    // Emoji Picker state
+    const [emojiPickerContainer,setEmojiPickerContainer] = useState(false)
+
+
+    useEffect(()=>
+    {
+
+    })
+
     useEffect(()=>
     {
         // call api to get data
@@ -62,8 +71,18 @@ const ChatWindow = function()
                 ]
             }
         })
-        console.log(data)
+        twemoji.parse(document.getElementById('root'))
+
     },[])
+
+    useEffect(()=>
+    {
+        const lineTest = /\n+/ig
+        const heightMess = message.match(lineTest)?message.match(lineTest).length:0
+        setHeightMess(heightMess)
+
+    },[message])
+
 
     // function
     function handleSendMessage(event)
@@ -82,6 +101,15 @@ const ChatWindow = function()
             })
         }
         setMessage('')
+    }
+
+    
+
+    function handleInputMessage(event)
+    {
+        event.preventDefault()
+        event.stopPropagation()
+        setMessage(event.target.value.toString())
     }
             
 
@@ -182,13 +210,13 @@ const ChatWindow = function()
 
             {/* Footer */}
 
-            <div className='mess-window-input-container'>
+            <div className='mess-window-input-container' style={{height:heightMessage*36+60+"px"}}>
 
                 <div className='mess-window-input-icon-container'>
                     <AiFillPlusCircle style={{margin:"auto"}}/>
                     
                 </div>
-                <div className='mess-window-input-textarea-icon-container'>
+                <div className='mess-window-input-textarea-icon-container' style={{height: heightMessage*36+36+"px"}}>
                     <div className='mess-window-input-icon-container-wraper' style={{display:message.length==0?"flex":"none"}}>
                         <div className='mess-window-input-icon-container'>
                             <FaImages style={{margin:"auto"}}/>
@@ -204,13 +232,26 @@ const ChatWindow = function()
                         </div>
                     </div>
                     <div className='mess-window-input-textarea-container'>
-                        <textarea placeholder="Aa" value={message} onChange={(e)=>setMessage(e.target.value)}></textarea>
+                        <textarea placeholder="Aa" value={message} onChange={handleInputMessage}></textarea>
                         
                         
 
-                        <div className='mess-window-input-icon-container center'>
-                            <FaSmile style={{margin:"auto"}} />    
+                        <div className='mess-window-input-icon-container center' onClick={()=> setEmojiPickerContainer(!emojiPickerContainer)}>
+                            <FaSmile style={{margin:"auto"}} />
                         </div>
+                        {
+                            emojiPickerContainer&&(
+                                <div className='mess-window-emoji-picker-container'>
+                                <EmojiPicker
+                                width={"500px"}
+                                height={"300px"}
+                                emojiStyle={"facebook"}
+                                onEmojiClick={(emoji)=> setMessage(preMessage=>preMessage+emoji.emoji)}
+                                />    
+                            </div>
+                            )
+                        }
+                       
                     </div>
                 </div>
                 {
@@ -229,6 +270,7 @@ const ChatWindow = function()
                
 
             </div>
+                        
         </div>
     )
 }
