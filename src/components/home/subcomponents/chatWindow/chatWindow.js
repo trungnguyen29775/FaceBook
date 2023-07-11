@@ -29,7 +29,7 @@ const ChatWindow = function()
         setData({
             userId:1,
             userSrcImg:"assets/image/avt-user-login.jpg",
-            userName:"Phúc Lê",
+            userName:"Trung Nguyen",
             mess:{
                 currentUser:[
                     {
@@ -134,14 +134,16 @@ const ChatWindow = function()
                     <img src={data.userSrcImg} className='mess-chat-content__img'/>
                     <div className='mess-chat-content-message-container'>
                         <span>Hello</span>
+                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
                         <span>Hello</span>
+
 
                     </div>
                 </div>
 
                 <div className='mess-chat-content-current-container'>
-                    <img src={data.userSrcImg} className='mess-chat-content__img'/>
                     <div className='mess-chat-content-message-container'>
+                        <span>Hello</span>
                         <span>Hello</span>
                         <span>Hello</span>
 

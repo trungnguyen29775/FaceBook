@@ -130,6 +130,7 @@
     overflow-y: auto;
     margin-top: 47px;
     flex-direction: column;
+    padding-bottom: 10px;
 
 }
 .mess-chat-content-user-backgrounnd-info__img
@@ -206,7 +207,14 @@
     padding: 8px 12px;
     font-size: 15px;
     margin-bottom: 3px;
-    border-radius: 10%;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    width: fit-content;
+    display: inline-block;
+    margin-right: 10px;
+
 }
 .mess-chat-content-current-container
 {
@@ -271,6 +279,7 @@
     padding: 0px 6px;
     align-items: center;
     box-sizing: border-box;
+    max-height: 164px;
 }
 .mess-window-input-textarea-icon-container
 {
@@ -278,7 +287,8 @@
     flex-direction: row;
     width: 248px;
     height: 36px;
-    margin: auto
+    margin: auto;
+    max-height: 100%;
 }
 .mess-window-input-icon-container-wraper
 {
@@ -299,18 +309,14 @@
     color: white;
     resize: none;
     overflow: hidden;
-    width: 80%;
     padding: 0px;
-    margin: 0px;
     line-height: 36px;    
-    padding-left: 12px;
     box-sizing: border-box;
-    border-top-left-radius: 50%;
-    border-bottom-left-radius: 50%;
-    max-height: 36px;
+    max-height: 142px;
     align-items: center;
-    
-
+    overflow: hidden;
+    overflow-y: auto;
+    margin: 8px 0px
 }
 .mess-window-input-icon-container
 {
@@ -330,7 +336,8 @@
     flex: 1;
     background-color: rgb(58, 59, 60);
     box-sizing: border-box;
-   border-radius: 20px;
+    border-radius: 20px;
+    max-height: 142px;
 }
 .mess-window-input-textare-container .mess-window-input-icon-container
 {
@@ -357,3 +364,34 @@
     background-color: #3A3B3C;
     cursor: pointer;
 }   
+
+/* Current  user messages */
+.mess-chat-content-current-container .mess-chat-content-message-container span:first-child
+{
+    border-bottom-right-radius: 8px;
+}
+.mess-chat-content-current-container .mess-chat-content-message-container > *:not(:first-child):not(:last-child)
+{
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+
+}
+.mess-chat-content-current-container .mess-chat-content-message-container span:last-child
+{
+    border-top-right-radius: 8px;
+}
+/* Other messages */
+.mess-chat-content-other-container .mess-chat-content-message-container span:first-child
+{
+    border-bottom-left-radius: 8px;
+}
+.mess-chat-content-other-container .mess-chat-content-message-container > *:not(:first-child):not(:last-child)
+{
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+
+}
+.mess-chat-content-other-container .mess-chat-content-message-container span:last-child
+{
+    border-top-left-radius: 8px;
+}
