@@ -1316,11 +1316,26 @@ class  Home extends React.Component
                         </div>
                     </div>
                 </div>
+                <div className='mess-window-and-bubble-wraper-container'>
+                    
+
+                    <div className='mess-window-wraper'>
+                        <ChatWindow />
+                        <ChatWindow />
+
+
+                    </div>
+                    <div className='mess-buble-container'>
+
+                        
+                    </div>
+
+                </div>
                 </div>
                 
                 
             </div>
-            <ChatWindow />
+            
 
             </div>
         )

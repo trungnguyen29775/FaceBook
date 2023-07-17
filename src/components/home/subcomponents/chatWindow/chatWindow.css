@@ -4,11 +4,10 @@
     max-height: 455px;
     width: 328px;
     margin-left: 10px;
-    position: fixed;  
+    position: relative;  
     bottom: 0;  
     background-color: #242526;
     box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2),0 2px 4px 0 rgba(0, 0, 0, 0.1);
-    right: 88px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
