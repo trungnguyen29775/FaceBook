@@ -1,5 +1,5 @@
 import './home.css'
-import React from 'react'
+import React, { useEffect } from 'react'
 import {BsBookmark,BsClock,BsBell, BsFillBookmarkFill,BsSearch,BsMessenger,BsCameraVideoFill,BsPencilSquare,BsFillPeopleFill,BsLink45Deg } from "react-icons/bs";
 import { IoNotifications,IoApps } from "react-icons/io5";
 import {AiOutlineGif,AiOutlineCamera,AiOutlineComment,AiOutlineLike,AiOutlineGlobal,AiOutlineLeft,AiOutlineRight, AiOutlinePlus,AiOutlineUserSwitch,AiOutlineDown,AiFillHome,AiFillFlag,AiOutlineNotification } from "react-icons/ai";
@@ -11,16 +11,27 @@ import { TbBuildingWarehouse } from "react-icons/tb";
 import { RiEmotionHappyLine } from "react-icons/ri";
 import { LuSticker } from "react-icons/lu";
 import EmojiLikeButton from './subcomponents/emojiLikeButton/emoji';
-import { current } from '@reduxjs/toolkit';
-import { useState } from 'react';
+import { HiOutlinePencilAlt } from "react-icons/hi";
 import ChatWindow from './subcomponents/chatWindow/chatWindow';
-class  Home extends React.Component
+import { useState } from 'react';
+function Home(props)
 {
-    constructor(props)
-    {
-        super(props)
-        this.state = 
+    // Img src
+    const userSrcImg = "assets/image/avt-user-login.jpg";
+    const userStatusImg = "assets/image/user-status-image.jpg";
+    const angryEmoji = "assets/image/emoji/angry.svg"
+    const likeEmoji = "assets/image/emoji/like.svg"
+    const loveEmoji = "assets/image/emoji/love.svg"
+    const shareLoveEmoji = "assets/image/emoji/share-love.svg"
+    const sadEmoji = "assets/image/emoji/sad.svg"
+    const hahaEmoji = "assets/image/emoji/haha.svg"
+    const wowEmoji = "assets/image/emoji/wow.svg"
+
+    const [messWindowArray,setMessWindowArray] =useState([])
+
+    const [homeData,setHomeData]=  useState(
         {
+            show:true,
             messType:"personal",
             currentUser:
             {
@@ -239,22 +250,11 @@ class  Home extends React.Component
                 }
                 
             ]
-        }
-        this.handleReelsScrollLeft = this.handleReelsScrollLeft.bind(this)
-        this.handleHideNotifiDropTab = this.handleHideNotifiDropTab.bind(this)
-        this.activeNotifiDropTab = this.activeNotifiDropTab.bind(this)
-        this.handleHideMessDropTab = this.handleHideMessDropTab.bind(this)
-        this.activeMessDropTab = this.activeMessDropTab.bind(this)
-        this.hideInputTab = this.hideInputTab.bind(this)
-        this.handleClickInput = this.handleClickInput.bind(this)
-        this.handleReelsScrollRight = this.handleReelsScrollRight.bind(this)
-        this.handleNewFeedEmojiClick = this.handleNewFeedEmojiClick.bind(this)
-        this.handleNewFeedEmojiUnClick = this.handleNewFeedEmojiUnClick.bind(this)
-        this.handleNewFeedMoreOptionOpen = this.handleNewFeedMoreOptionOpen.bind(this)
-        this.handleNewFeedMoreOptionHide = this.handleNewFeedMoreOptionHide.bind(this)
-    }
+        })
 
-    handleNewFeedMoreOptionOpen(event)
+    
+
+    const handleNewFeedMoreOptionOpen=(event)=>
     {
         event.preventDefault()
         event.stopPropagation()
@@ -267,7 +267,7 @@ class  Home extends React.Component
             event.target.parentNode.parentNode.children[1].classList.add('active')
 
     }
-    handleNewFeedMoreOptionHide(event)
+    const handleNewFeedMoreOptionHide = (event)=>
     {
         event.preventDefault()
         event.stopPropagation()
@@ -280,7 +280,7 @@ class  Home extends React.Component
         })
 
     }
-    activeNotifiDropTab(event)
+    const activeNotifiDropTab = (event)=>
     {
         event.preventDefault()
         event.stopPropagation()
@@ -297,7 +297,7 @@ class  Home extends React.Component
             notifiIcon.classList.add('active')
         }
     }
-    handleHideNotifiDropTab(event)
+    const handleHideNotifiDropTab = (event)=>
     {
         event.preventDefault()
         event.stopPropagation()
@@ -312,7 +312,7 @@ class  Home extends React.Component
 
         })
     }
-    handleHideMessDropTab(event)
+    const handleHideMessDropTab = (event)=>
     {
         event.preventDefault()
         event.stopPropagation()
@@ -328,7 +328,7 @@ class  Home extends React.Component
         })
     }
 
-    handleClickInput(event)
+    const handleClickInput = (event)=>
     {
         event.stopPropagation()
         const droptab = document.querySelector('.nav-search-tab-container')
@@ -336,7 +336,7 @@ class  Home extends React.Component
         
 
     }
-    hideInputTab(event)
+    const hideInputTab = (event)=>
     {
         event.stopPropagation()
         event.preventDefault()
@@ -348,7 +348,7 @@ class  Home extends React.Component
               });
     }
 
-    handleReelsScrollRight(event)
+    const handleReelsScrollRight = (event)=>
     {
         event.stopPropagation()
         event.preventDefault()
@@ -357,9 +357,12 @@ class  Home extends React.Component
             left: 200,
             behavior: 'smooth'
           });
-        this.setState({displayReelScrollLeftButton:true})
+          setHomeData(prevState => ({
+            ...prevState,
+            displayReelScrollLeftButton: true
+          }));
     }
-    handleReelsScrollLeft(event)
+    const handleReelsScrollLeft = (event)=>
     {
         event.stopPropagation()
         event.preventDefault()
@@ -371,13 +374,19 @@ class  Home extends React.Component
         const scrollPosition = slideContainer.scrollLeft;
         console.log(scrollPosition)
         if(scrollPosition<=200)
-            this.setState({displayReelScrollLeftButton:false})
+        setHomeData(prevState => ({
+            ...prevState,
+            displayReelScrollLeftButton: false
+          }));
         else
-            this.setState({displayReelScrollLeftButton:true})
+            setHomeData(prevState => ({
+                ...prevState,
+            displayReelScrollLeftButton: true
+            }));
     
     }
 
-    activeMessDropTab(event)
+    const activeMessDropTab = (event)=>
     {
         event.preventDefault()
         event.stopPropagation()
@@ -395,79 +404,66 @@ class  Home extends React.Component
             messIcon.classList.add('active')
         }
     }
-    handleNewFeedEmojiClick(event)
+    const handleNewFeedEmojiClick=(event) =>
     {
         event.preventDefault()
         event.stopPropagation()
-
-
         const emojiContainer = event.target.parentNode
         const newFeedLikeButton = emojiContainer.parentNode
         const newFeedContainer = newFeedLikeButton.parentNode.parentNode
         newFeedContainer.classList.add('reacted')
-        let newFeeds = this.state.newFeeds
+        let newFeeds = homeData.newFeeds
         let targetIndex = 0
         for(targetIndex;targetIndex<newFeeds.length;targetIndex++)
         {
             if(newFeeds[targetIndex].id==newFeedContainer.id)
             {
                 if(newFeeds[targetIndex].reacted=="none")
-                    newFeeds[targetIndex].userReacted.push(this.state.currentUser)
+                    newFeeds[targetIndex].userReacted.push(homeData.currentUser)
                 newFeeds[targetIndex].reacted = event.target.alt
                 
             }
             
         }
            
-        this.setState({newFeeds: newFeeds},()=>
-        {
-            console.log(this.state.newFeeds)
-        })
+        setHomeData(prevState => ({
+            ...prevState,
+            newFeeds: newFeeds
+          }));
     }
-    handleNewFeedEmojiUnClick(event,currentNewFeed)
+    const handleNewFeedEmojiUnClick = (event,currentNewFeed)=>
     {
         event.preventDefault()
         event.stopPropagation()
         if(currentNewFeed.reacted === "none")
         {
             currentNewFeed.reacted="like"
-            currentNewFeed.userReacted.push(this.state.currentUser)
+            currentNewFeed.userReacted.push(homeData.currentUser)
 
         }
         else
         {
             currentNewFeed.reacted="none"
-            let indexCurrentUser = currentNewFeed.userReacted.indexOf(this.state.currentUser)
+            let indexCurrentUser = currentNewFeed.userReacted.indexOf(homeData.currentUser)
             currentNewFeed.userReacted.splice(indexCurrentUser,1)
 
         }
-        let newFeeds = this.state.newFeeds
+        let newFeeds = homeData.newFeeds
         for(let newFeed of newFeeds)
             if(newFeed.id === currentNewFeed.id)
                 newFeed = currentNewFeed
-        this.setState({newFeeds:newFeeds})
+                setHomeData(prevState => ({
+                    ...prevState,
+                    newFeeds: newFeeds
+                  }));
     }
-    render()
-    {
-        // Img src
-        const userSrcImg = "assets/image/avt-user-login.jpg";
-        const userStatusImg = "assets/image/user-status-image.jpg";
-        const angryEmoji = "assets/image/emoji/angry.svg"
-        const likeEmoji = "assets/image/emoji/like.svg"
-        const loveEmoji = "assets/image/emoji/love.svg"
-        const shareLoveEmoji = "assets/image/emoji/share-love.svg"
-        const sadEmoji = "assets/image/emoji/sad.svg"
-        const hahaEmoji = "assets/image/emoji/haha.svg"
-        const wowEmoji = "assets/image/emoji/wow.svg"
-
-
         return(
             <div className='home-container'>
                 <nav className='nav'>
                     <a className='nav-logo__a' href='/home'>facebook</a>
                     <div className='nav-search-container'>
                         <BsSearch/>
-                        <input type='search' onMouseLeave={this.hideInputTab} onClick={this.handleClickInput} className='home-search__input' placeholder='Tìm kiếm trên Facebook'/>
+                        <input type='search' onMouseLeave={hideInputTab} onClick={handleClickInput} className='home-search__input' placeholder='Tìm kiếm trên Facebook'/>
 
                         {/* Search  tab */}
                         <div className='nav-search-tab-container'>
@@ -491,7 +487,7 @@ class  Home extends React.Component
                             <AiOutlineDown style={{position:"absolute",height:"12px",width:"12px",borderRadius:"6px",backgroundColor:"#3A3B3C",bottom:0,right:0,padding:"auto"}}/>
                         </div>
                        
-                        <div  className='nav-icon--padding notification' onClick={this.activeNotifiDropTab} onMouseLeave={this.handleHideNotifiDropTab}>
+                        <div  className='nav-icon--padding notification' onClick={activeNotifiDropTab} onMouseLeave={handleHideNotifiDropTab}>
                         <IoNotifications style={{margin:"auto"}}/>
                         <div className='notifi-droptab-container'>
                             <div className='home-notifi-header-container'>
@@ -617,7 +613,7 @@ class  Home extends React.Component
                         </div>
                         </div>
                         </div>
-                        <div className='nav-icon--padding mess' onClick={this.activeMessDropTab} onMouseLeave={this.handleHideMessDropTab}>
+                        <div className='nav-icon--padding mess' onClick={activeMessDropTab} onMouseLeave={handleHideMessDropTab}>
                         <BsMessenger style={{margin:"auto"}} />
                         <div className='mess-droptab-container'>
                             <div className='home-mess-header-container'>
@@ -789,11 +785,11 @@ class  Home extends React.Component
                 <div className='home-new-feed-container'>
                     {/* Reels */}
                     <div className='home-reels-container'>
-                    <button className='reel-arrow-right' onClick={this.handleReelsScrollRight}>
+                    <button className='reel-arrow-right' onClick={handleReelsScrollRight}>
                                 <AiOutlineRight style={{margin:"auto", fontWeight:600}}/>
                             </button>
                             
-                            <button className='reel-arrow-left' style={{display:this.state.displayReelScrollLeftButton?'flex':'none'}} onClick={this.handleReelsScrollLeft}>
+                            <button className='reel-arrow-left' style={{display:homeData.displayReelScrollLeftButton?'flex':'none'}} onClick={handleReelsScrollLeft}>
                                 <AiOutlineLeft style={{margin:"auto", fontWeight:600}}/>
                             </button>
                         <div className='reels-nav-container'>
@@ -963,7 +959,7 @@ class  Home extends React.Component
 
                      {/* New feed */}
                      {
-                        this.state.newFeeds.map((item,index)=>
+                        homeData.newFeeds.map((item,index)=>
                             <div className="new-feed-container" id={item.id} key={index}>
                                 <div className='new-feed-header'>
                             <div className='new-feed-header-avt-detail'>
@@ -973,7 +969,7 @@ class  Home extends React.Component
                                     <span className='new-feed-header-detail-date'>4 Tháng 2, 2022 <span className='dot-seperate'>.</span><AiOutlineGlobal style={{margin:"auto"}}/></span>
                             </div>
                             </div>
-                            <div className='new-feed-more-icon-container' onClick={this.handleNewFeedMoreOptionOpen} onMouseLeave={this.handleNewFeedMoreOptionHide}>
+                            <div className='new-feed-more-icon-container' onClick={handleNewFeedMoreOptionOpen} onMouseLeave={handleNewFeedMoreOptionHide}>
                                 <IoIosMore style={{fontSize:"20px",margin:"auto"}} onMouseLeave={e=>e.stopPropagation()}/>
 
                                 <div className='new-feed-more-option-drop-tab-container'>
@@ -1079,7 +1075,7 @@ class  Home extends React.Component
                         </div>
 
                         <div className='new-feed-action-container'>
-                            <div className='new-feed-action react' onClick={e=>this.handleNewFeedEmojiUnClick(e,item)}>
+                            <div className='new-feed-action react' onClick={e=>handleNewFeedEmojiUnClick(e,item)}>
                                 {
                                     
                                     
@@ -1097,13 +1093,13 @@ class  Home extends React.Component
                                     EmojiLikeButton.wow
                                 } */}
                                 <div className='new-feed-react-emoji-container'>
-                                    <img className='emoji' alt="like" src={likeEmoji} onClick={this.handleNewFeedEmojiClick}/>
-                                    <img className='emoji' alt="love" src={loveEmoji} onClick={this.handleNewFeedEmojiClick} />
-                                    <img className='emoji' alt="share-love" src={shareLoveEmoji} onClick={this.handleNewFeedEmojiClick} />
-                                    <img className='emoji' alt="haha" src={hahaEmoji} onClick={this.handleNewFeedEmojiClick}/>
-                                    <img className='emoji' alt="wow" src={wowEmoji} onClick={this.handleNewFeedEmojiClick}/>
-                                    <img className='emoji' alt="sad" src={sadEmoji} onClick={this.handleNewFeedEmojiClick}/>
-                                    <img className='emoji' alt="angry" src={angryEmoji} onClick={this.handleNewFeedEmojiClick}/>
+                                    <img className='emoji' alt="like" src={likeEmoji} onClick={handleNewFeedEmojiClick}/>
+                                    <img className='emoji' alt="love" src={loveEmoji} onClick={handleNewFeedEmojiClick} />
+                                    <img className='emoji' alt="share-love" src={shareLoveEmoji} onClick={handleNewFeedEmojiClick} />
+                                    <img className='emoji' alt="haha" src={hahaEmoji} onClick={handleNewFeedEmojiClick}/>
+                                    <img className='emoji' alt="wow" src={wowEmoji} onClick={handleNewFeedEmojiClick}/>
+                                    <img className='emoji' alt="sad" src={sadEmoji} onClick={handleNewFeedEmojiClick}/>
+                                    <img className='emoji' alt="angry" src={angryEmoji} onClick={handleNewFeedEmojiClick}/>
                                 
                                 
                                 
@@ -1320,13 +1316,18 @@ class  Home extends React.Component
                     
 
                     <div className='mess-window-wraper'>
-                        <ChatWindow />
-                        <ChatWindow />
-
+                        {
+                            messWindowArray?.map((item,index)=>
+                            {
+                                <ChatWindow key={index} data = {item}/>
+                            })
+                        }
 
                     </div>
-                    <div className='mess-buble-container'>
-
+                    <div className='mess-bubble-container'>
+                     <div className='mess-bubble-item'>
+                        <HiOutlinePencilAlt style={{margin:"auto"}}/>
+                     </div>
                         
                     </div>
 
@@ -1339,6 +1340,6 @@ class  Home extends React.Component
 
             </div>
         )
-    }
 }
+
 export default Home

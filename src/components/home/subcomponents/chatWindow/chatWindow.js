@@ -12,6 +12,7 @@ import twemoji from 'twemoji';
 const ChatWindow = function(props)
 {
  // State for input mess  window
+    console.log(props)
     const [message,setMessage] = useState('')
     const [heightMessage,setHeightMess] = useState(0)
     const  [data,setData] = useState({
@@ -35,6 +36,9 @@ const ChatWindow = function(props)
     {
 
     })
+
+    const [show,setShow] = useState(true)
+
 
     useEffect(()=>
     {
@@ -74,6 +78,7 @@ const ChatWindow = function(props)
         twemoji.parse(document.getElementById('root'))
 
     },[])
+
 
     useEffect(()=>
     {
@@ -116,7 +121,7 @@ const ChatWindow = function(props)
    
 
     return(
-        <div className='mess-window-container'>
+        <div className='mess-window-container' style={{display: show?"flex":"none"}}>
             {/* Header */}
             <div className='mess-window-header-container'>
                 
@@ -146,7 +151,7 @@ const ChatWindow = function(props)
                         <HiVideoCamera style={{margin:"auto"}}/>
                     </div>
 
-                    <div className='mess-window-action-icon-container'>
+                    <div className='mess-window-action-icon-container' onClick={()=>setShow(false)}>
                         <CgLoadbar style={{margin:"auto"}}/>
                     </div>
 

@@ -1891,12 +1891,29 @@
     
 }
 
-.mess-buble-container
+.mess-bubble-container
 {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     height: 100%;
     width: 50px;
     margin-left: 10px;
-    padding-right: 20px;
+    margin-right: 20px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.mess-bubble-item
+{
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+    background-color: rgb(75, 76, 79);
+    font-size: 20px;
+    color: #e4e6eb;
+    display: flex;
+}
+.mess-bubble-item:hover
+{
+    cursor: pointer;
 }
