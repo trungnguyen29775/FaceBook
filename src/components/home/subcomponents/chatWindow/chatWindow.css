@@ -1,5 +1,6 @@
 .mess-window-container
 {
+    display: flex;
     height: 455px;
     max-height: 455px;
     width: 328px;

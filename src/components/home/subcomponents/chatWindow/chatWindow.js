@@ -1,4 +1,3 @@
-import './chatWindow.css'
 import { AiOutlineGif,AiOutlineDown,AiFillPlusCircle,AiFillLike } from "react-icons/ai";
 import { HiVideoCamera } from "react-icons/hi2";
 import { CgLoadbar } from "react-icons/cg";
@@ -9,10 +8,14 @@ import { BsSend } from "react-icons/bs";
 import { useEffect, useState } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 import twemoji from 'twemoji';
-const ChatWindow = function(props)
+import { memo } from "react";
+
+import './chatWindow.css'
+
+const ChatWindow = function()
 {
  // State for input mess  window
-    console.log(props)
+
     const [message,setMessage] = useState('')
     const [heightMessage,setHeightMess] = useState(0)
     const  [data,setData] = useState({
@@ -37,7 +40,6 @@ const ChatWindow = function(props)
 
     })
 
-    const [show,setShow] = useState(true)
 
 
     useEffect(()=>
@@ -121,7 +123,7 @@ const ChatWindow = function(props)
    
 
     return(
-        <div className='mess-window-container' style={{display: show?"flex":"none"}}>
+        <div className='mess-window-container'>
             {/* Header */}
             <div className='mess-window-header-container'>
                 
@@ -151,7 +153,7 @@ const ChatWindow = function(props)
                         <HiVideoCamera style={{margin:"auto"}}/>
                     </div>
 
-                    <div className='mess-window-action-icon-container' onClick={()=>setShow(false)}>
+                    <div className='mess-window-action-icon-container'>
                         <CgLoadbar style={{margin:"auto"}}/>
                     </div>
 
@@ -280,4 +282,4 @@ const ChatWindow = function(props)
     )
 }
 
-export default ChatWindow
+export default memo(ChatWindow)

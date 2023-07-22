@@ -1,5 +1,4 @@
-import './home.css'
-import React, { useEffect } from 'react'
+// React Icon
 import {BsBookmark,BsClock,BsBell, BsFillBookmarkFill,BsSearch,BsMessenger,BsCameraVideoFill,BsPencilSquare,BsFillPeopleFill,BsLink45Deg } from "react-icons/bs";
 import { IoNotifications,IoApps } from "react-icons/io5";
 import {AiOutlineGif,AiOutlineCamera,AiOutlineComment,AiOutlineLike,AiOutlineGlobal,AiOutlineLeft,AiOutlineRight, AiOutlinePlus,AiOutlineUserSwitch,AiOutlineDown,AiFillHome,AiFillFlag,AiOutlineNotification } from "react-icons/ai";
@@ -10,10 +9,22 @@ import {FaWindowClose,FaRegWindowClose,FaRegCommentAlt, FaTv,FaUserFriends } fro
 import { TbBuildingWarehouse } from "react-icons/tb";
 import { RiEmotionHappyLine } from "react-icons/ri";
 import { LuSticker } from "react-icons/lu";
-import EmojiLikeButton from './subcomponents/emojiLikeButton/emoji';
 import { HiOutlinePencilAlt } from "react-icons/hi";
+
+// Hook
+import React, { useEffect,useState,useContext } from 'react'
+
+// Component
 import ChatWindow from './subcomponents/chatWindow/chatWindow';
-import { useState } from 'react';
+import EmojiLikeButton from './subcomponents/emojiLikeButton/emoji';
+
+// reducer
+import store, {action} from "./store";
+import MessStateContext from "./store/context";
+
+// CSS
+import './home.css'
+
 function Home(props)
 {
     // Img src
@@ -26,12 +37,38 @@ function Home(props)
     const sadEmoji = "assets/image/emoji/sad.svg"
     const hahaEmoji = "assets/image/emoji/haha.svg"
     const wowEmoji = "assets/image/emoji/wow.svg"
-
+    
+    // Hook
     const [messWindowArray,setMessWindowArray] =useState([])
-
+    const [homeContactUserData,setHomeContacUserData] = useState([
+        {
+            userId:1,
+            nameUser:"Trung Nguyen",
+            userSrcImg:userSrcImg
+        },
+        {
+            userId:2,
+            nameUser:"Trung Nguyen",
+            userSrcImg:userSrcImg
+        },
+        {
+            userId:3,
+            nameUser:"Trung Nguyen",
+            userSrcImg:userSrcImg
+        },
+        {
+            userId:4,
+            nameUser:"Trung Nguyen",
+            userSrcImg:userSrcImg
+        },
+        {
+            userId:5,
+            nameUser:"Trung Nguyen",
+            userSrcImg:userSrcImg
+        }
+    ])
     const [homeData,setHomeData]=  useState(
         {
-            show:true,
             messType:"personal",
             currentUser:
             {
@@ -92,168 +129,24 @@ function Home(props)
                     ]
 
                 },
-                {
-                    id:1,
-                    userPoster:{
-                        avtUrl:"assets/image/avt-user-login.jpg",
-                        name:"Trung Nguyen"
-                       
-                    },
-                    timePosted:"4 Tháng 2, 2022",
-                    newFeedStatus:"Hello",
-                    newFeedSrcImg:"assets/image/user-status-image.jpg",
-                    reacted:'none',
-                    userReacted:[
-                        {
-                            userId:0,
-                            userName:"Thiên Long",
-                            reacted:"haha"
-                        },
-                        {
-                            userId:1,
-                            userName:"Phúc Lee",
-                            reacted:"haha"
-                        },
-                        {
-                            userId:3,
-                            userName:"Phúc Lee",
-                            reacted:"haha"
-                        },
-                        {
-                            userId:4,
-                            userName:"Phúc Lee",
-                            reacted:"haha"
-                        },
-                        {
-                            userId:5,
-                            userName:"Phúc Lee",
-                            reacted:"haha"
-                        },
-                    ],
-                    comment:[
-                        {
-                            userId:1,
-                            userSrcImg:"assets/image/user-status-image.jpg",
-                            userName:"Trung Nguyen",
-                            comment:{
-                                commentText:"siuuuuuuuuuuuuuuuuuu",
-                                comentImgSrc:"assets/image/user-status-image.jpg"
-                            },
-                            timePosted:"1 năm"
-                        }
-                    ]
-
-                },
-                {
-                    id:2,
-                    userPoster:{
-                        avtUrl:"assets/image/avt-user-login.jpg",
-                        name:"Trung Nguyen"
-                       
-                    },
-                    timePosted:"4 Tháng 2, 2022",
-                    newFeedStatus:"Hello",
-                    newFeedSrcImg:"assets/image/user-status-image.jpg",
-                    reacted:'none',
-                    userReacted:[
-                        {
-                            userId:0,
-                            userName:"Thiên Long",
-                            reacted:"haha"
-                        },
-                        {
-                            userId:1,
-                            userName:"Phúc Lee",
-                            reacted:"haha"
-                        },
-                        {
-                            userId:3,
-                            userName:"Phúc Lee",
-                            reacted:"haha"
-                        },
-                        {
-                            userId:4,
-                            userName:"Phúc Lee",
-                            reacted:"haha"
-                        },
-                        {
-                            userId:5,
-                            userName:"Phúc Lee",
-                            reacted:"haha"
-                        },
-                    ],
-                    comment:[
-                        {
-                            userId:1,
-                            userSrcImg:"assets/image/user-status-image.jpg",
-                            userName:"Trung Nguyen",
-                            comment:{
-                                commentText:"siuuuuuuuuuuuuuuuuuu",
-                                comentImgSrc:"assets/image/user-status-image.jpg"
-                            },
-                            timePosted:"1 năm"
-                        }
-                    ]
-
-                },
-                {
-                    id:3,
-                    userPoster:{
-                        avtUrl:"assets/image/avt-user-login.jpg",
-                        name:"Trung Nguyen"
-                       
-                    },
-                    timePosted:"4 Tháng 2, 2022",
-                    newFeedStatus:"Hello",
-                    newFeedSrcImg:"assets/image/user-status-image.jpg",
-                    reacted:'none',
-                    userReacted:[
-                        {
-                            userId:0,
-                            userName:"Thiên Long",
-                            reacted:"haha"
-                        },
-                        {
-                            userId:1,
-                            userName:"Phúc Lee",
-                            reacted:"haha"
-                        },
-                        {
-                            userId:3,
-                            userName:"Phúc Lee",
-                            reacted:"haha"
-                        },
-                        {
-                            userId:4,
-                            userName:"Phúc Lee",
-                            reacted:"haha"
-                        },
-                        {
-                            userId:5,
-                            userName:"Phúc Lee",
-                            reacted:"haha"
-                        },
-                    ],
-                    comment:[
-                        {
-                            userId:1,
-                            userSrcImg:"assets/image/user-status-image.jpg",
-                            userName:"Trung Nguyen",
-                            comment:{
-                                commentText:"siuuuuuuuuuuuuuuuuuu",
-                                comentImgSrc:"assets/image/user-status-image.jpg"
-                            },
-                            timePosted:"1 năm"
-                        }
-                    ]
-
-                }
+                
+                
                 
             ]
         })
-
+    const [messState,dispatchMessState] = useContext(MessStateContext)
+    console.log(messState)
+    const showMessWindow = ()=>
+    {
+        console.log("hello")
+        setMessWindowArray(preState=>
+            
+            [...preState,1]
+        )
+    }
     
-
+        
+    
     const handleNewFeedMoreOptionOpen=(event)=>
     {
         event.preventDefault()
@@ -1079,13 +972,13 @@ function Home(props)
                                 {
                                     
                                     
-                                    item.reacted=="like"?EmojiLikeButton.like
-                                    :item.reacted=="love"? EmojiLikeButton.love
-                                    :item.reacted=="angry"? EmojiLikeButton.angry
-                                    :item.reacted=="wow"?EmojiLikeButton.wow
-                                    :item.reacted=="share-love"?EmojiLikeButton.shareLove
-                                    :item.reacted=="sad"?EmojiLikeButton.sad
-                                    :item.reacted=="haha"?EmojiLikeButton.haha
+                                    item.reacted==="like"?EmojiLikeButton.like
+                                    :item.reacted==="love"? EmojiLikeButton.love
+                                    :item.reacted==="angry"? EmojiLikeButton.angry
+                                    :item.reacted==="wow"?EmojiLikeButton.wow
+                                    :item.reacted==="share-love"?EmojiLikeButton.shareLove
+                                    :item.reacted==="sad"?EmojiLikeButton.sad
+                                    :item.reacted==="haha"?EmojiLikeButton.haha
                                     :EmojiLikeButton.default
                                 }
                                
@@ -1259,53 +1152,17 @@ function Home(props)
                                 </div>
                             </div>
                             <div className='contact-users-container'>
-                                <div className='contact-user'>
-                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Trung Nguyen</span>
-                                </div>
-                                <div className='contact-user'>
-                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Trung Nguyen</span>
-                                </div>
-                                <div className='contact-user'>
-                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Trung Nguyen</span>
-                                </div>
-                                <div className='contact-user'>
-                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Trung Nguyen</span>
-                                </div>
-                                <div className='contact-user'>
-                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Trung Nguyen</span>
-                                </div>
-                                <div className='contact-user'>
-                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Trung Nguyen</span>
-                                </div>
-                                <div className='contact-user'>
-                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Trung Nguyen</span>
-                                </div>
-                                <div className='contact-user'>
-                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Trung Nguyen</span>
-                                </div>
-                                <div className='contact-user'>
-                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Trung Nguyen</span>
-                                </div>
-                                <div className='contact-user'>
-                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Trung Nguyen</span>
-                                </div>
-                                <div className='contact-user'>
-                                    <img src={userSrcImg} className='contact-user__img' alt='avt user'/>
-                                    <span>Trung Nguyen</span>
-                                </div>
-
-                                
-                               
+                                {
+                                    homeContactUserData?.map((item,index)=>
+                                    {
+                                        return(
+                                            <div className='contact-user' key={index} onClick={showMessWindow}>
+                                                <img src={item.userSrcImg} className='contact-user__img' alt='avt user'/>
+                                                <span>{item.nameUser}</span>
+                                            </div>
+                                        )
+                                    })
+                                }
                                 
                             </div>
 
@@ -1319,7 +1176,7 @@ function Home(props)
                         {
                             messWindowArray?.map((item,index)=>
                             {
-                                <ChatWindow key={index} data = {item}/>
+                                return(<ChatWindow key={index}/>)
                             })
                         }
 

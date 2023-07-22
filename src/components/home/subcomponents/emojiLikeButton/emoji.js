@@ -1,5 +1,7 @@
-import './emoji.css'
 import {AiOutlineLike} from "react-icons/ai";
+import { memo } from "react";
+
+import './emoji.css'
 
 const likeEmoji = "assets/image/emoji/like.svg"
 const loveEmoji = "assets/image/emoji/love.svg"
@@ -8,6 +10,8 @@ const sadEmoji = "assets/image/emoji/sad.svg"
 const hahaEmoji = "assets/image/emoji/haha.svg"
 const wowEmoji = "assets/image/emoji/wow.svg"
 const angryEmoji = "assets/image/emoji/angry.svg"
+
+
 
 function Like ()
 {
@@ -93,14 +97,14 @@ function Default()
 
 const EmojiLikeButton = 
 {
-    like:Like(),
-    love:Love(),
-    haha:Haha(),
-    wow:Wow(),
-    angry:Angry(),
-    shareLove:ShareLove(),
-    sad:Sad(),
-    default:Default()
+    like:<Like/>,
+    love:<Love/>,
+    haha:<Haha/>,
+    wow:<Wow/>,
+    angry:<Angry/>,
+    shareLove:<ShareLove/>,
+    sad:<Sad/>,
+    default:<Default/>
 }
 
 export default EmojiLikeButton
