@@ -1877,10 +1877,12 @@
     bottom: 0;
     max-width: 100%;
     padding-left: 10px;
-    height: 455px;
+    max-height: 455px;
     justify-content: space-between;
     width: fit-content;
     right: 0;
+    overflow: hidden;
+    align-items: flex-end;
 }
 .mess-window-wraper
 {
@@ -1899,8 +1901,9 @@
     width: 50px;
     margin-left: 10px;
     margin-right: 20px;
-    padding-bottom: 20px;
     box-sizing: border-box;
+    padding-bottom: 18px;
+
 }
 
 .mess-bubble-item
@@ -1912,8 +1915,42 @@
     font-size: 20px;
     color: #e4e6eb;
     display: flex;
+    position: relative;
+    margin-top: 12px;
 }
 .mess-bubble-item:hover
 {
     cursor: pointer;
+    background-color: #3A3B3C;
+}
+
+.mess-bubble-item__img
+{
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+}
+.mess-buble-item-icon-container
+{
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: #242526;
+    font-size: 12px;
+    display: none;
+    top: -6px;
+    right: -6px;
+}
+.mess-bubble-item:hover
+{
+    .mess-buble-item-icon-container
+    {
+        display: flex;
+    }
+}
+.mess-buble-item-icon-container:hover
+{
+    cursor: pointer;
+    background-color:#3A3B3C ;
 }

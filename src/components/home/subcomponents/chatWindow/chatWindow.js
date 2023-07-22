@@ -5,14 +5,16 @@ import { FiX } from "react-icons/fi";
 import { FaImages,FaSmile,FaPhoneAlt } from "react-icons/fa";
 import { LuSticker } from "react-icons/lu";
 import { BsSend } from "react-icons/bs";
-import { useEffect, useState } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 import twemoji from 'twemoji';
 import { memo } from "react";
 
 import './chatWindow.css'
+import MessStateContext from "../../store/context";
+import { action } from "../../store";
 
-const ChatWindow = function()
+const ChatWindow = function({id})
 {
  // State for input mess  window
 
@@ -33,8 +35,11 @@ const ChatWindow = function()
     })
     // Emoji Picker state
     const [emojiPickerContainer,setEmojiPickerContainer] = useState(false)
+    
 
-
+    // reducer
+    const [messState,dispatchMessState] = useContext(MessStateContext)
+    
     useEffect(()=>
     {
 
@@ -119,11 +124,15 @@ const ChatWindow = function()
         setMessage(event.target.value.toString())
     }
             
-
+    const handelHideMessWindow = (e)=>
+    {
+        dispatchMessState(action.hideMessWinDow(e.target.closest('.mess-window-container').id))
+        dispatchMessState(action.showMessBubble(e.target.closest('.mess-window-container').id))
+    }
    
 
     return(
-        <div className='mess-window-container'>
+        <div className='mess-window-container' id={id}>
             {/* Header */}
             <div className='mess-window-header-container'>
                 
@@ -153,7 +162,7 @@ const ChatWindow = function()
                         <HiVideoCamera style={{margin:"auto"}}/>
                     </div>
 
-                    <div className='mess-window-action-icon-container'>
+                    <div className='mess-window-action-icon-container' onClick={e=>handelHideMessWindow(e)}>
                         <CgLoadbar style={{margin:"auto"}}/>
                     </div>
 

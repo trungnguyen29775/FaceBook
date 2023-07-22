@@ -5,12 +5,12 @@ import {AiOutlineGif,AiOutlineCamera,AiOutlineComment,AiOutlineLike,AiOutlineGlo
 import { FiX } from "react-icons/fi";
 import { IoIosMore,IoIosBook } from "react-icons/io";
 import {BiMessageError, BiShare,BiExpand,BiMoviePlay } from "react-icons/bi";
-import {FaWindowClose,FaRegWindowClose,FaRegCommentAlt, FaTv,FaUserFriends } from "react-icons/fa";
+import {FaWindowClose,FaRegWindowClose,FaRegCommentAlt, FaTv,FaUserFriends, FaCross } from "react-icons/fa";
 import { TbBuildingWarehouse } from "react-icons/tb";
 import { RiEmotionHappyLine } from "react-icons/ri";
 import { LuSticker } from "react-icons/lu";
 import { HiOutlinePencilAlt } from "react-icons/hi";
-
+import { RxCross2 } from "react-icons/rx";
 // Hook
 import React, { useEffect,useState,useContext } from 'react'
 
@@ -135,17 +135,12 @@ function Home(props)
             ]
         })
     const [messState,dispatchMessState] = useContext(MessStateContext)
-    console.log(messState)
-    const showMessWindow = ()=>
+    const showMessWindow = (e)=>
     {
-        console.log("hello")
-        setMessWindowArray(preState=>
-            
-            [...preState,1]
-        )
-    }
-    
         
+    
+        dispatchMessState(action.showMessWindow(e.target.closest('.contact-user').id))
+    }
     
     const handleNewFeedMoreOptionOpen=(event)=>
     {
@@ -1156,7 +1151,7 @@ function Home(props)
                                     homeContactUserData?.map((item,index)=>
                                     {
                                         return(
-                                            <div className='contact-user' key={index} onClick={showMessWindow}>
+                                            <div className='contact-user'id={index} key={index} onClick={e=>showMessWindow(e)}>
                                                 <img src={item.userSrcImg} className='contact-user__img' alt='avt user'/>
                                                 <span>{item.nameUser}</span>
                                             </div>
@@ -1174,9 +1169,9 @@ function Home(props)
 
                     <div className='mess-window-wraper'>
                         {
-                            messWindowArray?.map((item,index)=>
+                            messState.messWindowArray.map((item,index)=>
                             {
-                                return(<ChatWindow key={index}/>)
+                                return(<ChatWindow key={index} id={index}/>)
                             })
                         }
 
@@ -1185,6 +1180,20 @@ function Home(props)
                      <div className='mess-bubble-item'>
                         <HiOutlinePencilAlt style={{margin:"auto"}}/>
                      </div>
+                     {
+                        messState.messBubbleArray.map((item,index)=>
+                        {
+                            return(
+                            <div className='mess-bubble-item' key={index} id={index}>
+                                <img className="mess-bubble-item__img" src={userSrcImg}/>
+                                <div className="mess-buble-item-icon-container">   
+                                    <RxCross2 style={{margin:"auto",fontWeight:600}}/>
+                                </div>
+                             </div>
+                            )
+                        })
+                     }
+                     
                         
                     </div>
 
