@@ -1,3 +1,3 @@
-import { createContext } from "react";
-const MessStateContext = createContext()
-export default MessStateContext
+import { createContext } from 'react';
+const MessStateContext = createContext();
+export default MessStateContext;

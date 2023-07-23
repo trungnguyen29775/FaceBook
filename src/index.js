@@ -7,11 +7,11 @@ import MessProvider from './components/home/store/Provider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <MessProvider>
-      <App />  
-    </MessProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <MessProvider>
+            <App />
+        </MessProvider>
+    </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

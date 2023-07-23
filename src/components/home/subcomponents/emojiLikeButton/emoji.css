@@ -1,5 +1,4 @@
-.new-feed-like-button-container
-{
+.new-feed-like-button-container {
     height: 44px;
     padding: 0px 12px;
     font-size: 15px;
@@ -12,43 +11,34 @@
     border-radius: 5px;
     margin: auto;
 }
-.new-feed-like-button-container img
-{
+.new-feed-like-button-container img {
     height: 18px;
     width: 18px;
     padding: 6px 4px;
 }
-.new-feed-like-button-container 
-{
+.new-feed-like-button-container {
     font-size: 15px;
     color: rgb(176, 179, 184);
     font-weight: 600;
 }
-span.haha
-{
+span.haha {
     color: rgb(247, 177, 37);
 }
-span.like
-{
+span.like {
     color: rgb(32, 120, 244);
 }
-span.love
-{
+span.love {
     color: rgb(243, 62, 88);
 }
-span.share-love
-{
+span.share-love {
     color: rgb(247, 177, 37);
 }
-span.angry
-{
-    color: rgb(233, 113, 15)
+span.angry {
+    color: rgb(233, 113, 15);
 }
-span.wow
-{
+span.wow {
     color: rgb(247, 177, 37);
 }
-span.sad
-{
+span.sad {
     color: rgb(247, 177, 37);
 }
