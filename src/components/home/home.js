@@ -50,6 +50,9 @@ import MessStateContext from './store/context';
 // CSS
 import './home.css';
 
+// axios
+import instance from '../../axios';
+
 function Home(props) {
     // Img src
     const userSrcImg = 'assets/image/avt-user-login.jpg';
@@ -63,7 +66,6 @@ function Home(props) {
     const wowEmoji = 'assets/image/emoji/wow.svg';
 
     // Hook
-    const [messWindowArray, setMessWindowArray] = useState([]);
     const [homeContactUserData, setHomeContacUserData] = useState([
         {
             userId: 1,
@@ -153,6 +155,14 @@ function Home(props) {
     });
     const [messState, dispatchMessState] = useContext(MessStateContext);
     const showMessWindow = (e) => {
+        instance
+            .get()
+            .then((res) => {
+                console.log(res.data.data);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
         dispatchMessState(action.showMessWindow(e.target.closest('.contact-user').id));
     };
 
