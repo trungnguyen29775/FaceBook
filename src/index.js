@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import MessProvider from './components/home/store/Provider';
-import LoginProvider from './store/Provider';
+import LoginProvider from './store/LoginProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

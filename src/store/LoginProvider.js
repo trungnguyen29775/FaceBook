@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
-import LoginContext from './context';
-import loginReducer, { initLoginState } from './reducer';
+import LoginContext from './loginContext';
+import loginReducer, { initLoginState } from './loginReducer';
 
 function LoginProvider({ children }) {
     const [loginState, dispatchLogin] = useReducer(loginReducer, initLoginState);

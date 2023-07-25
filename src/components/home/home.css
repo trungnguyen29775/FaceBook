@@ -84,14 +84,20 @@
     position: relative;
     font-size: 4px;
 }
+.nav-img-icon-container:hover {
+    cursor: pointer;
+}
 .home-avt__img .smaller {
     height: 36px;
     width: 36px;
 }
+.nav-search-container:hover {
+    cursor: pointer;
+}
 .nav-search-tab-container {
     position: absolute;
     padding: 8px;
-    height: 574px;
+    max-height: 574px;
     width: 100%;
     background-color: rgb(36, 37, 38);
     border-radius: 8px;
@@ -102,6 +108,7 @@
     max-height: 665.6px;
     top: 49px;
     margin: auto;
+    overflow: hidden;
 }
 .search-title-container {
     display: flex;

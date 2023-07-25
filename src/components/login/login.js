@@ -4,8 +4,9 @@ import src from '../../constant/src';
 import { AiFillPlusCircle, AiFillGithub, AiFillInstagram, AiFillFacebook } from 'react-icons/ai';
 import { FiX } from 'react-icons/fi';
 import Date from '../../constant/date';
-import LoginContext from '../../store/context';
-import { login } from '../../store';
+import LoginContext from '../../store/loginContext';
+import instance from '../../axios';
+import { loginAction } from '../../store/loginAction';
 function Login() {
     const [loginState, dispatchLoginState] = useContext(LoginContext);
     const [userLogged, setUserLogged] = useState([
@@ -22,9 +23,17 @@ function Login() {
             avtUrl: 'assets/image/avt-user-login.jpg',
         },
     ]);
-    useEffect(() => {
-        console.log(loginState);
-    }, [loginState]);
+    const [passwordLogin, setPasswordLogin] = useState('');
+    const [emailLogin, setEmailLogin] = useState('');
+
+    const handleChangeEmailLogin = (event) => {
+        setEmailLogin(event.target.value);
+    };
+
+    const handleChangePasswordLogin = (event) => {
+        setPasswordLogin(event.target.value);
+    };
+
     const handleDeleteRecentUser = (event) => {
         let indexTarget = event.target.id;
         let temp = [];
@@ -37,7 +46,19 @@ function Login() {
     const handleLogin = (event) => {
         event.preventDefault();
         event.stopPropagation();
-        dispatchLoginState(login(event));
+        console.log('email: ', emailLogin, ' password: ', passwordLogin);
+        // instance
+        //     .post('/', {
+        //         email: emailLogin,
+        //         password: passwordLogin,
+        //     })
+        //     .then((respone) => {
+        //         console.log(respone.data);
+        //     })
+        //     .catch((e) => {
+        //         console.log(e);
+        //     });
+        dispatchLoginState(loginAction(event));
     };
     const handleCreateAccountClick = (event) => {
         event.preventDefault();
@@ -49,7 +70,7 @@ function Login() {
         const registerContainer = document.querySelector('.register-container');
         registerContainer.classList.add('hide');
     };
-    const handleChangeEmail = (event) => {
+    const handleChangeEmailRegister = (event) => {
         setUserLogged({ email: event.target.value }, () => {
             const registerEmailInput = document.querySelectorAll('.register-detail__input')[1];
             if (userLogged.email != '') registerEmailInput.classList.remove('hide');
@@ -126,10 +147,21 @@ function Login() {
                         </div>
                     </div>
                 </div>
-                <form className="login__form">
-                    <input placeholder="Email address or phone number" className="login-input" />
-                    <input placeholder="Password" type="password" className="login-input" />
-                    <button className="login-button" onClick={(e) => handleLogin(e)}>
+                <form className="login__form" onSubmit={handleLogin}>
+                    <input
+                        value={emailLogin}
+                        onChange={(e) => handleChangeEmailLogin(e)}
+                        placeholder="Email address or phone number"
+                        className="login-input"
+                    />
+                    <input
+                        value={passwordLogin}
+                        onChange={(e) => handleChangePasswordLogin(e)}
+                        placeholder="Password"
+                        type="password"
+                        className="login-input"
+                    />
+                    <button className="login-button" type="submit">
                         Log in
                     </button>
                     <a href="#" className="forgot-password__a">
@@ -170,7 +202,7 @@ function Login() {
                         </div>
                         <input
                             type="text"
-                            onChange={handleChangeEmail}
+                            onChange={handleChangeEmailRegister}
                             value={userLogged.email}
                             placeholder="Mobile number or email address"
                             className="register-detail__input"

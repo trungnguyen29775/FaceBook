@@ -37,7 +37,7 @@ import { LuSticker } from 'react-icons/lu';
 import { HiOutlinePencilAlt } from 'react-icons/hi';
 import { RxCross2 } from 'react-icons/rx';
 // Hook
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 
 // Component
 import ChatWindow from './subcomponents/chatWindow/chatWindow';
@@ -154,6 +154,8 @@ function Home(props) {
         ],
     });
     const [messState, dispatchMessState] = useContext(MessStateContext);
+    const inputHomeSearch = useRef();
+    const [valueInputHomeSearch, setValueInputHomeSearch] = '';
     const showMessWindow = (e) => {
         instance
             .get()
@@ -165,6 +167,17 @@ function Home(props) {
             });
         dispatchMessState(action.showMessWindow(e.target.closest('.contact-user').id));
     };
+
+    useEffect(() => {
+        instance
+            .get(`/api/search?q=${valueInputHomeSearch}`)
+            .then((res) => {
+                console(res.data);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }, [valueInputHomeSearch]);
 
     const handleNewFeedMoreOptionOpen = (event) => {
         event.preventDefault();
@@ -230,6 +243,10 @@ function Home(props) {
         event.stopPropagation();
         const droptab = document.querySelector('.nav-search-tab-container');
         droptab.classList.add('active');
+        inputHomeSearch.current.focus();
+    };
+    const handleChangeHomeSearchInput = (event) => {
+        setValueInputHomeSearch(event.target.value);
     };
     const hideInputTab = (event) => {
         event.stopPropagation();
@@ -342,14 +359,16 @@ function Home(props) {
                 <a className="nav-logo__a" href="/home">
                     facebook
                 </a>
-                <div className="nav-search-container">
+                <div className="nav-search-container" onClick={(e) => handleClickInput(e)} onMouseLeave={hideInputTab}>
                     <BsSearch />
                     <input
                         type="search"
-                        onMouseLeave={hideInputTab}
                         onClick={handleClickInput}
                         className="home-search__input"
                         placeholder="Tìm kiếm trên Facebook"
+                        ref={inputHomeSearch}
+                        onChange={(e) => setValueInputHomeSearch(e.target.value)}
+                        value={valueInputHomeSearch}
                     />
 
                     {/* Search  tab */}
@@ -360,7 +379,7 @@ function Home(props) {
                                 Chỉnh sửa
                             </a>
                         </div>
-                        <div className="search-target-container">
+                        <div className="search-target-container" onClick={() => console.log('Hello')}>
                             <img src={userSrcImg} className="home-avt__img smaller" />
                             <div className="search-target-detail">
                                 <span>Nguyễn Trần Minh Trung</span>
