@@ -9,6 +9,7 @@ import instance from '../../axios';
 import { loginAction } from '../../store/loginAction';
 function Login() {
     const [loginState, dispatchLoginState] = useContext(LoginContext);
+
     const [userLogged, setUserLogged] = useState([
         {
             name: 'Nguyễn',
@@ -25,6 +26,22 @@ function Login() {
     ]);
     const [passwordLogin, setPasswordLogin] = useState('');
     const [emailLogin, setEmailLogin] = useState('');
+    const [registerFirstName, setRegisterFirstName] = useState('');
+    const [registerLastName, setRegisterLastName] = useState('');
+    const [registerEmail, setRegisterEmail] = useState('');
+    const [registerPassword, setRegisterPassword] = useState('');
+    const [dob, setDob] = useState({
+        day: 29,
+        month: 'Sep',
+        year: 2002,
+    });
+    const [gender, setGender] = useState('female');
+
+    const handleCreateAccountClick = (event) => {
+        event.preventDefault();
+        const registerContainer = document.querySelector('.register-container');
+        registerContainer.classList.remove('hide');
+    };
 
     const handleChangeEmailLogin = (event) => {
         setEmailLogin(event.target.value);
@@ -32,6 +49,43 @@ function Login() {
 
     const handleChangePasswordLogin = (event) => {
         setPasswordLogin(event.target.value);
+    };
+
+    const handleChangeEmailRegister = (event) => {
+        setRegisterEmail(event.target.value);
+    };
+
+    const handleChangePasswordRegister = (event) => {
+        setRegisterPassword(event.target.value);
+    };
+
+    const handleChangeFirstNameRegister = (event) => {
+        setRegisterFirstName(event.target.value);
+    };
+    const handleChangeLastNameRegister = (event) => {
+        setRegisterLastName(event.target.value);
+    };
+
+    const handleChangeDay = (event) => {
+        setDob((preState) => {
+            return { ...preState, day: event.target.value };
+        });
+    };
+
+    const handleChangeMonth = (event) => {
+        setDob((preState) => {
+            return { ...preState, month: event.target.value };
+        });
+    };
+
+    const handleChangeYear = (event) => {
+        setDob((preState) => {
+            return { ...preState, year: event.target.value };
+        });
+    };
+
+    const handleChangeGender = (event) => {
+        setGender(event.target.id);
     };
 
     const handleDeleteRecentUser = (event) => {
@@ -46,36 +100,95 @@ function Login() {
     const handleLogin = (event) => {
         event.preventDefault();
         event.stopPropagation();
-        console.log('email: ', emailLogin, ' password: ', passwordLogin);
-        // instance
-        //     .post('/', {
-        //         email: emailLogin,
-        //         password: passwordLogin,
-        //     })
-        //     .then((respone) => {
-        //         console.log(respone.data);
-        //     })
-        //     .catch((e) => {
-        //         console.log(e);
-        //     });
-        dispatchLoginState(loginAction(event));
+        instance
+            .post('/login', {
+                userName: emailLogin,
+                password: passwordLogin,
+            })
+            .then((respone) => {
+                if (respone.data.message === 'Authentication successful') dispatchLoginState(loginAction(event));
+                else console.log('Wrong ');
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     };
-    const handleCreateAccountClick = (event) => {
-        event.preventDefault();
-        const registerContainer = document.querySelector('.register-container');
-        registerContainer.classList.remove('hide');
-    };
+
     const handleExitRegister = (event) => {
         event.stopPropagation();
         const registerContainer = document.querySelector('.register-container');
         registerContainer.classList.add('hide');
     };
-    const handleChangeEmailRegister = (event) => {
-        setUserLogged({ email: event.target.value }, () => {
-            const registerEmailInput = document.querySelectorAll('.register-detail__input')[1];
-            if (userLogged.email != '') registerEmailInput.classList.remove('hide');
-            else registerEmailInput.classList.add('hide');
-        });
+
+    const handleRegisterSubmit = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const form = event.target;
+        let dobFormat = '';
+        dobFormat += dob.year + '-';
+        let monthFormat = '';
+        switch (dob.month) {
+            case 'Jan':
+                monthFormat = '01';
+                break;
+            case 'Feb':
+                monthFormat = '02';
+                break;
+            case 'Mar':
+                monthFormat = '03';
+                break;
+            case 'Apr':
+                monthFormat = '04';
+                break;
+            case 'May':
+                monthFormat = '05';
+                break;
+            case 'Jun':
+                monthFormat = '06';
+                break;
+            case 'Jul':
+                monthFormat = '07';
+                break;
+            case 'Aug':
+                monthFormat = '08';
+                break;
+            case 'Sep':
+                monthFormat = '09';
+                break;
+            case 'Oct':
+                monthFormat = '10';
+                break;
+            case 'Nov':
+                monthFormat = '11';
+                break;
+            case 'Dev':
+                monthFormat = '12';
+                break;
+            default:
+                monthFormat = '01';
+                break;
+        }
+        dobFormat += monthFormat + '-';
+        let dayFormat = dob.day >= 10 ? dob.day : '0' + dob.day;
+        dobFormat += dayFormat;
+        const data = {};
+        console.log(data);
+        instance
+            .post('/register', {
+                userName: registerEmail,
+                registerPassword: registerPassword,
+                registerFirstName: registerFirstName,
+                registerLastName: registerLastName,
+                dob: dobFormat,
+                gender: gender,
+                avtFilePath: 'assets/image/avt-user-login.jpg',
+            })
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((e) => {
+                console.log('Can not create account due to ', e);
+            });
     };
 
     return (
@@ -195,29 +308,50 @@ function Login() {
                         <h1 className="register-header">Sign Up</h1>
                         <p className="register-sub-header">It's quick and easy.</p>
                     </div>
-                    <form className="register-form">
+                    <form className="register-form" onSubmit={(e) => handleRegisterSubmit(e)}>
                         <div className="register-name-container">
-                            <input placeholder="First name" className="register-name__input" />
-                            <input placeholder="Last name" className="register-name__input" />
+                            <input
+                                onChange={(e) => handleChangeFirstNameRegister(e)}
+                                placeholder="First name"
+                                className="register-name__input"
+                            />
+                            <input
+                                onChange={(e) => handleChangeLastNameRegister(e)}
+                                placeholder="Last name"
+                                className="register-name__input"
+                            />
                         </div>
                         <input
                             type="text"
-                            onChange={handleChangeEmailRegister}
-                            value={userLogged.email}
+                            onChange={(e) => handleChangeEmailRegister(e)}
+                            value={registerEmail}
                             placeholder="Mobile number or email address"
                             className="register-detail__input"
                         />
                         <input
                             type="text"
                             placeholder="Re-enter email address"
-                            className="register-detail__input hide"
+                            className={
+                                registerEmail.length == 0 ? 'register-detail__input hide' : 'register-detail__input'
+                            }
                         />
 
-                        <input type="password" placeholder="New password" className="register-detail__input" />
+                        <input
+                            onChange={(e) => handleChangePasswordRegister(e)}
+                            type="password"
+                            placeholder="New password"
+                            className="register-detail__input"
+                        />
                         <div className="register-dob-container">
                             <label className="register-dob-header">Date of birth</label>
                             <div className="register-date-container">
-                                <select className="register-date__select">
+                                <select
+                                    className="register-date__select"
+                                    onChange={(e) => handleChangeDay(e)}
+                                    value={dob.day}
+                                    contentEditable
+                                    suppressContentEditableWarning
+                                >
                                     {Date.day.map((item, index) => {
                                         return (
                                             <option key={index} value={item}>
@@ -226,7 +360,12 @@ function Login() {
                                         );
                                     })}
                                 </select>
-                                <select className="register-date__select">
+                                <select
+                                    className="register-date__select"
+                                    onChange={(e) => handleChangeMonth(e)}
+                                    contentEditable
+                                    suppressContentEditableWarning
+                                >
                                     {Date.month.map((item, index) => {
                                         return (
                                             <option value={item} key={index}>
@@ -235,7 +374,13 @@ function Login() {
                                         );
                                     })}
                                 </select>
-                                <select className="register-date__select">
+                                <select
+                                    className="register-date__select"
+                                    value={dob.year}
+                                    contentEditable
+                                    suppressContentEditableWarning
+                                    onChange={(e) => handleChangeYear(e)}
+                                >
                                     {Date.year.map((item, index) => {
                                         return (
                                             <option value={item} key={index}>
@@ -251,15 +396,33 @@ function Login() {
                             <div className="register-gender-input-container">
                                 <div className="register-gender">
                                     <label htmlFor="female">Female</label>
-                                    <input id="female" name="gender" type="radio" />
+                                    <input
+                                        id="female"
+                                        name="gender"
+                                        type="radio"
+                                        onChange={(e) => handleChangeGender(e)}
+                                        checked={gender === 'female'}
+                                    />
                                 </div>
                                 <div className="register-gender">
                                     <label htmlFor="male">Male</label>
-                                    <input id="male" name="gender" type="radio" />
+                                    <input
+                                        id="male"
+                                        name="gender"
+                                        type="radio"
+                                        onChange={(e) => handleChangeGender(e)}
+                                        checked={gender === 'male'}
+                                    />
                                 </div>
                                 <div className="register-gender">
                                     <label htmlFor="other">Other</label>
-                                    <input id="other" name="gender" type="radio" />
+                                    <input
+                                        onChange={(e) => handleChangeGender(e)}
+                                        checked={gender === 'other'}
+                                        id="other"
+                                        name="gender"
+                                        type="radio"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -282,7 +445,9 @@ function Login() {
                             . You may receive SMS notifications from us and can opt out at any time.
                         </p>
                         <div className="register-button-container">
-                            <button className="register-sign-in__button">Sign Up</button>
+                            <button type="submit" className="register-sign-in__button">
+                                Sign Up
+                            </button>
                         </div>
                     </form>
                 </div>
