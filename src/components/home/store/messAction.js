@@ -5,7 +5,7 @@ import {
     HIDE_MESS_WINDOW,
     SHOW_MESS_BUBBLE,
     SHOW_MESS_WINDOW,
-} from './constant';
+} from './messConstant';
 export const hideMessWinDow = (payload) => {
     return {
         type: HIDE_MESS_WINDOW,

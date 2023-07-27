@@ -3,7 +3,6 @@ import {
     BsBookmark,
     BsClock,
     BsBell,
-    BsFillBookmarkFill,
     BsSearch,
     BsMessenger,
     BsCameraVideoFill,
@@ -16,7 +15,6 @@ import {
     AiOutlineGif,
     AiOutlineCamera,
     AiOutlineComment,
-    AiOutlineLike,
     AiOutlineGlobal,
     AiOutlineLeft,
     AiOutlineRight,
@@ -43,9 +41,12 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import ChatWindow from './subcomponents/chatWindow/chatWindow';
 import EmojiLikeButton from './subcomponents/emojiLikeButton/emoji';
 
-// reducer
-import store, { action } from './store';
-import MessStateContext from './store/context';
+// Provider
+import MessStateContext from './store/messContext';
+import AuthenContext from '../../store/authenContext';
+
+// Reducer action
+import { messAction } from './store';
 
 // CSS
 import './home.css';
@@ -53,7 +54,7 @@ import './home.css';
 // axios
 import instance from '../../axios';
 
-function Home(props) {
+function Home() {
     // Img src
     const userSrcImg = 'assets/image/avt-user-login.jpg';
     const userStatusImg = 'assets/image/user-status-image.jpg';
@@ -66,33 +67,7 @@ function Home(props) {
     const wowEmoji = 'assets/image/emoji/wow.svg';
 
     // Hook
-    const [homeContactUserData, setHomeContacUserData] = useState([
-        {
-            userId: 1,
-            nameUser: 'Trung Nguyen',
-            userSrcImg: userSrcImg,
-        },
-        {
-            userId: 2,
-            nameUser: 'Trung Nguyen',
-            userSrcImg: userSrcImg,
-        },
-        {
-            userId: 3,
-            nameUser: 'Trung Nguyen',
-            userSrcImg: userSrcImg,
-        },
-        {
-            userId: 4,
-            nameUser: 'Trung Nguyen',
-            userSrcImg: userSrcImg,
-        },
-        {
-            userId: 5,
-            nameUser: 'Trung Nguyen',
-            userSrcImg: userSrcImg,
-        },
-    ]);
+    const [homeContactUserData, setHomeContacUserData] = useState([]);
     const [homeData, setHomeData] = useState({
         messType: 'personal',
         currentUser: {
@@ -153,31 +128,47 @@ function Home(props) {
             },
         ],
     });
+    // Use Context
+    const [authenState, dispatchAuthenState] = useContext(AuthenContext);
     const [messState, dispatchMessState] = useContext(MessStateContext);
+
     const inputHomeSearch = useRef();
-    const [valueInputHomeSearch, setValueInputHomeSearch] = '';
+
+    // Use State
+    const [valueInputHomeSearch, setValueInputHomeSearch] = useState('');
+    const [currentUserData, setCurrentUserData] = useState({
+        avtFilePath: '',
+        dob: '',
+        firstName: '',
+        gender: '',
+        lastName: '',
+        userName: '',
+    });
+    // Use Effect
+    useEffect(() => {
+        setCurrentUserData({
+            avtFilePath: authenState.payload.avtFilePath,
+            dob: authenState.payload.dob,
+            firstName: authenState.payload.firstName,
+            gender: authenState.payload.gender,
+            lastName: authenState.payload.lastName,
+            userName: authenState.payload.userName,
+        });
+    }, []);
+
     const showMessWindow = (e) => {
-        instance
-            .get()
-            .then((res) => {
-                console.log(res.data.data);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-        dispatchMessState(action.showMessWindow(e.target.closest('.contact-user').id));
+        // instance
+        //     .get()
+        //     .then((res) => {
+        //         console.log(res.data.data);
+        //     })
+        //     .catch((e) => {
+        //         console.log(e);
+        //     });
+        dispatchMessState(messAction.showMessWindow(e.target.closest('.contact-user').id));
     };
 
-    useEffect(() => {
-        instance
-            .get(`/api/search?q=${valueInputHomeSearch}`)
-            .then((res) => {
-                console(res.data);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-    }, [valueInputHomeSearch]);
+    useEffect(() => {}, [valueInputHomeSearch]);
 
     const handleNewFeedMoreOptionOpen = (event) => {
         event.preventDefault();
@@ -236,7 +227,7 @@ function Home(props) {
 
     const handleDeleteMessBubble = (e) => {
         e.stopPropagation();
-        dispatchMessState(action.hideMessBubble(e.target.closest('.mess-bubble-item').id));
+        dispatchMessState(messAction.hideMessBubble(e.target.closest('.mess-bubble-item').id));
     };
 
     const handleClickInput = (event) => {
@@ -350,8 +341,8 @@ function Home(props) {
     };
     const handelHideMessBubble = (e) => {
         e.stopPropagation();
-        dispatchMessState(action.hideMessBubble(e.target.closest('.mess-bubble-item'.id)));
-        dispatchMessState(action.showMessWindow(e.target.closest('.mess-bubble-item').id));
+        dispatchMessState(messAction.hideMessBubble(e.target.closest('.mess-bubble-item'.id)));
+        dispatchMessState(messAction.showMessWindow(e.target.closest('.mess-bubble-item').id));
     };
     return (
         <div className="home-container">
@@ -391,7 +382,7 @@ function Home(props) {
                 </div>
                 <div className="home-icon-container">
                     <div className="nav-img-icon-container">
-                        <img className="home-avt__img" src={userSrcImg} alt="avatar user" />
+                        <img className="home-avt__img" src={currentUserData.avtFilePath} alt="avatar user" />
                         <AiOutlineDown
                             style={{
                                 position: 'absolute',
@@ -618,7 +609,9 @@ function Home(props) {
                         </div>
                         <div className="home-left-side-bar-item-container">
                             <img src={userSrcImg} className="home-avt__img bar" />
-                            <span className="side-bar-item__span">Trung Nguyễn</span>
+                            <span className="side-bar-item__span">
+                                {currentUserData.lastName + ' ' + currentUserData.firstName}
+                            </span>
                         </div>
                     </div>
                     <div className="left-side-bar-feature-container">
@@ -846,7 +839,10 @@ function Home(props) {
                         <div className="home-status-container">
                             <div className="status-header">
                                 <img type="text" className="home-avt__img" src={userSrcImg} alt="avatar user" />
-                                <input className="status__input" placeholder="Nguyễn ơi bạn đang nghĩ gì thế" />
+                                <input
+                                    className="status__input"
+                                    placeholder={currentUserData.firstName + ' ơi bạn đang nghĩ gì thế'}
+                                />
                             </div>
                             <div className="line-through status"></div>
                             <div className="status-action-container">

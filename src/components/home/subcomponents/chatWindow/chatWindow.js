@@ -11,8 +11,8 @@ import twemoji from 'twemoji';
 import { memo } from 'react';
 
 import './chatWindow.css';
-import MessStateContext from '../../store/context';
-import { action } from '../../store';
+import MessStateContext from '../../store/messContext';
+import { messAction } from '../../store';
 
 const ChatWindow = function ({ id }) {
     // State for input mess  window
@@ -97,12 +97,12 @@ const ChatWindow = function ({ id }) {
     }
 
     const handelHideMessWindow = (e) => {
-        dispatchMessState(action.hideMessWinDow(e.target.closest('.mess-window-container').id));
-        dispatchMessState(action.showMessBubble(e.target.closest('.mess-window-container').id));
+        dispatchMessState(messAction.hideMessWinDow(e.target.closest('.mess-window-container').id));
+        dispatchMessState(messAction.showMessBubble(e.target.closest('.mess-window-container').id));
     };
 
     const handleDeleteMessWindow = (e) => {
-        dispatchMessState(action.hideMessWinDow(e.target.closest('.mess-window-container').id));
+        dispatchMessState(messAction.hideMessWinDow(e.target.closest('.mess-window-container').id));
     };
 
     return (

@@ -1,8 +1,8 @@
-import reducer, { initState } from './reducer';
+import reducer, { initState } from './messReducer';
 
 const store = {
     reducer: reducer,
     initState: initState,
 };
-export * as action from './action';
+export * as messAction from './messAction';
 export default store;

@@ -4,11 +4,11 @@ import src from '../../constant/src';
 import { AiFillPlusCircle, AiFillGithub, AiFillInstagram, AiFillFacebook } from 'react-icons/ai';
 import { FiX } from 'react-icons/fi';
 import Date from '../../constant/date';
-import LoginContext from '../../store/loginContext';
+import AuthenContext from '../../store/authenContext';
 import instance from '../../axios';
-import { loginAction } from '../../store/loginAction';
+import { loginSucceedAction } from '../../store/authenAction';
 function Login() {
-    const [loginState, dispatchLoginState] = useContext(LoginContext);
+    const [authenState, dispatchAuthenState] = useContext(AuthenContext);
 
     const [userLogged, setUserLogged] = useState([
         {
@@ -106,7 +106,8 @@ function Login() {
                 password: passwordLogin,
             })
             .then((respone) => {
-                if (respone.data.message === 'Authentication successful') dispatchLoginState(loginAction(event));
+                if (respone.data.message === 'Authentication successful')
+                    dispatchAuthenState(loginSucceedAction(respone.data));
                 else console.log('Wrong ');
             })
             .catch((e) => {

@@ -1,4 +1,10 @@
-import { DELETE_MESS_BUBBLE, HIDE_MESS_BUBBLE, HIDE_MESS_WINDOW, SHOW_MESS_BUBBLE, SHOW_MESS_WINDOW } from './constant';
+import {
+    DELETE_MESS_BUBBLE,
+    HIDE_MESS_BUBBLE,
+    HIDE_MESS_WINDOW,
+    SHOW_MESS_BUBBLE,
+    SHOW_MESS_WINDOW,
+} from './messConstant';
 
 export const initState = {
     messWindowArray: [],
