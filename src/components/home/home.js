@@ -53,6 +53,7 @@ import './home.css';
 
 // axios
 import instance from '../../axios';
+import SuggestFriend from './subcomponents/suggestFriend/suggestFriend';
 
 function Home() {
     // Img src
@@ -1161,6 +1162,9 @@ function Home() {
                                 </div>
                             </div>
                         ))}
+
+                        {/* Friend suggest */}
+                        <SuggestFriend />
                     </div>
 
                     {/* rigt side bar */}

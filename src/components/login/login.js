@@ -35,7 +35,7 @@ function Login() {
         month: 'Sep',
         year: 2002,
     });
-    const [gender, setGender] = useState('female');
+    const [gender, setGender] = useState('Female');
 
     const handleCreateAccountClick = (event) => {
         event.preventDefault();
@@ -398,29 +398,29 @@ function Login() {
                                 <div className="register-gender">
                                     <label htmlFor="female">Female</label>
                                     <input
-                                        id="female"
+                                        id="Female"
                                         name="gender"
                                         type="radio"
                                         onChange={(e) => handleChangeGender(e)}
-                                        checked={gender === 'female'}
+                                        checked={gender === 'Female'}
                                     />
                                 </div>
                                 <div className="register-gender">
                                     <label htmlFor="male">Male</label>
                                     <input
-                                        id="male"
+                                        id="Male"
                                         name="gender"
                                         type="radio"
                                         onChange={(e) => handleChangeGender(e)}
-                                        checked={gender === 'male'}
+                                        checked={gender === 'Male'}
                                     />
                                 </div>
                                 <div className="register-gender">
                                     <label htmlFor="other">Other</label>
                                     <input
                                         onChange={(e) => handleChangeGender(e)}
-                                        checked={gender === 'other'}
-                                        id="other"
+                                        checked={gender === 'Other'}
+                                        id="Other"
                                         name="gender"
                                         type="radio"
                                     />
