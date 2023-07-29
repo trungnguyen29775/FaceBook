@@ -35,7 +35,7 @@ import { LuSticker } from 'react-icons/lu';
 import { HiOutlinePencilAlt } from 'react-icons/hi';
 import { RxCross2 } from 'react-icons/rx';
 // Hook
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useEffect, useState, useContext, useRef, useLayoutEffect } from 'react';
 
 // Component
 import ChatWindow from './subcomponents/chatWindow/chatWindow';
@@ -145,8 +145,17 @@ function Home() {
         lastName: '',
         userName: '',
     });
+
+    const [searchResult, setSearchResult] = useState([]);
+    const [currentSearch, setCurrentSearch] = useState([
+        {
+            firstName: 'Nguyễn',
+            lastName: 'Trung',
+            avtFilePath: 'assets/image/avt-user-login.jpg',
+        },
+    ]);
     // Use Effect
-    useEffect(() => {
+    useLayoutEffect(() => {
         setCurrentUserData({
             avtFilePath: authenState.payload.avtFilePath,
             dob: authenState.payload.dob,
@@ -169,7 +178,18 @@ function Home() {
         dispatchMessState(messAction.showMessWindow(e.target.closest('.contact-user').id));
     };
 
-    useEffect(() => {}, [valueInputHomeSearch]);
+    useEffect(() => {
+        if (valueInputHomeSearch != '') {
+            instance
+                .post(`/search?q=${valueInputHomeSearch}`)
+                .then((res) => {
+                    setSearchResult(res.data);
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        } else setSearchResult([]);
+    }, [valueInputHomeSearch]);
 
     const handleNewFeedMoreOptionOpen = (event) => {
         event.preventDefault();
@@ -359,26 +379,47 @@ function Home() {
                         className="home-search__input"
                         placeholder="Tìm kiếm trên Facebook"
                         ref={inputHomeSearch}
-                        onChange={(e) => setValueInputHomeSearch(e.target.value)}
+                        onChange={(e) => handleChangeHomeSearchInput(e)}
                         value={valueInputHomeSearch}
                     />
 
                     {/* Search  tab */}
                     <div className="nav-search-tab-container">
-                        <div className="search-title-container">
-                            <span className="search-title__span">Gần đây</span>
-                            <a href="#" className="search-title__a">
-                                Chỉnh sửa
-                            </a>
-                        </div>
-                        <div className="search-target-container" onClick={() => console.log('Hello')}>
-                            <img src={userSrcImg} className="home-avt__img smaller" />
-                            <div className="search-target-detail">
-                                <span>Nguyễn Trần Minh Trung</span>
-                                <span className="search-target-role">Bạn bè</span>
+                        {valueInputHomeSearch.length === 0 ? (
+                            <div>
+                                <div className="search-title-container">
+                                    <span className="search-title__span">Gần đây</span>
+                                    <a href="#" className="search-title__a">
+                                        Chỉnh sửa
+                                    </a>
+                                </div>
+                                {currentSearch?.map((item, index) => {
+                                    return (
+                                        <div className="search-target-container" key={index}>
+                                            <img src={item.avtFilePath} className="home-avt__img smaller" />
+                                            <div className="search-target-detail">
+                                                <span>{item.firstName + ' ' + item.lastName}</span>
+                                                <span className="search-target-role">Bạn bè</span>
+                                            </div>
+                                            <FiX style={{ fontSize: '15px', color: 'rgb(176, 179, 184)' }} />
+                                        </div>
+                                    );
+                                })}
                             </div>
-                            <FiX style={{ fontSize: '15px', color: 'rgb(176, 179, 184)' }} />
-                        </div>
+                        ) : (
+                            searchResult?.map((item, index) => {
+                                return (
+                                    <div className="search-target-container" key={index}>
+                                        <img src={item.avtFilePath} className="home-avt__img smaller" />
+                                        <div className="search-target-detail">
+                                            <span>{item.firstName + ' ' + item.lastName}</span>
+                                            <span className="search-target-role">Bạn bè</span>
+                                        </div>
+                                        <FiX style={{ fontSize: '15px', color: 'rgb(176, 179, 184)' }} />
+                                    </div>
+                                );
+                            })
+                        )}
                     </div>
                 </div>
                 <div className="home-icon-container">
@@ -1164,7 +1205,7 @@ function Home() {
                         ))}
 
                         {/* Friend suggest */}
-                        <SuggestFriend />
+                        <SuggestFriend currentUserName={currentUserData.userName} key={'suggest-user-container'} />
                     </div>
 
                     {/* rigt side bar */}
