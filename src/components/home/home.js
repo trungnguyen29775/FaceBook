@@ -154,8 +154,22 @@ function Home() {
             avtFilePath: 'assets/image/avt-user-login.jpg',
         },
     ]);
+    const [contactUser, setContactUser] = useState([]);
+
     // Use Effect
-    useLayoutEffect(() => {
+
+    useEffect(() => {
+        instance
+            .post('/home-contact', {
+                userName: currentUserData.userName,
+            })
+            .then((res) => {
+                setContactUser(res.data);
+            })
+            .catch((e) => console.log(e));
+    }, [currentUserData]);
+
+    useEffect(() => {
         setCurrentUserData({
             avtFilePath: authenState.payload.avtFilePath,
             dob: authenState.payload.dob,
@@ -1251,7 +1265,7 @@ function Home() {
                                     </div>
                                 </div>
                                 <div className="contact-users-container">
-                                    {homeContactUserData?.map((item, index) => {
+                                    {contactUser?.map((item, index) => {
                                         return (
                                             <div
                                                 className="contact-user"
@@ -1260,11 +1274,11 @@ function Home() {
                                                 onClick={(e) => showMessWindow(e)}
                                             >
                                                 <img
-                                                    src={item.userSrcImg}
+                                                    src={item.avtFilePath}
                                                     className="contact-user__img"
-                                                    alt="avt user"
+                                                    alt={`avt user ${item.userName}`}
                                                 />
-                                                <span>{item.nameUser}</span>
+                                                <span>{item.firstName + ' ' + item.lastName}</span>
                                             </div>
                                         );
                                     })}
