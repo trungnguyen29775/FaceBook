@@ -1,9 +1,9 @@
 import './suggestFriend.css';
 import { IoIosMore } from 'react-icons/io';
-import { IoPersonAddSharp } from 'react-icons/io5';
+import { IoPersonAddSharp, IoPersonRemoveSharp } from 'react-icons/io5';
 import { RxCross2 } from 'react-icons/rx';
 import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai';
-import { memo, useEffect, useState } from 'react';
+import { Fragment, memo, useEffect, useState } from 'react';
 import instance from '../../../../axios';
 import getAndFormattedCurrentDate from '../../../../ulti/formatDate.ulti';
 function SuggestFriend({ currentUserName }) {
@@ -24,6 +24,23 @@ function SuggestFriend({ currentUserName }) {
     }, [currentUserName]);
 
     // Function
+
+    const changeAddFriendButton = (p) => {
+        const addFriendButton = p.target.closest('.add-friend__button');
+        const removeFriendRequestButton = p.target.closest('.home-suggest-friend-item').childNodes[4];
+        console.log(removeFriendRequestButton);
+        addFriendButton.classList.add('hide');
+        removeFriendRequestButton.classList.remove('hide');
+    };
+
+    const changeRemoveFriendRequestButton = (p) => {
+        const removeFriendRequestButton = p.target.closest('.remove-friend-request__button');
+        const addFriendButton = p.target.closest('.home-suggest-friend-item').childNodes[3];
+        removeFriendRequestButton.classList.add('hide');
+        addFriendButton.classList.remove('hide');
+        // console.log(p.target);
+    };
+
     const handleReelsScrollRight = (event) => {
         event.stopPropagation();
         event.preventDefault();
@@ -34,8 +51,8 @@ function SuggestFriend({ currentUserName }) {
         });
         setScrollLeftButton(true);
     };
-
     const handleAddFriendClick = (event) => {
+        event.stopPropagation();
         const userName = event.target.closest('.home-suggest-friend-item').id;
         const dateFormated = getAndFormattedCurrentDate();
         instance
@@ -45,7 +62,24 @@ function SuggestFriend({ currentUserName }) {
                 addFriendDate: dateFormated,
             })
             .then((res) => {
+                if (res.status === 200) changeAddFriendButton(event);
+            })
+            .catch((e) => console.log(e));
+    };
+
+    const handelRemoveFriendRequest = (event) => {
+        event.stopPropagation();
+        const userName = event.target.closest('.home-suggest-friend-item').id;
+        instance
+            .post('/remove-friend-request', {
+                currentUser: currentUserName,
+                targetUser: userName,
+            })
+            .then((res) => {
                 console.log(res.data);
+                if (res.status === 200) {
+                    changeRemoveFriendRequestButton(event);
+                }
             })
             .catch((e) => console.log(e));
     };
@@ -95,9 +129,18 @@ function SuggestFriend({ currentUserName }) {
                                 <span>{item.firstName + ' ' + item.lastName}</span>
                                 <span className="suggest-friend-detail__span"> 13 bạn chung</span>
                             </div>
+
                             <button className="add-friend__button" onClick={(e) => handleAddFriendClick(e)}>
                                 <IoPersonAddSharp style={{ fontSize: '15px' }} />
                                 <span>Thêm bạn bè</span>
+                            </button>
+
+                            <button
+                                className="remove-friend-request__button hide"
+                                onClick={(e) => handelRemoveFriendRequest(e)}
+                            >
+                                <IoPersonRemoveSharp style={{ fontSize: '15px' }} />
+                                <span>Hủy yêu cầu</span>
                             </button>
                         </div>
                     );

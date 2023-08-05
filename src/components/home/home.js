@@ -155,10 +155,12 @@ function Home() {
         },
     ]);
     const [contactUser, setContactUser] = useState([]);
+    const [friendRequest, setFriendRequest] = useState([]);
 
-    // Use Effect
+    // ----------------------Use Effect------------------------
 
     useEffect(() => {
+        // Find Contact
         instance
             .post('/home-contact', {
                 userName: currentUserData.userName,
@@ -167,8 +169,20 @@ function Home() {
                 setContactUser(res.data);
             })
             .catch((e) => console.log(e));
+        // Find Friend Request
+        instance
+            .post('/friend-request', {
+                userName: currentUserData.userName,
+            })
+            .then((res) => {
+                setFriendRequest(res.data);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     }, [currentUserData]);
 
+    // Get Current User Data
     useEffect(() => {
         setCurrentUserData({
             avtFilePath: authenState.payload.avtFilePath,
@@ -179,6 +193,24 @@ function Home() {
             userName: authenState.payload.userName,
         });
     }, []);
+    // Search feature
+    useEffect(() => {
+        if (valueInputHomeSearch != '') {
+            instance
+                .post(`/search?q=${valueInputHomeSearch}`)
+                .then((res) => {
+                    setSearchResult(res.data);
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        } else setSearchResult([]);
+    }, [valueInputHomeSearch]);
+
+    // Friend Request
+    useEffect(() => {}, [currentUserData]);
+
+    // Function
 
     const showMessWindow = (e) => {
         // instance
@@ -192,18 +224,20 @@ function Home() {
         dispatchMessState(messAction.showMessWindow(e.target.closest('.contact-user').id));
     };
 
-    useEffect(() => {
-        if (valueInputHomeSearch != '') {
-            instance
-                .post(`/search?q=${valueInputHomeSearch}`)
-                .then((res) => {
-                    setSearchResult(res.data);
-                })
-                .catch((e) => {
-                    console.log(e);
-                });
-        } else setSearchResult([]);
-    }, [valueInputHomeSearch]);
+    const handelAcceptFriend = (event) => {
+        const targetUserName = event.target.closest('.zone-item-container').id;
+        instance
+            .post('/accept-friend', {
+                currentUserName: currentUserData.userName,
+                targetUser: targetUserName,
+            })
+            .then((res) => {
+                console.log(res.status, ' ', res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
     const handleNewFeedMoreOptionOpen = (event) => {
         event.preventDefault();
@@ -482,20 +516,35 @@ function Home() {
                                         </a>
                                     </div>
 
-                                    <div className="zone-item-container">
-                                        <img className="notifi-avt-user" src={userSrcImg} alt="avt-user" />
-                                        <div className="notifi-item-detail">
-                                            <span className="notifi-item-content">
-                                                <strong className="notifi-name-taget">Minh Trung</strong> đã gửi cho bạn
-                                                lời mời kết bạn
-                                            </span>
-                                            <span className="notifi-item-time">18 phút</span>
-                                            <div className="zone-button-container">
-                                                <button className="active">Xác nhận</button>
-                                                <button>Xóa</button>
+                                    {friendRequest?.map((item, index) => {
+                                        return (
+                                            <div className="zone-item-container" key={index} id={item.userName}>
+                                                <img
+                                                    className="notifi-avt-user"
+                                                    src={item.avtFilePath}
+                                                    alt={item.userName}
+                                                />
+                                                <div className="notifi-item-detail">
+                                                    <span className="notifi-item-content">
+                                                        <strong className="notifi-name-taget">
+                                                            {item.firstName + ' ' + item.lastName}
+                                                        </strong>{' '}
+                                                        đã gửi cho bạn lời mời kết bạn
+                                                    </span>
+                                                    <span className="notifi-item-time">18 phút</span>
+                                                    <div className="zone-button-container">
+                                                        <button
+                                                            className="active"
+                                                            onClick={(e) => handelAcceptFriend(e)}
+                                                        >
+                                                            Xác nhận
+                                                        </button>
+                                                        <button>Xóa</button>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        );
+                                    })}
 
                                     <div></div>
                                 </div>
