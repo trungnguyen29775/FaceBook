@@ -55,6 +55,8 @@ import './home.css';
 import instance from '../../axios';
 import SuggestFriend from './subcomponents/suggestFriend/suggestFriend';
 
+// Socket.IO
+
 function Home() {
     // Img src
     const userSrcImg = 'assets/image/avt-user-login.jpg';
@@ -213,30 +215,41 @@ function Home() {
     // Function
 
     const showMessWindow = (e) => {
-        // instance
-        //     .get()
-        //     .then((res) => {
-        //         console.log(res.data.data);
-        //     })
-        //     .catch((e) => {
-        //         console.log(e);
-        //     });
         dispatchMessState(messAction.showMessWindow(e.target.closest('.contact-user').id));
     };
 
     const handelAcceptFriend = (event) => {
+        event.stopPropagation();
+        event.preventDefault();
         const targetUserName = event.target.closest('.zone-item-container').id;
         instance
-            .post('/accept-friend', {
+            .put('/accept-friend', {
                 currentUserName: currentUserData.userName,
-                targetUser: targetUserName,
+                targetUserName: targetUserName,
             })
             .then((res) => {
-                console.log(res.status, ' ', res.data);
+                if (res.status === 200) event.target.closest('.zone-item-container').classList.add('hide');
             })
             .catch((err) => {
                 console.log(err);
             });
+    };
+
+    const handelRemoveFriendRequest = (event) => {
+        event.stopPropagation();
+        const targetUserName = event.target.closest('.zone-item-container').id;
+        instance
+            .post('/remove-friend-request', {
+                currentUser: currentUserData.userName,
+                targetUser: targetUserName,
+            })
+            .then((res) => {
+                console.log(res.data);
+                if (res.status === 200) {
+                    event.target.closest('.zone-item-container').classList.add('hide');
+                }
+            })
+            .catch((e) => console.log(e));
     };
 
     const handleNewFeedMoreOptionOpen = (event) => {
@@ -273,6 +286,7 @@ function Home() {
         event.preventDefault();
         event.stopPropagation();
         document.addEventListener('click', (event) => {
+            event.stopPropagation();
             event.preventDefault();
             const notifiIcon = document.querySelector('.nav-icon--padding.notification');
 
@@ -287,7 +301,6 @@ function Home() {
         document.addEventListener('click', (event) => {
             event.preventDefault();
             const messIcon = document.querySelector('.nav-icon--padding.mess');
-
             const messDropTab = document.querySelector('.mess-droptab-container');
             messDropTab.classList.remove('active');
             messIcon.classList.remove('active');
@@ -539,7 +552,9 @@ function Home() {
                                                         >
                                                             Xác nhận
                                                         </button>
-                                                        <button>Xóa</button>
+                                                        <button onClick={(e) => handelRemoveFriendRequest(e)}>
+                                                            Xóa
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1318,7 +1333,7 @@ function Home() {
                                         return (
                                             <div
                                                 className="contact-user"
-                                                id={index}
+                                                id={item.userName}
                                                 key={index}
                                                 onClick={(e) => showMessWindow(e)}
                                             >
@@ -1338,7 +1353,14 @@ function Home() {
                     <div className="mess-window-and-bubble-wraper-container">
                         <div className="mess-window-wraper">
                             {messState.messWindowArray.map((item, index) => {
-                                return <ChatWindow key={index} id={index} />;
+                                return (
+                                    <ChatWindow
+                                        key={index}
+                                        currentUserName={currentUserData.userName}
+                                        targetUserName={item}
+                                        id={item}
+                                    />
+                                );
                             })}
                         </div>
                         <div className="mess-bubble-container">
@@ -1350,7 +1372,7 @@ function Home() {
                                     <div
                                         className="mess-bubble-item"
                                         key={index}
-                                        id={index}
+                                        id={item}
                                         onClick={(e) => handelHideMessBubble(e)}
                                     >
                                         <img className="mess-bubble-item__img" src={userSrcImg} />

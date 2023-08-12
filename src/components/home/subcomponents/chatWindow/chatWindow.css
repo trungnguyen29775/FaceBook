@@ -171,8 +171,9 @@
     height: fit-content;
     align-items: flex-start;
     margin-bottom: 6px;
+    padding-left: 0px;
 }
-.mess-chat-content-message-container span {
+.mess-chat-content-message-container li {
     background-color: rgb(62, 64, 66);
     padding: 8px 12px;
     font-size: 15px;
@@ -200,7 +201,7 @@
     flex-direction: row-reverse;
     color: rgb(255, 255, 255);
 }
-.mess-chat-content-current-container .mess-chat-content-message-container span {
+.mess-chat-content-current-container .mess-chat-content-message-container li {
     background-color: rgb(0, 132, 255);
 }
 
@@ -243,12 +244,12 @@
     flex-direction: row;
     color: rgb(176, 179, 184);
     width: 100%;
-    height: 60px;
+    max-height: 142px;
     box-sizing: border-box;
     padding: 12px 0px;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0px 6px;
+    padding: 6px 6px;
     align-items: center;
     box-sizing: border-box;
     max-height: 164px;
@@ -259,9 +260,9 @@
     display: flex;
     flex-direction: row;
     width: 248px;
-    height: 36px;
+    height: auto;
     margin: auto;
-    max-height: 100%;
+    max-height: 142px;
 }
 .mess-window-input-icon-container-wraper {
     display: flex;
@@ -270,6 +271,7 @@
 }
 
 .mess-window-input-textarea-container textarea {
+    box-sizing: border-box;
     font-family: inherit;
     font-size: 15px;
     background-color: rgb(58, 59, 60);
@@ -278,14 +280,16 @@
     outline: 0px;
     color: white;
     resize: none;
-    padding: 0px;
-    line-height: 36px;
+    padding: 8px 0px;
     max-height: 142px;
     overflow: hidden;
     overflow-y: auto;
     width: 80%;
     box-sizing: border-box;
     margin-left: 15px;
+    vertical-align: top;
+    overflow-wrap: break-word;
+    height: auto;
 }
 .mess-window-input-icon-container {
     height: 20px;
@@ -306,6 +310,7 @@
     border-radius: 20px;
     max-height: 142px;
     position: relative;
+    height: auto;
 }
 .mess-window-input-textare-container .mess-window-input-icon-container {
     margin: auto;
@@ -329,25 +334,25 @@
 }
 
 /* Current  user messages */
-.mess-chat-content-current-container .mess-chat-content-message-container span:first-child {
+.mess-chat-content-current-container .mess-chat-content-message-container li:first-child {
     border-bottom-right-radius: 8px;
 }
 .mess-chat-content-current-container .mess-chat-content-message-container > *:not(:first-child):not(:last-child) {
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
 }
-.mess-chat-content-current-container .mess-chat-content-message-container span:last-child {
+.mess-chat-content-current-container .mess-chat-content-message-container li:last-child {
     border-top-right-radius: 8px;
 }
 /* Other messages */
-.mess-chat-content-other-container .mess-chat-content-message-container span:first-child {
+.mess-chat-content-other-container .mess-chat-content-message-container li:first-child {
     border-bottom-left-radius: 8px;
 }
 .mess-chat-content-other-container .mess-chat-content-message-container > *:not(:first-child):not(:last-child) {
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
 }
-.mess-chat-content-other-container .mess-chat-content-message-container span:last-child {
+.mess-chat-content-other-container .mess-chat-content-message-container li:last-child {
     border-top-left-radius: 8px;
 }
 

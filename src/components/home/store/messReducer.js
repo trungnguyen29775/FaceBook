@@ -1,3 +1,4 @@
+import { act } from 'react-dom/test-utils';
 import {
     DELETE_MESS_BUBBLE,
     HIDE_MESS_BUBBLE,
@@ -12,34 +13,37 @@ export const initState = {
 };
 
 const reducer = (messState, action) => {
-    console.log(action.payload);
     switch (action.type) {
         case SHOW_MESS_WINDOW: {
             return {
                 ...messState,
-                messWindowArray: [...messState.messWindowArray, 1],
+                messWindowArray: [...messState.messWindowArray, action.payload],
             };
         }
         case HIDE_MESS_WINDOW: {
+            const targetIndex = messState.messWindowArray.indexOf(action.payload);
+
             return {
                 ...messState,
                 messWindowArray: messState.messWindowArray
-                    .slice(0, action.payload)
-                    .concat(messState.messWindowArray.slice(action.payload + 1, messState.messWindowArray.length)),
+                    .slice(0, targetIndex)
+                    .concat(messState.messWindowArray.slice(targetIndex + 1, messState.messWindowArray.length)),
             };
         }
         case SHOW_MESS_BUBBLE: {
             return {
                 ...messState,
-                messBubbleArray: [...messState.messBubbleArray, 1],
+                messBubbleArray: [...messState.messBubbleArray, action.payload],
             };
         }
         case HIDE_MESS_BUBBLE: {
+            const targetIndex = messState.messBubbleArray.indexOf(action.payload);
+
             return {
                 ...messState,
                 messBubbleArray: messState.messBubbleArray
-                    .slice(0, action.payload)
-                    .concat(messState.messBubbleArray.slice(action.payload + 1, messState.messBubbleArray.length)),
+                    .slice(0, targetIndex)
+                    .concat(messState.messBubbleArray.slice(targetIndex + 1, messState.messBubbleArray.length)),
             };
         }
         default:
