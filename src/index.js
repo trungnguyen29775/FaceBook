@@ -8,13 +8,11 @@ import MessProvider from './components/home/store/MessProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <React.StrictMode>
-        <AuthenProvider>
-            <MessProvider>
-                <App />
-            </MessProvider>
-        </AuthenProvider>
-    </React.StrictMode>,
+    <AuthenProvider>
+        <MessProvider>
+            <App />
+        </MessProvider>
+    </AuthenProvider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

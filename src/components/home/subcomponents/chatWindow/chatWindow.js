@@ -5,27 +5,33 @@ import { FiX } from 'react-icons/fi';
 import { FaImages, FaSmile, FaPhoneAlt } from 'react-icons/fa';
 import { LuSticker } from 'react-icons/lu';
 import { BsSend } from 'react-icons/bs';
-import { useEffect, useContext, useState, useLayoutEffect } from 'react';
+import { useEffect, useContext, useState, useLayoutEffect, Fragment } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 import { memo } from 'react';
-
-// Socket
-import { io } from 'socket.io-client';
-import baseUrl from '../../../../constant/severUrl';
 
 import './chatWindow.css';
 import MessStateContext from '../../store/messContext';
 import { messAction } from '../../store';
 import instance from '../../../../axios';
 
-const socket = io(baseUrl);
+const ChatWindow = function ({ currentUserName, targetUserName, socket }) {
+    function formatDateFromTimestamp() {
+        const date = new Date(Date.now());
+        return date.toLocaleString();
+    }
 
-const ChatWindow = function ({ currentUserName, targetUserName }) {
+
     useEffect(() => {
-        socket.on('chat message', ({ message }) => {
-            setMessage((preState) => [...preState, message]);
-        });
+        instance
+            .post(`/message/current/${currentUserName}/target/${targetUserName}`)
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     }, []);
+
     // State for input mess  window
 
     const [message, setMessage] = useState('');
@@ -36,15 +42,7 @@ const ChatWindow = function ({ currentUserName, targetUserName }) {
         firstName: '',
         lastName: '',
     });
-    const [data, setData] = useState({
-        userId: null,
-        userSrcImg: '',
-        userName: '',
-        mess: {
-            currentUser: [],
-            targetUser: [],
-        },
-    });
+    const [messData, setMessData] = useState([]);
     // Emoji Picker state
     const [emojiPickerContainer, setEmojiPickerContainer] = useState(false);
 
@@ -63,38 +61,8 @@ const ChatWindow = function ({ currentUserName, targetUserName }) {
     }, []);
 
     useEffect(() => {
-        // call api to get data
-        setData({
-            userId: 1,
-            userSrcImg: 'assets/image/avt-user-login.jpg',
-            userName: 'Trung Nguyen',
-            mess: {
-                currentUser: [
-                    {
-                        message: 'Porttitor rhoncus dolor purus non enim praesent elementum facilisis leo. ',
-                    },
-                    {
-                        message: 'Suspendisse in est ante in nibh mauris cursus mattis molestie.',
-                    },
-                ],
-                otherUser: [
-                    {
-                        message: 'Porttitor rhoncus dolor purus non enim praesent elementum facilisis leo.',
-                    },
-                    {
-                        message: 'Nunc lobortis  in massa.',
-                    },
-                    {
-                        message: 'Hello',
-                    },
-                ],
-            },
-        });
-    }, []);
-
-    useEffect(() => {
         const lineTest = /\n+/gi;
-        const heightMess = message.match(lineTest) ? message.match(lineTest).length : 0;
+        const heightMess = lineTest.test(message) ? message.match(lineTest).length : 0;
         let wordBreakMess = (message.length - (message.length % 25)) / 25;
         setHeightMess(heightMess + wordBreakMess);
     }, [message]);
@@ -103,16 +71,7 @@ const ChatWindow = function ({ currentUserName, targetUserName }) {
     const handleSendMessage = (event) => {
         event.preventDefault();
         event.stopPropagation();
-        if (message.length > 0) {
-            setData({
-                ...data,
-                mess: {
-                    ...data.mess,
-                    currentUser: [...data.mess.currentUser, { message: message }],
-                },
-            });
-        }
-        socket.emit('chat message', { message });
+        socket.emit('sendMess', { sender: currentUserName, receiver: targetUserName, message: message });
         setMessage('');
     };
 
@@ -174,7 +133,6 @@ const ChatWindow = function ({ currentUserName, targetUserName }) {
                     </div>
                 </div>
             </div>
-
             {/* Content */}
             <div className="mess-chat-content-container">
                 <div className="mess-chat-content-user-backgrounnd-info">
@@ -194,26 +152,28 @@ const ChatWindow = function ({ currentUserName, targetUserName }) {
                         <span>Các bạn là bạn bè trên Facebook</span>
                     </div>
                 </div>
-                <div className="mess-chat-content-other-container">
-                    <img src={data.userSrcImg} className="mess-chat-content__img" />
-                    <ul className="mess-chat-content-message-container">
-                        {data.mess.otherUser?.map((messData, index) => {
-                            return <li key={index}>{messData.message}</li>;
-                        })}
-                    </ul>
-                </div>
-
-                <div className="mess-chat-content-current-container">
-                    <ul className="mess-chat-content-message-container">
-                        {data.mess.currentUser?.map((messData, index) => {
-                            return <li key={index}>{messData.message}</li>;
-                        })}
-                    </ul>
-                </div>
+                {messData.map((data, index) => {
+                    return (
+                        <Fragment key={index}>
+                            {data.userName === targetUserName ? (
+                                <div className="mess-chat-content-other-container">
+                                    <img src={targetUserData.avtFilePath} className="mess-chat-content__img" />
+                                    <ul className="mess-chat-content-message-container">
+                                        <li key={index}>{data.message}</li>
+                                    </ul>
+                                </div>
+                            ) : (
+                                <div className="mess-chat-content-current-container">
+                                    <ul className="mess-chat-content-message-container">
+                                        <li key={index}>{data.message}</li>
+                                    </ul>
+                                </div>
+                            )}
+                        </Fragment>
+                    );
+                })}
             </div>
-
             {/* Footer */}
-
             <div className="mess-window-input-container" style={{ height: heightMessage * 36 + 60 + 'px' }}>
                 <div className="mess-window-input-icon-container">
                     <AiFillPlusCircle style={{ margin: 'auto' }} />

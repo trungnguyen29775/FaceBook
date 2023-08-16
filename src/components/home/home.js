@@ -56,6 +56,10 @@ import instance from '../../axios';
 import SuggestFriend from './subcomponents/suggestFriend/suggestFriend';
 
 // Socket.IO
+import { io } from 'socket.io-client';
+import baseUrl from '../../constant/severUrl';
+
+const socket = io(baseUrl);
 
 function Home() {
     // Img src
@@ -158,11 +162,33 @@ function Home() {
     ]);
     const [contactUser, setContactUser] = useState([]);
     const [friendRequest, setFriendRequest] = useState([]);
+    const [messReceiver, setMessReceiver] = useState([]);
 
     // ----------------------Use Effect------------------------
+    // Receive Mess
+    useEffect(() => {
+        socket.emit('online', { userName: currentUserData.userName });
+        socket.on('receivedMessage', (data) => {
+            console.log(data);
+            setMessReceiver((prevState) => [
+                ...prevState,
+                { sender: data.sender, message: data.message, receiver: data.receiver },
+            ]);
+        });
+        return () => {};
+    }, [currentUserData]);
 
     useEffect(() => {
-        // Find Contact
+        if (messReceiver.length > 1) {
+            messReceiver.map((item) => {
+                if (item.sender != currentUserData.userName && messState.messWindowArray.indexOf(item.sender) == -1)
+                    dispatchMessState(messAction.showMessWindow(item.sender));
+            });
+        }
+    }, [messReceiver]);
+    // Find Contact
+
+    useEffect(() => {
         instance
             .post('/home-contact', {
                 userName: currentUserData.userName,
@@ -208,9 +234,6 @@ function Home() {
                 });
         } else setSearchResult([]);
     }, [valueInputHomeSearch]);
-
-    // Friend Request
-    useEffect(() => {}, [currentUserData]);
 
     // Function
 
@@ -1359,6 +1382,7 @@ function Home() {
                                         currentUserName={currentUserData.userName}
                                         targetUserName={item}
                                         id={item}
+                                        socket={socket}
                                     />
                                 );
                             })}
