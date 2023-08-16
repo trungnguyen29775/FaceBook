@@ -108,6 +108,37 @@
     justify-content: space-between;
 }
 
+.add-friend__button.hide {
+    display: none;
+}
+
+.remove-friend-request__button {
+    background-color: #3e4042;
+    color: #8a8d91;
+    border: 0;
+    height: 36px;
+    width: 136.4px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 0px 12px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    justify-content: space-between;
+}
+
+.remove-friend-request__button.hide {
+    display: none;
+}
+
+.remove-friend-request__button:hover {
+    cursor: pointer;
+    background-color: #555;
+}
+
 .add-friend__button:hover {
     cursor: pointer;
     background-color: rgba(45, 136, 255, 0.3);

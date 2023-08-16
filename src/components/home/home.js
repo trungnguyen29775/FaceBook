@@ -55,6 +55,12 @@ import './home.css';
 import instance from '../../axios';
 import SuggestFriend from './subcomponents/suggestFriend/suggestFriend';
 
+// Socket.IO
+import { io } from 'socket.io-client';
+import baseUrl from '../../constant/severUrl';
+
+const socket = io(baseUrl);
+
 function Home() {
     // Img src
     const userSrcImg = 'assets/image/avt-user-login.jpg';
@@ -155,8 +161,32 @@ function Home() {
         },
     ]);
     const [contactUser, setContactUser] = useState([]);
+    const [friendRequest, setFriendRequest] = useState([]);
+    const [messReceiver, setMessReceiver] = useState([]);
 
-    // Use Effect
+    // ----------------------Use Effect------------------------
+    // Receive Mess
+    useEffect(() => {
+        socket.emit('online', { userName: currentUserData.userName });
+        socket.on('receivedMessage', (data) => {
+            console.log(data);
+            setMessReceiver((prevState) => [
+                ...prevState,
+                { sender: data.sender, message: data.message, receiver: data.receiver },
+            ]);
+        });
+        return () => {};
+    }, [currentUserData]);
+
+    useEffect(() => {
+        if (messReceiver.length > 1) {
+            messReceiver.map((item) => {
+                if (item.sender != currentUserData.userName && messState.messWindowArray.indexOf(item.sender) == -1)
+                    dispatchMessState(messAction.showMessWindow(item.sender));
+            });
+        }
+    }, [messReceiver]);
+    // Find Contact
 
     useEffect(() => {
         instance
@@ -167,8 +197,20 @@ function Home() {
                 setContactUser(res.data);
             })
             .catch((e) => console.log(e));
+        // Find Friend Request
+        instance
+            .post('/friend-request', {
+                userName: currentUserData.userName,
+            })
+            .then((res) => {
+                setFriendRequest(res.data);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     }, [currentUserData]);
 
+    // Get Current User Data
     useEffect(() => {
         setCurrentUserData({
             avtFilePath: authenState.payload.avtFilePath,
@@ -179,19 +221,7 @@ function Home() {
             userName: authenState.payload.userName,
         });
     }, []);
-
-    const showMessWindow = (e) => {
-        // instance
-        //     .get()
-        //     .then((res) => {
-        //         console.log(res.data.data);
-        //     })
-        //     .catch((e) => {
-        //         console.log(e);
-        //     });
-        dispatchMessState(messAction.showMessWindow(e.target.closest('.contact-user').id));
-    };
-
+    // Search feature
     useEffect(() => {
         if (valueInputHomeSearch != '') {
             instance
@@ -204,6 +234,46 @@ function Home() {
                 });
         } else setSearchResult([]);
     }, [valueInputHomeSearch]);
+
+    // Function
+
+    const showMessWindow = (e) => {
+        dispatchMessState(messAction.showMessWindow(e.target.closest('.contact-user').id));
+    };
+
+    const handelAcceptFriend = (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        const targetUserName = event.target.closest('.zone-item-container').id;
+        instance
+            .put('/accept-friend', {
+                currentUserName: currentUserData.userName,
+                targetUserName: targetUserName,
+            })
+            .then((res) => {
+                if (res.status === 200) event.target.closest('.zone-item-container').classList.add('hide');
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+    const handelRemoveFriendRequest = (event) => {
+        event.stopPropagation();
+        const targetUserName = event.target.closest('.zone-item-container').id;
+        instance
+            .post('/remove-friend-request', {
+                currentUser: currentUserData.userName,
+                targetUser: targetUserName,
+            })
+            .then((res) => {
+                console.log(res.data);
+                if (res.status === 200) {
+                    event.target.closest('.zone-item-container').classList.add('hide');
+                }
+            })
+            .catch((e) => console.log(e));
+    };
 
     const handleNewFeedMoreOptionOpen = (event) => {
         event.preventDefault();
@@ -239,6 +309,7 @@ function Home() {
         event.preventDefault();
         event.stopPropagation();
         document.addEventListener('click', (event) => {
+            event.stopPropagation();
             event.preventDefault();
             const notifiIcon = document.querySelector('.nav-icon--padding.notification');
 
@@ -253,7 +324,6 @@ function Home() {
         document.addEventListener('click', (event) => {
             event.preventDefault();
             const messIcon = document.querySelector('.nav-icon--padding.mess');
-
             const messDropTab = document.querySelector('.mess-droptab-container');
             messDropTab.classList.remove('active');
             messIcon.classList.remove('active');
@@ -482,20 +552,37 @@ function Home() {
                                         </a>
                                     </div>
 
-                                    <div className="zone-item-container">
-                                        <img className="notifi-avt-user" src={userSrcImg} alt="avt-user" />
-                                        <div className="notifi-item-detail">
-                                            <span className="notifi-item-content">
-                                                <strong className="notifi-name-taget">Minh Trung</strong> đã gửi cho bạn
-                                                lời mời kết bạn
-                                            </span>
-                                            <span className="notifi-item-time">18 phút</span>
-                                            <div className="zone-button-container">
-                                                <button className="active">Xác nhận</button>
-                                                <button>Xóa</button>
+                                    {friendRequest?.map((item, index) => {
+                                        return (
+                                            <div className="zone-item-container" key={index} id={item.userName}>
+                                                <img
+                                                    className="notifi-avt-user"
+                                                    src={item.avtFilePath}
+                                                    alt={item.userName}
+                                                />
+                                                <div className="notifi-item-detail">
+                                                    <span className="notifi-item-content">
+                                                        <strong className="notifi-name-taget">
+                                                            {item.firstName + ' ' + item.lastName}
+                                                        </strong>{' '}
+                                                        đã gửi cho bạn lời mời kết bạn
+                                                    </span>
+                                                    <span className="notifi-item-time">18 phút</span>
+                                                    <div className="zone-button-container">
+                                                        <button
+                                                            className="active"
+                                                            onClick={(e) => handelAcceptFriend(e)}
+                                                        >
+                                                            Xác nhận
+                                                        </button>
+                                                        <button onClick={(e) => handelRemoveFriendRequest(e)}>
+                                                            Xóa
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        );
+                                    })}
 
                                     <div></div>
                                 </div>
@@ -1269,7 +1356,7 @@ function Home() {
                                         return (
                                             <div
                                                 className="contact-user"
-                                                id={index}
+                                                id={item.userName}
                                                 key={index}
                                                 onClick={(e) => showMessWindow(e)}
                                             >
@@ -1289,7 +1376,15 @@ function Home() {
                     <div className="mess-window-and-bubble-wraper-container">
                         <div className="mess-window-wraper">
                             {messState.messWindowArray.map((item, index) => {
-                                return <ChatWindow key={index} id={index} />;
+                                return (
+                                    <ChatWindow
+                                        key={index}
+                                        currentUserName={currentUserData.userName}
+                                        targetUserName={item}
+                                        id={item}
+                                        socket={socket}
+                                    />
+                                );
                             })}
                         </div>
                         <div className="mess-bubble-container">
@@ -1301,7 +1396,7 @@ function Home() {
                                     <div
                                         className="mess-bubble-item"
                                         key={index}
-                                        id={index}
+                                        id={item}
                                         onClick={(e) => handelHideMessBubble(e)}
                                     >
                                         <img className="mess-bubble-item__img" src={userSrcImg} />
