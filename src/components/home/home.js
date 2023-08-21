@@ -35,7 +35,7 @@ import { LuSticker } from 'react-icons/lu';
 import { HiOutlinePencilAlt } from 'react-icons/hi';
 import { RxCross2 } from 'react-icons/rx';
 // Hook
-import React, { useEffect, useState, useContext, useRef, useLayoutEffect } from 'react';
+import React, { useEffect, useState, useContext, useRef, useLayoutEffect, memo } from 'react';
 
 // Component
 import ChatWindow from './subcomponents/chatWindow/chatWindow';
@@ -167,19 +167,50 @@ function Home() {
     // ----------------------Use Effect------------------------
     // Receive Mess
     useEffect(() => {
+        console.log('Mess: ', messReceiver);
+    }, [messReceiver]);
+    useEffect(() => {
         socket.emit('online', { userName: currentUserData.userName });
-        socket.on('receivedMessage', (data) => {
-            console.log(data);
-            setMessReceiver((prevState) => [
-                ...prevState,
-                { sender: data.sender, message: data.message, receiver: data.receiver },
-            ]);
-        });
         return () => {};
-    }, [currentUserData]);
+    }, [currentUserData.userName]);
 
     useEffect(() => {
-        if (messReceiver.length > 1) {
+        return () => {
+            socket.on('receivedMessage', (data) => {
+                console.log(data);
+                setMessReceiver((prevState) => {
+                    const senderArray = [];
+                    prevState.map((item) => {
+                        senderArray.push(item.sender);
+                    });
+                    if (senderArray.indexOf(data.sender) == -1) {
+                        const formatData = {
+                            sender: data.sender,
+                            message: [data.message],
+                            receiver: data.receiver,
+                        };
+                        return [...prevState, formatData];
+                    } else {
+                        const indexTarget = senderArray.indexOf(data.sender);
+                        const temp = prevState;
+                        temp[indexTarget].message.push(data.message);
+                        return temp;
+                    }
+                });
+            });
+        };
+    }, []);
+
+    function findDataMess(data) {
+        let temp = {};
+        messReceiver.map((item) => {
+            if (item.sender == data) temp = item;
+        });
+        return temp;
+    }
+
+    useEffect(() => {
+        if (messReceiver.length > 0) {
             messReceiver.map((item) => {
                 if (item.sender != currentUserData.userName && messState.messWindowArray.indexOf(item.sender) == -1)
                     dispatchMessState(messAction.showMessWindow(item.sender));
@@ -1381,6 +1412,7 @@ function Home() {
                                         key={index}
                                         currentUserName={currentUserData.userName}
                                         targetUserName={item}
+                                        messageData={findDataMess(item)}
                                         id={item}
                                         socket={socket}
                                     />
@@ -1417,4 +1449,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default memo(Home);

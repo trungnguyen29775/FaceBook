@@ -5,6 +5,7 @@
     background-color: rgb(28, 30, 33);
     height: 100vh;
     width: 100vw;
+    overflow: hidden;
 }
 .nav {
     background-color: #242526;

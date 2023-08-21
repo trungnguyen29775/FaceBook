@@ -14,12 +14,20 @@ import MessStateContext from '../../store/messContext';
 import { messAction } from '../../store';
 import instance from '../../../../axios';
 
-const ChatWindow = function ({ currentUserName, targetUserName, socket }) {
+const ChatWindow = function ({ currentUserName, targetUserName, messageData, socket }) {
     function formatDateFromTimestamp() {
         const date = new Date(Date.now());
         return date.toLocaleString();
     }
 
+    useEffect(() => {
+        const temp = {
+            sender: messageData.sender,
+            message: messageData.message,
+            receiver: messageData.receiver,
+        };
+        setMessData((preState) => [...preState, temp]);
+    }, [messageData]);
 
     useEffect(() => {
         instance
@@ -33,8 +41,7 @@ const ChatWindow = function ({ currentUserName, targetUserName, socket }) {
     }, []);
 
     // State for input mess  window
-
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState([]);
     const [heightMessage, setHeightMess] = useState(0);
     const [targetUserData, setTargetUserData] = useState({
         userName: '',
@@ -43,6 +50,9 @@ const ChatWindow = function ({ currentUserName, targetUserName, socket }) {
         lastName: '',
     });
     const [messData, setMessData] = useState([]);
+    useEffect(() => {
+        console.log(messData);
+    }, [messData]);
     // Emoji Picker state
     const [emojiPickerContainer, setEmojiPickerContainer] = useState(false);
 
@@ -71,6 +81,7 @@ const ChatWindow = function ({ currentUserName, targetUserName, socket }) {
     const handleSendMessage = (event) => {
         event.preventDefault();
         event.stopPropagation();
+        console.log('Clicked');
         socket.emit('sendMess', { sender: currentUserName, receiver: targetUserName, message: message });
         setMessage('');
     };
@@ -155,17 +166,21 @@ const ChatWindow = function ({ currentUserName, targetUserName, socket }) {
                 {messData.map((data, index) => {
                     return (
                         <Fragment key={index}>
-                            {data.userName === targetUserName ? (
+                            {data.sender === targetUserName ? (
                                 <div className="mess-chat-content-other-container">
                                     <img src={targetUserData.avtFilePath} className="mess-chat-content__img" />
                                     <ul className="mess-chat-content-message-container">
-                                        <li key={index}>{data.message}</li>
+                                        {data.message?.map((item, index) => {
+                                            return <li key={index}>{item}</li>;
+                                        })}
                                     </ul>
                                 </div>
                             ) : (
                                 <div className="mess-chat-content-current-container">
                                     <ul className="mess-chat-content-message-container">
-                                        <li key={index}>{data.message}</li>
+                                        {data.message?.map((item, index) => {
+                                            return <li key={index}>{item}</li>;
+                                        })}
                                     </ul>
                                 </div>
                             )}
@@ -239,4 +254,4 @@ const ChatWindow = function ({ currentUserName, targetUserName, socket }) {
     );
 };
 
-export default memo(ChatWindow);
+export default ChatWindow;
