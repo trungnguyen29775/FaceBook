@@ -58,6 +58,7 @@ import SuggestFriend from './subcomponents/suggestFriend/suggestFriend';
 // Socket.IO
 import { io } from 'socket.io-client';
 import baseUrl from '../../constant/severUrl';
+import { Link } from 'react-router-dom';
 
 const socket = io(baseUrl);
 
@@ -177,7 +178,6 @@ function Home() {
     useEffect(() => {
         return () => {
             socket.on('receivedMessage', (data) => {
-                console.log(data);
                 setMessReceiver((prevState) => {
                     const senderArray = [];
                     prevState.map((item) => {
@@ -267,6 +267,8 @@ function Home() {
     }, [valueInputHomeSearch]);
 
     // Function
+
+    const handleProfileClick = (e) => {};
 
     const showMessWindow = (e) => {
         dispatchMessState(messAction.showMessWindow(e.target.closest('.contact-user').id));
@@ -525,7 +527,11 @@ function Home() {
                             searchResult?.map((item, index) => {
                                 return (
                                     <div className="search-target-container" key={index}>
-                                        <img src={item.avtFilePath} className="home-avt__img smaller" />
+                                        <img
+                                            src={item.avtFilePath}
+                                            className="home-avt__img smaller"
+                                            alt="search image"
+                                        />
                                         <div className="search-target-detail">
                                             <span>{item.firstName + ' ' + item.lastName}</span>
                                             <span className="search-target-role">Bạn bè</span>
@@ -538,7 +544,7 @@ function Home() {
                     </div>
                 </div>
                 <div className="home-icon-container">
-                    <div className="nav-img-icon-container">
+                    <Link to={`/profile/${currentUserData.userName}`} className="nav-img-icon-container">
                         <img className="home-avt__img" src={currentUserData.avtFilePath} alt="avatar user" />
                         <AiOutlineDown
                             style={{
@@ -552,7 +558,7 @@ function Home() {
                                 padding: 'auto',
                             }}
                         />
-                    </div>
+                    </Link>
 
                     <div
                         className="nav-icon--padding notification"
@@ -1412,7 +1418,7 @@ function Home() {
                                         key={index}
                                         currentUserName={currentUserData.userName}
                                         targetUserName={item}
-                                        messageData={findDataMess(item)}
+                                        messageData={messReceiver.find((data) => data.sender === item)}
                                         id={item}
                                         socket={socket}
                                     />

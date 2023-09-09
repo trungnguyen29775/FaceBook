@@ -20,26 +20,6 @@ const ChatWindow = function ({ currentUserName, targetUserName, messageData, soc
         return date.toLocaleString();
     }
 
-    useEffect(() => {
-        const temp = {
-            sender: messageData.sender,
-            message: messageData.message,
-            receiver: messageData.receiver,
-        };
-        setMessData((preState) => [...preState, temp]);
-    }, [messageData]);
-
-    useEffect(() => {
-        instance
-            .post(`/message/current/${currentUserName}/target/${targetUserName}`)
-            .then((res) => {
-                console.log(res.data);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-    }, []);
-
     // State for input mess  window
     const [message, setMessage] = useState([]);
     const [heightMessage, setHeightMess] = useState(0);
@@ -69,6 +49,25 @@ const ChatWindow = function ({ currentUserName, targetUserName, messageData, soc
                 console.log(e);
             });
     }, []);
+
+    useEffect(() => {
+        if (messageData) setMessData((preState) => [...preState, messageData]);
+    }, [messageData]);
+
+    useEffect(() => {
+        instance
+            .post(`/message/current/${currentUserName}/target/${targetUserName}`)
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }, []);
+
+    useEffect(() => {
+        console.log(messData);
+    }, [messData]);
 
     useEffect(() => {
         const lineTest = /\n+/gi;
@@ -163,7 +162,7 @@ const ChatWindow = function ({ currentUserName, targetUserName, messageData, soc
                         <span>Các bạn là bạn bè trên Facebook</span>
                     </div>
                 </div>
-                {messData.map((data, index) => {
+                {messData?.map((data, index) => {
                     return (
                         <Fragment key={index}>
                             {data.sender === targetUserName ? (
@@ -254,4 +253,4 @@ const ChatWindow = function ({ currentUserName, targetUserName, messageData, soc
     );
 };
 
-export default ChatWindow;
+export default memo(ChatWindow);
