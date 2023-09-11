@@ -40,8 +40,82 @@ function Main() {
                         <AiFillGithub style={{ fontSize: '22px', color: '#8c939d' }} />
                         <a href="https://github.com/trungnguyen29775">trungnguyen29775</a>
                     </div>
+                    <button className="profile-edit-detail__button">Chỉnh sửa chi tiết</button>
+                    <button className="profile-edit-detail__button">Thêm sở thích</button>
+                    <div className="profile-feature-container">
+                        <div className="profile-feature-item">
+                            <div className="profile-feature">
+                                <img
+                                    src="/assets/image/avt-user-login.jpg"
+                                    className="profile-feature__img"
+                                    alt="profile feature"
+                                />
+                                <span className="profile-feature-num">+11</span>
+                            </div>
+                            <span>Age: 20</span>
+                        </div>
+
+                        <div className="profile-feature-item">
+                            <div className="profile-feature">
+                                <img
+                                    src="/assets/image/avt-user-login.jpg"
+                                    className="profile-feature__img"
+                                    alt="profile feature"
+                                />
+                                <span className="profile-feature-num">+11</span>
+                            </div>
+                            <span>Age: 20</span>
+                        </div>
+
+                        <div className="profile-feature-item">
+                            <div className="profile-feature">
+                                <img
+                                    src="/assets/image/avt-user-login.jpg"
+                                    className="profile-feature__img"
+                                    alt="profile feature"
+                                />
+                                <span className="profile-feature-num">+11</span>
+                            </div>
+                            <span>Age: 20</span>
+                        </div>
+                    </div>
+                    <button className="profile-edit-detail__button">Chỉnh sửa đáng chú ý</button>
                 </div>
-                <button></button>
+
+                {/* Profile detail image */}
+
+                <div className="profile-photos-container">
+                    <div className="profile-photos-title-container">
+                        <span className="photo-title">Hình ảnh</span>
+                        <span>Xem tất cả</span>
+                    </div>
+                    <div className="profile-photos-preview-container">
+                        <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img" />
+                        <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img" />
+                        <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img" />
+                        <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img" />
+                        <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img" />
+                        <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img" />
+                        <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img" />
+                        <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img" />
+                        <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img" />
+                    </div>
+                </div>
+
+                {/* Profile friend */}
+                <div>
+                    <div>
+                        <span>Bạn bè</span>
+                        <span>Xem tất cả</span>
+                    </div>
+                    <span>180 bạn bè</span>
+                    <div>
+                        <div>
+                            <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img" />
+                            <span>Hằng Đoan</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div className="profile-main-post-container"></div>
         </div>
