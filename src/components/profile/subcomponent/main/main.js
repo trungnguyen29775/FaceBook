@@ -103,15 +103,27 @@ function Main() {
                 </div>
 
                 {/* Profile friend */}
-                <div>
-                    <div>
-                        <span>Bạn bè</span>
+                <div className="profile-photos-container friend">
+                    <div className="profile-photos-title-container">
+                        <span className="photo-title">Bạn bè</span>
                         <span>Xem tất cả</span>
                     </div>
                     <span>180 bạn bè</span>
-                    <div>
-                        <div>
-                            <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img" />
+                    <div className="profile-main-friend-container">
+                        <div className="profile-main-friend-item">
+                            <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img friend-avt" />
+                            <span>Hằng Đoan</span>
+                        </div>
+                        <div className="profile-main-friend-item">
+                            <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img friend-avt" />
+                            <span>Hằng Đoan</span>
+                        </div>
+                        <div className="profile-main-friend-item">
+                            <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img friend-avt" />
+                            <span>Hằng Đoan</span>
+                        </div>
+                        <div className="profile-main-friend-item">
+                            <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img friend-avt" />
                             <span>Hằng Đoan</span>
                         </div>
                     </div>
