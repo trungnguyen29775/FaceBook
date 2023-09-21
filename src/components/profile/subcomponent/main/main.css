@@ -12,10 +12,7 @@
     flex-direction: column;
     margin-right: 20px;
 }
-.profile-main-post-container {
-    background-color: #242526;
-    width: 590px;
-}
+
 .infomation-container {
     display: flex;
     flex-direction: column;
@@ -190,4 +187,7 @@
 .profile-photos-container.friend {
     height: fit-content;
     margin-bottom: 30px;
+}
+.profile-main-post-container {
+    width: 590px;
 }

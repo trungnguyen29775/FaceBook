@@ -129,7 +129,52 @@ function Main() {
                     </div>
                 </div>
             </div>
-            <div className="profile-main-post-container"></div>
+            <div className="profile-main-post-container">
+                <div className="home-status-container">
+                    <div className="status-header">
+                        <img
+                            type="text"
+                            className="home-avt__img"
+                            src="/assets/image/avt-user-login.jpg"
+                            alt="avatar user"
+                        />
+                        <input className="status__input" placeholder={'Trung ' + ' ơi bạn đang nghĩ gì thế'} />
+                    </div>
+                    <div className="line-through status"></div>
+                    <div className="status-action-container">
+                        <div className="status-action">
+                            <div className="status-action--center">
+                                <img
+                                    alt="status icon"
+                                    className="status-icon__img"
+                                    src="https://static.xx.fbcdn.net/rsrc.php/v3/yF/r/v1iF2605Cb5.png"
+                                />
+                                <span>Video trực tiếp</span>
+                            </div>
+                        </div>
+                        <div className="status-action">
+                            <div className="status-action--center">
+                                <img
+                                    alt="status icon"
+                                    className="status-icon__img"
+                                    src="https://static.xx.fbcdn.net/rsrc.php/v3/yC/r/a6OjkIIE-R0.png"
+                                />
+                                <span>Ảnh/video</span>
+                            </div>
+                        </div>
+                        <div className="status-action">
+                            <div className="status-action--center">
+                                <img
+                                    alt="status icon"
+                                    className="status-icon__img"
+                                    src="https://static.xx.fbcdn.net/rsrc.php/v3/yk/r/yMDS19UDsWe.png"
+                                />
+                                <span>Cảm xúc/hoạt động</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

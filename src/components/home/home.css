@@ -1005,6 +1005,7 @@
     box-sizing: border-box;
     vertical-align: top;
     position: relative;
+    margin: 12px;
 }
 .reel-avt-user {
     width: 112.5px;
