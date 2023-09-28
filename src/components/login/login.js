@@ -7,6 +7,7 @@ import Date from '../../constant/date';
 import AuthenContext from '../../store/authenContext';
 import instance from '../../axios';
 import { loginSucceedAction } from '../../store/authenAction';
+import registerCheck from '../../ulti/registerCheck';
 function Login() {
     const [authenState, dispatchAuthenState] = useContext(AuthenContext);
 
@@ -36,6 +37,52 @@ function Login() {
         year: 2002,
     });
     const [gender, setGender] = useState('Female');
+    const [registerState, setRegisterState] = useState({
+        usernameRegister: null,
+        reUsernameRegister: null,
+        password: null,
+    });
+
+    //--------------------------------Use effect-------------------------
+
+    //Register
+
+    // ------------------------------Function------------------------------
+
+    const handelCheckUserName = (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        if (registerEmail) {
+            if (
+                registerCheck.emailCheck.test(registerEmail) === false &&
+                registerCheck.phoneNumberCheck.test(registerEmail) === false
+            )
+                setRegisterState((prevState) => ({
+                    ...prevState,
+                    usernameRegister: false,
+                }));
+            else
+                setRegisterState((prevState) => ({
+                    ...prevState,
+                    usernameRegister: true,
+                }));
+        }
+    };
+
+    const handelCheckReUserName = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (event.target.value != registerEmail)
+            setRegisterState((preState) => ({
+                ...preState,
+                reUsernameRegister: false,
+            }));
+        else
+            setRegisterState((preState) => ({
+                ...preState,
+                reUsernameRegister: true,
+            }));
+    };
 
     const handleCreateAccountClick = (event) => {
         event.preventDefault();
@@ -172,24 +219,26 @@ function Login() {
         dobFormat += monthFormat + '-';
         let dayFormat = dob.day >= 10 ? dob.day : '0' + dob.day;
         dobFormat += dayFormat;
-        const data = {};
-        console.log(data);
-        instance
-            .post('/register', {
-                userName: registerEmail,
-                registerPassword: registerPassword,
-                registerFirstName: registerFirstName,
-                registerLastName: registerLastName,
-                dob: dobFormat,
-                gender: gender,
-                avtFilePath: 'assets/image/avt-user-login.jpg',
-            })
-            .then((res) => {
-                console.log(res.data);
-            })
-            .catch((e) => {
-                console.log('Can not create account due to ', e);
-            });
+        console.log(registerState);
+        if (registerState.password && registerState.usernameRegister && registerState.reUsernameRegister) {
+            // instance
+            //     .post('/register', {
+            //         userName: registerEmail,
+            //         registerPassword: registerPassword,
+            //         registerFirstName: registerFirstName,
+            //         registerLastName: registerLastName,
+            //         dob: dobFormat,
+            //         gender: gender,
+            //         avtFilePath: 'assets/image/avt-user-login.jpg',
+            //     })
+            //     .then((res) => {
+            //         console.log(res.data);
+            //     })
+            //     .catch((e) => {
+            //         console.log('Can not create account due to ', e);
+            //     });
+            console.log('Hello');
+        }
     };
 
     return (
@@ -320,6 +369,7 @@ function Login() {
                                 onChange={(e) => handleChangeLastNameRegister(e)}
                                 placeholder="Last name"
                                 className="register-name__input"
+                                required
                             />
                         </div>
                         <input
@@ -327,21 +377,38 @@ function Login() {
                             onChange={(e) => handleChangeEmailRegister(e)}
                             value={registerEmail}
                             placeholder="Mobile number or email address"
-                            className="register-detail__input"
+                            className={
+                                registerState.usernameRegister === false
+                                    ? 'register-detail__input wrong username'
+                                    : 'register-detail__input'
+                            }
+                            onBlur={(e) => handelCheckUserName(e)}
+                            required
                         />
                         <input
                             type="text"
                             placeholder="Re-enter email address"
                             className={
-                                registerEmail.length == 0 ? 'register-detail__input hide' : 'register-detail__input'
+                                registerEmail.length == 0
+                                    ? 'register-detail__input hide'
+                                    : registerState.reUsernameRegister === false
+                                    ? 'register-detail__input wrong re-username'
+                                    : 'register-detail__input'
                             }
+                            required
+                            onBlur={(e) => handelCheckReUserName(e)}
                         />
 
                         <input
                             onChange={(e) => handleChangePasswordRegister(e)}
                             type="password"
                             placeholder="New password"
-                            className="register-detail__input"
+                            className={
+                                registerState.password === false
+                                    ? 'register-detail__input wrong password'
+                                    : 'register-detail__input'
+                            }
+                            required
                         />
                         <div className="register-dob-container">
                             <label className="register-dob-header">Date of birth</label>

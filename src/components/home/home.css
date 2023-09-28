@@ -84,6 +84,7 @@
 .nav-img-icon-container {
     position: relative;
     font-size: 4px;
+    color: #e4e6eb;
 }
 .nav-img-icon-container:hover {
     cursor: pointer;
