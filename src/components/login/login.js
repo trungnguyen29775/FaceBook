@@ -40,18 +40,23 @@ function Login() {
     const [registerState, setRegisterState] = useState({
         usernameRegister: null,
         reUsernameRegister: null,
-        password: null,
+        passwordRegister: null,
     });
 
     //--------------------------------Use effect-------------------------
 
     //Register
 
+    useEffect(() => {
+        console.log(registerState);
+    }, [registerState]);
+
     // ------------------------------Function------------------------------
 
     const handelCheckUserName = (event) => {
         event.stopPropagation();
         event.preventDefault();
+
         if (registerEmail) {
             if (
                 registerCheck.emailCheck.test(registerEmail) === false &&
@@ -61,11 +66,35 @@ function Login() {
                     ...prevState,
                     usernameRegister: false,
                 }));
-            else
-                setRegisterState((prevState) => ({
-                    ...prevState,
-                    usernameRegister: true,
-                }));
+            else {
+                if (registerCheck.phoneNumberCheck.test(registerEmail) === true) {
+                    setRegisterState((prevState) => ({
+                        ...prevState,
+                        usernameRegister: true,
+                    }));
+                } else {
+                    instance
+                        .post('/register/check', {
+                            email: registerEmail,
+                        })
+                        .then((res) => {
+                            if (res.data === 'Valid email') {
+                                setRegisterState((prevState) => ({
+                                    ...prevState,
+                                    usernameRegister: true,
+                                }));
+                            } else {
+                                setRegisterState((prevState) => ({
+                                    ...prevState,
+                                    usernameRegister: false,
+                                }));
+                            }
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                }
+            }
         }
     };
 
@@ -82,6 +111,22 @@ function Login() {
                 ...preState,
                 reUsernameRegister: true,
             }));
+    };
+
+    const handleCheckPassword = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (!registerCheck.passwordCheck.test(registerPassword)) {
+            setRegisterState((prevState) => ({
+                ...prevState,
+                passwordRegister: false,
+            }));
+        } else {
+            setRegisterState((prevState) => ({
+                ...prevState,
+                passwordRegister: true,
+            }));
+        }
     };
 
     const handleCreateAccountClick = (event) => {
@@ -220,24 +265,23 @@ function Login() {
         let dayFormat = dob.day >= 10 ? dob.day : '0' + dob.day;
         dobFormat += dayFormat;
         console.log(registerState);
-        if (registerState.password && registerState.usernameRegister && registerState.reUsernameRegister) {
-            // instance
-            //     .post('/register', {
-            //         userName: registerEmail,
-            //         registerPassword: registerPassword,
-            //         registerFirstName: registerFirstName,
-            //         registerLastName: registerLastName,
-            //         dob: dobFormat,
-            //         gender: gender,
-            //         avtFilePath: 'assets/image/avt-user-login.jpg',
-            //     })
-            //     .then((res) => {
-            //         console.log(res.data);
-            //     })
-            //     .catch((e) => {
-            //         console.log('Can not create account due to ', e);
-            //     });
-            console.log('Hello');
+        if (registerState.passwordRegister && registerState.usernameRegister && registerState.reUsernameRegister) {
+            instance
+                .post('/register', {
+                    userName: registerEmail,
+                    registerPassword: registerPassword,
+                    registerFirstName: registerFirstName,
+                    registerLastName: registerLastName,
+                    dob: dobFormat,
+                    gender: gender,
+                    avtFilePath: 'assets/image/avt-user-login.jpg',
+                })
+                .then((res) => {
+                    console.log(res.data);
+                })
+                .catch((e) => {
+                    console.log('Can not create account due to ', e);
+                });
         }
     };
 
@@ -364,6 +408,7 @@ function Login() {
                                 onChange={(e) => handleChangeFirstNameRegister(e)}
                                 placeholder="First name"
                                 className="register-name__input"
+                                required
                             />
                             <input
                                 onChange={(e) => handleChangeLastNameRegister(e)}
@@ -371,6 +416,12 @@ function Login() {
                                 className="register-name__input"
                                 required
                             />
+                        </div>
+                        <div
+                            className="register-input-alert"
+                            style={{ display: registerState.usernameRegister === false ? 'flex' : 'none' }}
+                        >
+                            <span>Email or Phone number invalid or does not exist</span>
                         </div>
                         <input
                             type="text"
@@ -385,6 +436,12 @@ function Login() {
                             onBlur={(e) => handelCheckUserName(e)}
                             required
                         />
+                        <div
+                            className="register-input-alert"
+                            style={{ display: registerState.reUsernameRegister === false ? 'flex' : 'none' }}
+                        >
+                            <span>Re-enter Email or phone number must be the same</span>
+                        </div>
                         <input
                             type="text"
                             placeholder="Re-enter email address"
@@ -398,18 +455,25 @@ function Login() {
                             required
                             onBlur={(e) => handelCheckReUserName(e)}
                         />
-
+                        <div
+                            className="register-input-alert"
+                            style={{ display: registerState.passwordRegister === false ? 'flex' : 'none' }}
+                        >
+                            <span>Password must have at least 8 characters and one capital character</span>
+                        </div>
                         <input
                             onChange={(e) => handleChangePasswordRegister(e)}
                             type="password"
-                            placeholder="New password"
+                            placeholder="Password"
                             className={
-                                registerState.password === false
+                                registerState.passwordRegister === false
                                     ? 'register-detail__input wrong password'
                                     : 'register-detail__input'
                             }
+                            onBlur={(e) => handleCheckPassword(e)}
                             required
                         />
+
                         <div className="register-dob-container">
                             <label className="register-dob-header">Date of birth</label>
                             <div className="register-date-container">
