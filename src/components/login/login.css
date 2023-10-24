@@ -239,6 +239,9 @@
     border-bottom: 1px solid #dadde1;
     position: relative;
 }
+.register-header-container svg:hover {
+    cursor: pointer;
+}
 .register-header {
     margin: 0;
     font-size: 32px;

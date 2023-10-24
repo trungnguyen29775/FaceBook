@@ -56,45 +56,42 @@ function Login() {
     const handelCheckUserName = (event) => {
         event.stopPropagation();
         event.preventDefault();
-
-        if (registerEmail) {
-            if (
-                registerCheck.emailCheck.test(registerEmail) === false &&
-                registerCheck.phoneNumberCheck.test(registerEmail) === false
-            )
-                setRegisterState((prevState) => ({
-                    ...prevState,
-                    usernameRegister: false,
-                }));
-            else {
-                if (registerCheck.phoneNumberCheck.test(registerEmail) === true) {
-                    setRegisterState((prevState) => ({
-                        ...prevState,
-                        usernameRegister: true,
-                    }));
-                } else {
-                    instance
-                        .post('/register/check', {
-                            email: registerEmail,
-                        })
-                        .then((res) => {
-                            if (res.data === 'Valid email') {
-                                setRegisterState((prevState) => ({
-                                    ...prevState,
-                                    usernameRegister: true,
-                                }));
-                            } else {
-                                setRegisterState((prevState) => ({
-                                    ...prevState,
-                                    usernameRegister: false,
-                                }));
-                            }
-                        })
-                        .catch((err) => {
-                            console.log(err);
-                        });
-                }
-            }
+        if (
+            registerCheck.emailCheck.test(registerEmail) === false &&
+            registerCheck.phoneNumberCheck.test(registerEmail) === false
+        )
+            setRegisterState((prevState) => ({
+                ...prevState,
+                usernameRegister: false,
+            }));
+        else {
+            // if (registerCheck.phoneNumberCheck.test(registerEmail) === true) {
+            setRegisterState((prevState) => ({
+                ...prevState,
+                usernameRegister: true,
+            }));
+            //  } else {
+            //     instance
+            //         .post('/register/check', {
+            //             email: registerEmail,
+            //         })
+            //         .then((res) => {
+            //             if (res.status === 200) {
+            //                 setRegisterState((prevState) => ({
+            //                     ...prevState,
+            //                     usernameRegister: true,
+            //                 }));
+            //             } else {
+            //                 setRegisterState((prevState) => ({
+            //                     ...prevState,
+            //                     usernameRegister: false,
+            //                 }));
+            //             }
+            //         })
+            //         .catch((err) => {
+            //             console.log(err);
+            //         });
+            // }
         }
     };
 
@@ -264,7 +261,6 @@ function Login() {
         dobFormat += monthFormat + '-';
         let dayFormat = dob.day >= 10 ? dob.day : '0' + dob.day;
         dobFormat += dayFormat;
-        console.log(registerState);
         if (registerState.passwordRegister && registerState.usernameRegister && registerState.reUsernameRegister) {
             instance
                 .post('/register', {
@@ -438,7 +434,14 @@ function Login() {
                         />
                         <div
                             className="register-input-alert"
-                            style={{ display: registerState.reUsernameRegister === false ? 'flex' : 'none' }}
+                            style={{
+                                display:
+                                    registerState.reUsernameRegister === false
+                                        ? registerEmail.length != 0
+                                            ? 'flex'
+                                            : 'none'
+                                        : 'none',
+                            }}
                         >
                             <span>Re-enter Email or phone number must be the same</span>
                         </div>
