@@ -56,11 +56,12 @@ import instance from '../../axios';
 import SuggestFriend from './subcomponents/suggestFriend/suggestFriend';
 
 // Socket.IO
-import { io } from 'socket.io-client';
-import baseUrl from '../../constant/severUrl';
-import { Link } from 'react-router-dom';
+import {socket} from '../../socket/index'
 
-const socket = io(baseUrl);
+// Router
+import { Link } from 'react-router-dom';
+import { LOGGED_IN } from '../../store/authenConstant';
+
 
 function Home() {
     // Img src
@@ -168,57 +169,36 @@ function Home() {
     // ----------------------Use Effect------------------------
     // Receive Mess
     useEffect(() => {
-        console.log('Mess: ', messReceiver);
-    }, [messReceiver]);
-    useEffect(() => {
-        socket.emit('online', { userName: currentUserData.userName });
-        return () => {};
+        if(authenState.loginState===LOGGED_IN)
+        {
+            socket.emit('online', { usernameOnline: currentUserData.userName });
+
+        }
     }, [currentUserData.userName]);
 
     useEffect(() => {
-        return () => {
-            socket.on('receivedMessage', (data) => {
+        if(authenState.loginState===LOGGED_IN)
+        {
+            socket.on('recieved-message', (data) => {
+                console.log(data)
                 setMessReceiver((prevState) => {
-                    const senderArray = [];
-                    prevState.map((item) => {
-                        senderArray.push(item.sender);
-                    });
-                    if (senderArray.indexOf(data.sender) == -1) {
-                        const formatData = {
-                            sender: data.sender,
-                            message: [data.message],
-                            receiver: data.receiver,
-                        };
-                        return [...prevState, formatData];
-                    } else {
-                        const indexTarget = senderArray.indexOf(data.sender);
-                        const temp = prevState;
-                        temp[indexTarget].message.push(data.message);
-                        return temp;
-                    }
-                });
+                    return [...prevState,data]
             });
-        };
-    }, []);
-
-    function findDataMess(data) {
-        let temp = {};
-        messReceiver.map((item) => {
-            if (item.sender == data) temp = item;
-        });
-        return temp;
-    }
+            })
+        }
+           
+    });
 
     useEffect(() => {
         if (messReceiver.length > 0) {
-            messReceiver.map((item) => {
+           for(let item of messReceiver)  {
                 if (item.sender != currentUserData.userName && messState.messWindowArray.indexOf(item.sender) == -1)
                     dispatchMessState(messAction.showMessWindow(item.sender));
-            });
+            };
         }
     }, [messReceiver]);
-    // Find Contact
 
+    // Find Contact
     useEffect(() => {
         instance
             .post('/home-contact', {
@@ -251,7 +231,8 @@ function Home() {
             lastName: authenState.payload.lastName,
             userName: authenState.payload.userName,
         });
-    }, []);
+        console.log(authenState)
+    }, [authenState]);
     // Search feature
     useEffect(() => {
         if (valueInputHomeSearch != '') {
@@ -267,8 +248,6 @@ function Home() {
     }, [valueInputHomeSearch]);
 
     // Function
-
-    const handleProfileClick = (e) => {};
 
     const showMessWindow = (e) => {
         dispatchMessState(messAction.showMessWindow(e.target.closest('.contact-user').id));
@@ -347,8 +326,10 @@ function Home() {
             const notifiIcon = document.querySelector('.nav-icon--padding.notification');
 
             const notifiDropTab = document.querySelector('.notifi-droptab-container');
-            notifiDropTab.classList.remove('active');
-            notifiIcon.classList.remove('active');
+            notifiDropTab.classList?.remove('active');
+            notifiIcon.classList?.remove('active');
+        document.removeEventListener('click',event);
+
         });
     };
     const handleHideMessDropTab = (event) => {

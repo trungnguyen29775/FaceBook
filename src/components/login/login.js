@@ -43,6 +43,8 @@ function Login() {
         passwordRegister: null,
     });
 
+    const [loginUsername, setLoginUsername] = useState(null);
+
     //--------------------------------Use effect-------------------------
 
     //Register
@@ -134,6 +136,7 @@ function Login() {
 
     const handleChangeEmailLogin = (event) => {
         setEmailLogin(event.target.value);
+        setLoginUsername(true);
     };
 
     const handleChangePasswordLogin = (event) => {
@@ -197,7 +200,7 @@ function Login() {
             .then((respone) => {
                 if (respone.data.message === 'Authentication successful')
                     dispatchAuthenState(loginSucceedAction(respone.data));
-                else console.log('Wrong ');
+                else setLoginUsername(false);
             })
             .catch((e) => {
                 console.log(e);
@@ -351,11 +354,19 @@ function Login() {
                     </div>
                 </div>
                 <form className="login__form" onSubmit={handleLogin}>
+                    <span
+                        style={{
+                            color: 'red',
+                            display: loginUsername == false ? 'flex' : 'none',
+                        }}
+                    >
+                        Sai tên đăng nhập
+                    </span>
                     <input
                         value={emailLogin}
                         onChange={(e) => handleChangeEmailLogin(e)}
                         placeholder="Email address or phone number"
-                        className="login-input"
+                        className={loginUsername != false ? 'login-input' : 'login-input wrong'}
                     />
                     <input
                         value={passwordLogin}

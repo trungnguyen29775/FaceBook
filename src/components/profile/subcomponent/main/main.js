@@ -109,24 +109,7 @@ function Main() {
                         <span>Xem tất cả</span>
                     </div>
                     <span>180 bạn bè</span>
-                    <div className="profile-main-friend-container">
-                        <div className="profile-main-friend-item">
-                            <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img friend-avt" />
-                            <span>Hằng Đoan</span>
-                        </div>
-                        <div className="profile-main-friend-item">
-                            <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img friend-avt" />
-                            <span>Hằng Đoan</span>
-                        </div>
-                        <div className="profile-main-friend-item">
-                            <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img friend-avt" />
-                            <span>Hằng Đoan</span>
-                        </div>
-                        <div className="profile-main-friend-item">
-                            <img src="/assets/image/avt-user-login.jpg" className="profile-photos__img friend-avt" />
-                            <span>Hằng Đoan</span>
-                        </div>
-                    </div>
+                    <div className="profile-main-friend-container"></div>
                 </div>
             </div>
             <div className="profile-main-post-container">

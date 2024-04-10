@@ -54,21 +54,21 @@ const ChatWindow = function ({ currentUserName, targetUserName, messageData, soc
         if (messageData) setMessData((preState) => [...preState, messageData]);
     }, [messageData]);
 
-    useEffect(() => {
-        instance
-            .post(`/message/current/${currentUserName}/target/${targetUserName}`)
-            .then((res) => {
-                console.log(res.data);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-    }, []);
+    // useEffect(() => {
+    //     instance
+    //         .post(`/message/current/${currentUserName}/target/${targetUserName}`)
+    //         .then((res) => {
+    //             console.log(res.data);
+    //         })
+    //         .catch((e) => {
+    //             console.log(e);
+    //         });
+    // }, []);
 
     useEffect(() => {
         console.log(messData);
     }, [messData]);
-
+    
     useEffect(() => {
         const lineTest = /\n+/gi;
         const heightMess = lineTest.test(message) ? message.match(lineTest).length : 0;
@@ -80,8 +80,8 @@ const ChatWindow = function ({ currentUserName, targetUserName, messageData, soc
     const handleSendMessage = (event) => {
         event.preventDefault();
         event.stopPropagation();
-        console.log('Clicked');
-        socket.emit('sendMess', { sender: currentUserName, receiver: targetUserName, message: message });
+        console.log('hello')
+        socket.emit('send-message', {  targetUser: targetUserName, message: message,sender: currentUserName });
         setMessage('');
     };
 
@@ -168,11 +168,11 @@ const ChatWindow = function ({ currentUserName, targetUserName, messageData, soc
                             {data.sender === targetUserName ? (
                                 <div className="mess-chat-content-other-container">
                                     <img src={targetUserData.avtFilePath} className="mess-chat-content__img" />
-                                    <ul className="mess-chat-content-message-container">
+                                    {/* <ul className="mess-chat-content-message-container">
                                         {data.message?.map((item, index) => {
                                             return <li key={index}>{item}</li>;
                                         })}
-                                    </ul>
+                                    </ul> */}
                                 </div>
                             ) : (
                                 <div className="mess-chat-content-current-container">

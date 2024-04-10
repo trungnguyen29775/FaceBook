@@ -157,6 +157,11 @@
     border: 1px solid #dddfe2;
     margin: 6px 0;
 }
+
+.login-input.wrong {
+    border: 1px solid red;
+}
+
 .login-button {
     background-color: #1877f2;
     border: none;
